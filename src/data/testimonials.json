@@ -1,0 +1,20 @@
+[
+  {
+    "quote": "Alex transformed our ML prototype into a production system that handles 10x our original traffic with half the infrastructure costs. Exceptional engineering.",
+    "author": "Sarah Kim",
+    "role": "CTO, ScaleAI Corp",
+    "company": "ScaleAI Corp"
+  },
+  {
+    "quote": "The fraud detection system Alex built is the backbone of our risk management. It processes millions of transactions daily with incredible reliability.",
+    "author": "Michael Torres",
+    "role": "VP Engineering, FinSecure",
+    "company": "FinSecure"
+  },
+  {
+    "quote": "Working with Alex on our LLM infrastructure was a game-changer. They brought deep systems knowledge that most ML engineers simply don't have.",
+    "author": "Priya Patel",
+    "role": "Head of AI, NeuralPath",
+    "company": "NeuralPath"
+  }
+]

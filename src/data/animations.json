@@ -1,0 +1,6 @@
+{
+  "durations": { "fast": 200, "base": 400, "slow": 800, "reveal": 600 },
+  "easings": { "smooth": [0.16, 1, 0.3, 1], "inOut": [0.65, 0, 0.35, 1] },
+  "stagger": { "tight": 0.05, "base": 0.08, "loose": 0.12 },
+  "scroll": { "lerp": 0.1, "duration": 1.1 }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "role": "AI/ML Engineer",
+    "employment_type": "Contract",
+    "company": "EQL Global",
+    "location": "Gothenburg, Sweden",
+    "period": "October 2025 - Present",
+    "description": "Designing and deploying production AI systems processing 100K+ of daily requests. Reduced inference costs by 60% through model optimization and intelligent caching.",
+    "highlights": [
+      "100K+ daily requests",
+      "99.9% uptime SLA", 
+      "60% cost reduction"
+    ]
+  },
+  {
+    "role": "AI Engineer",
+    "employment_type": "Full-time",
+    "company": "Darpin Dynamics",
+    "location": "Mumbai, India",
+    "period": "January 2026 - Present",
+    "description": "Led architecture and deployment of production RAG and agentic retrieval systems, optimizing retrieval, caching, and database execution paths to deliver scalable, low-latency real-time inference across high-concurrency workloads.",
+    "highlights": [
+      "Led team of 4 engineers",
+      "5K+ RPS serving", 
+      "3x latency & query time reduction"
+    ]
+  },
+  {
+    "role": "Analyst",
+    "employment_type": "Full-time",
+    "company": "Axtria",
+    "location": "Gurugram, India",
+    "period": "January 2025 - January 2026",
+    "description": "Built an AI-driven agentic QA automation and RAG-powered query platform for BI systems, transforming business requirements into validated SQL through a test-first multi-agent workflow, significantly improving query accuracy and enabling scalable, production-grade analytics automation while achieving 10x faster query execution and 3x higher system throughput.",
+    "highlights": [
+      "80% reduction in manual SQL effort",
+      "25% improvement in query accuracy",
+      "10x faster query execution",
+      "3x throughput increase via parallel processing"
+    ]
+  },
+  {
+    "role": "Junior Backend Engineer",
+    "employment_type": "Full-time",
+    "company": "Archmed Biotech",
+    "location": "Chandigarh, India",
+    "period": "October 2023 - December 2024",
+    "description": "Developed backend services and internal BI tooling for an inventory and operations platform using FastAPI and PostgreSQL, improving data processing reliability and automating operational workflows to enable real-time monitoring and reduce manual operational overhead.",
+    "highlights": [
+      "Reduced manual inventory effort by 40%",
+      "Built FastAPI + PostgreSQL inventory backend",
+      "Processed 100+ daily operational data points",
+      "Automated batch-expiry alerts with 40+ weekly notifications"
+    ]
+  }
+]

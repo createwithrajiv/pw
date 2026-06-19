@@ -1,0 +1,22 @@
+{
+  "eyebrow": "Questions",
+  "heading": "Frequently asked",
+  "items": [
+    {
+      "question": "What kind of work do you take on?",
+      "answer": "Production AI systems, ML infrastructure & MLOps, and LLM integration & orchestration — from architecture review and proof-of-concept to fully deployed, monitored, and scaled systems."
+    },
+    {
+      "question": "Are you available for contracts or full-time roles?",
+      "answer": "Both. I'm currently open to consulting engagements and full-time positions. The fastest way to start is a short call to scope the problem."
+    },
+    {
+      "question": "Where are you based, and do you work remotely?",
+      "answer": "I'm based in Noida, India, and work with distributed teams across time zones. Remote-first, with occasional on-site as needed."
+    },
+    {
+      "question": "What does a typical engagement look like?",
+      "answer": "It usually starts with an architecture and reliability review, then a tightly-scoped build phase with clear latency, uptime, and cost targets — followed by observability and handoff so your team can own it."
+    }
+  ]
+}

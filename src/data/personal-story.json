@@ -1,0 +1,19 @@
+{
+  "eyebrow": "The story",
+  "heading": "From research prototypes to production",
+  "subheading": "How I work, and why it matters",
+  "portraitImage": "",
+  "paragraphs": [
+    {
+      "heading": "The gap I close",
+      "body": "Most AI never makes it past the demo. I bridge research prototypes and reliable production systems — AI backends that survive real traffic, handle millions of requests, and hold sub-100ms latency under load."
+    },
+    {
+      "body": "My focus is machine learning infrastructure, distributed systems, and production-grade AI pipelines that never compromise on performance, reliability, or stability. The model is the easy part; making it dependable at scale is the craft."
+    },
+    {
+      "heading": "How I think",
+      "body": "I treat latency as a feature, observability as non-negotiable, and cost as a design constraint from day one. I'd rather ship something boring that runs for years than something clever that pages you at 3am."
+    }
+  ]
+}

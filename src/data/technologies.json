@@ -1,0 +1,25 @@
+{
+  "heading": "Tools of the trade",
+  "items": [
+    { "name": "PyTorch" },
+    { "name": "TensorFlow" },
+    { "name": "Hugging Face" },
+    { "name": "LangChain" },
+    { "name": "FastAPI" },
+    { "name": "Python" },
+    { "name": "Go" },
+    { "name": "PostgreSQL" },
+    { "name": "Redis" },
+    { "name": "Kafka" },
+    { "name": "Spark" },
+    { "name": "Airflow" },
+    { "name": "Docker" },
+    { "name": "Kubernetes" },
+    { "name": "AWS" },
+    { "name": "GCP" },
+    { "name": "Terraform" },
+    { "name": "MLflow" },
+    { "name": "Prometheus" },
+    { "name": "Grafana" }
+  ]
+}

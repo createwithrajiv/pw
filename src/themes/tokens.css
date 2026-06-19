@@ -1,0 +1,89 @@
+/**
+ * Design tokens — dark-first AI/tech.
+ * Authored as raw HSL channels so Tailwind can apply alpha:
+ *   hsl(var(--token) / <alpha-value>)
+ * `.dark` (default on <html>) holds the primary dark palette;
+ * `:root` holds an intentionally-designed light palette (not an inversion).
+ */
+
+:root {
+  /* ---- LIGHT (intentional, warm-paper "daylight lab") ---- */
+  --bg-base: 220 30% 96%;
+  --bg-canvas: 210 36% 98%;
+  --bg-elevated: 0 0% 100%;
+  --bg-overlay: 220 30% 90%;
+
+  --surface: 0 0% 100%;
+  --surface-hi: 220 28% 96%;
+  --glass-bg: 0 0% 100%;
+  --glass-border: 222 30% 30%;
+
+  --fg: 224 44% 12%;
+  --fg-muted: 222 16% 38%;
+  --fg-subtle: 220 14% 52%;
+
+  --border: 220 20% 88%;
+  --border-strong: 220 18% 78%;
+
+  --accent: 196 92% 38%;
+  --accent-2: 262 72% 52%;
+  --accent-3: 330 72% 50%;
+  --accent-fg: 0 0% 100%;
+
+  --grad-from: 196 92% 42%;
+  --grad-mid: 235 78% 56%;
+  --grad-to: 278 70% 54%;
+
+  --glow-cyan: 196 92% 50%;
+  --glow-violet: 262 72% 58%;
+
+  --success: 152 60% 40%;
+  --warning: 33 90% 48%;
+  --danger: 0 74% 50%;
+
+  --grid-line: 222 30% 30%;
+
+  --glass-alpha: 0.7;
+  --glass-border-alpha: 0.14;
+}
+
+.dark {
+  /* ---- DARK (primary) ---- */
+  --bg-base: 222 47% 4%;
+  --bg-canvas: 223 44% 6%;
+  --bg-elevated: 222 32% 10%;
+  --bg-overlay: 223 40% 7%;
+
+  --surface: 222 30% 12%;
+  --surface-hi: 220 26% 16%;
+  --glass-bg: 222 40% 10%;
+  --glass-border: 220 35% 80%;
+
+  --fg: 210 40% 98%;
+  --fg-muted: 217 18% 66%;
+  --fg-subtle: 218 16% 46%;
+
+  --border: 220 24% 18%;
+  --border-strong: 219 24% 28%;
+
+  --accent: 190 95% 55%;
+  --accent-2: 265 89% 66%;
+  --accent-3: 330 85% 62%;
+  --accent-fg: 222 47% 6%;
+
+  --grad-from: 190 95% 55%;
+  --grad-mid: 235 90% 66%;
+  --grad-to: 285 88% 66%;
+
+  --glow-cyan: 190 95% 55%;
+  --glow-violet: 265 89% 66%;
+
+  --success: 152 70% 50%;
+  --warning: 38 92% 58%;
+  --danger: 0 84% 63%;
+
+  --grid-line: 215 40% 60%;
+
+  --glass-alpha: 0.55;
+  --glass-border-alpha: 0.12;
+}

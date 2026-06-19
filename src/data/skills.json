@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "name": "AI / ML",
+      "skills": ["TensorFlow", "PyTorch", "Scikit-learn", "Hugging Face", "LangChain", "ONNX", "TensorRT"]
+    },
+    {
+      "name": "Backend & Infrastructure",
+      "skills": ["Python", "FastAPI", "gRPC", "Node.js", "PostgreSQL", "Redis", "Elasticsearch"]
+    },
+    {
+      "name": "Cloud & DevOps",
+      "skills": ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Terraform", "CI/CD"]
+    },
+    {
+      "name": "Data Engineering",
+      "skills": ["Apache Kafka", "Apache Spark", "Airflow", "dbt", "Snowflake", "BigQuery"]
+    },
+    {
+      "name": "MLOps & Monitoring",
+      "skills": ["MLflow", "Weights & Biases", "Grafana", "Prometheus", "Seldon", "BentoML"]
+    }
+  ]
+}

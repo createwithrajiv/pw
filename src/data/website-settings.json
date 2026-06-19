@@ -1,0 +1,27 @@
+{
+  "themeDefault": "dark",
+  "brandShortName": "RKY",
+  "features": {
+    "smoothScroll": true,
+    "hero3D": true,
+    "animatedGrid": true,
+    "customCursor": true,
+    "marquee": true
+  },
+  "sections": [
+    { "id": "hero", "label": "Home", "anchor": "#hero", "enabled": true, "order": 0, "hideWhenEmpty": false },
+    { "id": "metrics", "label": "Impact", "anchor": "#metrics", "enabled": true, "order": 10, "hideWhenEmpty": true },
+    { "id": "about", "label": "About", "anchor": "#about", "enabled": true, "order": 20, "hideWhenEmpty": false },
+    { "id": "services", "label": "Services", "anchor": "#services", "enabled": true, "order": 30, "hideWhenEmpty": true },
+    { "id": "skills", "label": "Skills", "anchor": "#skills", "enabled": true, "order": 40, "hideWhenEmpty": true },
+    { "id": "experience", "label": "Experience", "anchor": "#experience", "enabled": true, "order": 50, "hideWhenEmpty": true },
+    { "id": "projects", "label": "Work", "anchor": "#projects", "enabled": true, "order": 60, "hideWhenEmpty": true },
+    { "id": "testimonials", "label": "Praise", "anchor": "#testimonials", "enabled": true, "order": 70, "hideWhenEmpty": true },
+    { "id": "story", "label": "Story", "anchor": "#story", "enabled": true, "order": 80, "hideWhenEmpty": false },
+    { "id": "certifications", "label": "Certs", "anchor": "#certifications", "enabled": true, "order": 90, "hideWhenEmpty": true },
+    { "id": "faq", "label": "FAQ", "anchor": "#faq", "enabled": true, "order": 100, "hideWhenEmpty": true },
+    { "id": "blog", "label": "Writing", "anchor": "#blog", "enabled": false, "order": 110, "hideWhenEmpty": true },
+    { "id": "contact", "label": "Contact", "anchor": "#contact", "enabled": true, "order": 120, "hideWhenEmpty": false },
+    { "id": "cta", "label": "", "anchor": "#cta", "enabled": true, "order": 130, "hideWhenEmpty": false }
+  ]
+}

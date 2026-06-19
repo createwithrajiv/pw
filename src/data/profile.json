@@ -1,0 +1,21 @@
+{
+  "name": "Rajiv Kumar Yadav",
+  "title": "AI Engineer",
+  "tagline": "Building Production AI Systems That Scale",
+  "description": "I help companies deploy AI-powered backend systems that scale in production without compromising performance, reliability, or stability.",
+  "longDescription": "With deep expertise in machine learning infrastructure, distributed systems, and production-grade AI pipelines, I bridge the gap between research prototypes and reliable production systems. My focus is on building AI backends that handle millions of requests while maintaining sub-100ms latency.",
+  "email": "rajiv@rajivyadav.com",
+  "location": "Noida, India",
+  "availability": "Open to consulting & full-time roles",
+  "resumeUrl": "https://drive.google.com/file/d/1gVZtzOwn75b80kNmDFp5NG3yVlUWrP3L/view?usp=sharing",
+  "image": "/profile.jpg",
+  "stats": [
+    { "value": "20+", "label": "Production Models Deployed" },
+    { "value": "99.9%", "label": "System Uptime" },
+    { "value": "500K+", "label": "Daily API Requests Handled" },
+    { "value": "3+", "label": "Years of Experience" }
+  ]
+}
+
+
+

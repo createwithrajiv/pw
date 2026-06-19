@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Production AI Systems",
+    "description": "End-to-end design and deployment of ML models in production environments with high availability, low latency, and automated scaling.",
+    "icon": "server"
+  },
+  {
+    "title": "ML Infrastructure & MLOps",
+    "description": "Building robust ML pipelines, feature stores, model registries, and monitoring systems that keep your AI reliable at scale.",
+    "icon": "layers"
+  },
+  {
+    "title": "LLM Integration & Orchestration",
+    "description": "Architecting scalable LLM-powered applications with prompt management, caching, cost optimization, and multi-model routing.",
+    "icon": "brain"
+  },
+  {
+    "title": "AI Architecture Consulting",
+    "description": "Technical strategy and architecture reviews for companies building AI-first products. From prototype to production-ready systems.",
+    "icon": "compass"
+  }
+]

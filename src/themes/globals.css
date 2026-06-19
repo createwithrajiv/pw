@@ -1,0 +1,185 @@
+@import './tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    @apply border-border;
+  }
+
+  html {
+    @apply bg-canvas;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    scroll-behavior: auto; /* Lenis owns smooth scroll; native off to avoid conflict */
+    transition: background-color 0.4s ease;
+  }
+
+  body {
+    /* Background lives on <html> so a fixed -z-10 StoryBackdrop is visible. */
+    @apply text-foreground font-sans antialiased;
+    font-size: theme('fontSize.body');
+    transition: color 0.3s ease;
+    overflow-x: hidden;
+  }
+
+  /* When Lenis is active it adds these classes to <html>. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold text-foreground;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: hsl(var(--accent) / 0.28);
+    color: hsl(var(--fg));
+  }
+
+  /* High-contrast focus ring in both themes */
+  :focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 2px hsl(var(--bg-canvas)),
+      0 0 0 4px hsl(var(--accent));
+    border-radius: 6px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border-strong));
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--accent) / 0.5);
+    background-clip: padding-box;
+  }
+}
+
+@layer components {
+  .glass {
+    background: hsl(var(--glass-bg) / var(--glass-alpha));
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border: 1px solid hsl(var(--glass-border) / var(--glass-border-alpha));
+    box-shadow:
+      inset 0 1px 0 hsl(var(--fg) / 0.05),
+      var(--tw-shadow, 0 8px 24px -8px hsl(var(--bg-base) / 0.7));
+  }
+
+  @supports not (backdrop-filter: blur(1px)) {
+    .glass {
+      background: hsl(var(--surface) / 0.92);
+    }
+  }
+
+  /* Masked animated grid backdrop */
+  .grid-overlay {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid-line) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-line) / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 35%, transparent 80%);
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 35%, transparent 80%);
+  }
+
+  .text-gradient {
+    @apply bg-grad-text bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .eyebrow {
+    @apply font-mono uppercase text-eyebrow text-accent;
+  }
+
+  /* Animated gradient underline for links */
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1.5px;
+    width: 100%;
+    background: linear-gradient(90deg, hsl(var(--grad-from)), hsl(var(--grad-to)));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .glow-text {
+    text-shadow: 0 0 24px hsl(var(--glow-cyan) / 0.45);
+  }
+  .bg-grid-static {
+    background-image:
+      linear-gradient(to right, hsl(var(--grid-line) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--grid-line) / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .cursor-none,
+  .cursor-none * {
+    cursor: none !important;
+  }
+}
+
+/* Global reduced-motion safety net (in addition to JS gating) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

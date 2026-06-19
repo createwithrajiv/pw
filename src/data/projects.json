@@ -1,0 +1,88 @@
+[
+  {
+    "title": "PollSync: Real-Time Poll Platform",
+    "description": "Built a real-time poll platform supporting 10K+ concurrent users with sub-100ms vote sync via WebSockets and stable handling of 100K+ votes/day. Service-repository architecture reduced feature delivery time by ~40%. API and DB optimizations cut redundant calls by ~60% and improved throughput 3x. System supports containerized deployment and horizontal scaling with seamless migration from SQLite to production databases.",
+    "highlights": [
+      "10K+ concurrent users",
+      "100K+ votes/day",
+      "3x throughput increase",
+      "sub-100ms vote sync",
+      "40% feature delivery time reduction",
+      "60% API call reduction"
+    ],
+    "tags": ["Next.js", "FastAPI", "Python", "TypeScript", "SQLAlchemy", "WebSockets", "Docker"],
+    "category": "Full-Stack Application",
+    "link": "#",
+    "github": "#",
+    "featured": true
+  },
+  {
+    "title": "DocWeave: Agentic RAG System with OCR",
+    "description": "Built an agentic RAG platform with a 5-stage ingestion pipeline and 4-agent validation workflow, processing 5K+ document pages/day via OCR and supporting semantic retrieval over millions of vectors. Achieved ~45% reduction in hallucinated responses using validator + retry logic, with end-to-end query latency of ~5-8s. Optimizations reduced redundant embeddings by ~50% while improving retrieval accuracy and multi-mode query routing reliability",
+    "highlights": [
+      "4 agent validation workflow",
+      "5K+ document pages/day",
+      "45% reduction in hallucinated responses",
+      "5-8s end-to-end query latency",
+      "50% redundant embeddings reduction"
+    ],
+    "tags": ["Python", "FastAPI", "LangGraph", "RAG", "ChromaDB", "OpenAI", "OCR", "Streamlit"],
+    "category": "AI Infrastructure",
+    "link": "#",
+    "github": "#",
+    "featured": true
+  },
+  {
+    "title": "LungSight: Pneumonia Detection Web Application",
+    "description": "Built a CNN-based pneumonia detection system trained on ~6,000 chest X-ray images using a 9-layer architecture, achieving 99.2% validation and 97% test accuracy, correctly classifying 1,200+ cases. Delivered as a scalable FastAPI backend with React frontend enabling real-time clinical inference and deployment-ready medical imaging workflows.",
+    "highlights": [
+      "99.2% validation accuracy",
+      "97% test accuracy",
+      "1,200+ cases correctly classified",
+      "Model trained on 6000+ chest X-ray images",
+      "9-layer model architecture"
+    ],
+    "tags": ["FastAPI", "React", "CNN", "TensorFlow", "Computer Vision", "Medical AI", "Deep Learning", "Python"],
+    "category": "Healthcare AI",
+    "github": "#",
+    "link": "#",
+    "featured": true
+  },
+  {
+    "title": "QuantIQ: AI-Driven Algorithmic Trading Engine",
+    "description": "Built an institutional-grade trading engine combining 20+ TA features with a 5-model soft-voting ensemble (XGBoost, GBM, RF, SVM, MLP) for regime-aware signal generation. Implemented OHLCV ingestion, multi-timeframe resampling, SuperTrend filtering, ATR-based risk controls, and realistic backtesting with costs/slippage, achieving up to 39.4% returns and 62.5% win rates, outperforming buy-and-hold in volatile markets.",
+    "highlights": [
+      "Up to 39.4% returns",
+      "62.5% win rates",
+      "20+ TA features",
+      "5-model soft-voting ensemble"
+    ],
+    "tags": ["Python", "Scikit-Learn", "XGBoost", "Pandas", "Algorithmic Trading"],
+    "category": "Algorithmic Trading",
+    "link": "#",
+    "github": "#",
+    "featured": false
+  },
+  {
+    "title": "SecureGate: Enterprise Authentication & Identity Platform",
+    "description": "Built a production-grade Go authentication platform acting as a centralized identity provider for web and mobile apps, implementing JWT access (15m) and refresh (7d) tokens, device-bound sessions, RBAC, bcrypt password security, and Redis rate limiting. Delivered signup, OAuth, OTP, and recovery flows using PostgreSQL, Redis, AWS SES, and Twilio, enabling secure onboarding and session control for 50K+ users, supporting 1M+ monthly authentications, sub-25ms token validation, horizontal scalability, and instant global session revocation to reduce account takeover risks.",
+    "highlights": [
+      "50K+ users",
+      "1M+ monthly authentications",
+      "sub-25ms token validation"
+    ],
+    "tags": ["Go", "Gin", "PostgreSQL", "Redis", "JWT", "Docker", "AWS SES", "Twilio"],
+    "category": "Backend Systems",
+    "link": "#",
+    "featured": false
+  },
+  {
+    "title": "MLOps Monitoring Dashboard",
+    "description": "Created a comprehensive ML monitoring platform tracking model drift, data quality, and system performance across 50+ production models.",
+    "tags": ["Grafana", "Prometheus", "Python", "React", "Docker"],
+    "category": "MLOps",
+    "link": "#",
+    "github": "#",
+    "featured": false
+  }
+]

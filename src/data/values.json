@@ -1,0 +1,25 @@
+{
+  "heading": "Principles I build by",
+  "items": [
+    {
+      "title": "Production over prototypes",
+      "description": "Code that survives real traffic — not just the happy-path demo.",
+      "icon": "shield-check"
+    },
+    {
+      "title": "Latency is a feature",
+      "description": "Sub-100ms is a design constraint, decided on day one, not an afterthought.",
+      "icon": "zap"
+    },
+    {
+      "title": "Observability first",
+      "description": "If it isn't measured and monitored, it isn't really in production.",
+      "icon": "line-chart"
+    },
+    {
+      "title": "Cost-aware scale",
+      "description": "Scaling that handles 10× the load without 10×-ing the bill.",
+      "icon": "trending-down"
+    }
+  ]
+}

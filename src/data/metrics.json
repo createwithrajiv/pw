@@ -1,0 +1,10 @@
+{
+  "eyebrow": "Impact in numbers",
+  "heading": "Built to scale, measured in production",
+  "items": [
+    { "id": "models", "value": 20, "suffix": "+", "label": "Production Models Deployed", "icon": "boxes", "context": "Shipped and maintained across real production environments, not notebooks." },
+    { "id": "uptime", "value": 99.9, "suffix": "%", "decimals": 1, "label": "System Uptime", "icon": "activity", "context": "Sustained availability under load, backed by observability and automated failover." },
+    { "id": "requests", "value": 500, "suffix": "K+", "label": "Daily API Requests Handled", "icon": "gauge", "context": "Requests served daily across production systems at sub-100ms latency." },
+    { "id": "years", "value": 3, "suffix": "+", "label": "Years of Experience", "icon": "calendar-clock", "context": "Building ML infrastructure, distributed systems, and production AI pipelines." }
+  ]
+}
