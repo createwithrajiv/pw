@@ -35,9 +35,19 @@ export default function HeroSection() {
   const outScale = useTransform(scrollYProgress, [0, 1], [1, 0.985]);
   const outBlurPx = useTransform(scrollYProgress, [0, 1], [0, 6]);
   const outBlur = useMotionTemplate`blur(${outBlurPx}px)`;
+  // Tilt the whole hero back into depth as it recedes — reads as real 3D.
+  const outRotateX = useTransform(scrollYProgress, [0, 1], [0, 14]);
   const outStyle = reduced
     ? undefined
-    : { opacity: outOpacity, y: outY, scale: outScale, filter: outBlur };
+    : {
+        opacity: outOpacity,
+        y: outY,
+        scale: outScale,
+        filter: outBlur,
+        rotateX: outRotateX,
+        transformPerspective: 1200,
+        transformOrigin: 'center 20%',
+      };
 
   return (
     <Section ref={glow.ref} id="hero" className="!py-0">

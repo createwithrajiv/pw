@@ -9,7 +9,8 @@ import { useExperienceStore } from '@/store/experienceStore';
  */
 export function HeroZone() {
   const tier = useExperienceStore((s) => s.qualityTier);
-  const count = tier === 'full' ? 3200 : 1400;
-  const network = tier === 'full';
-  return <ParticleField count={count} network={network} />;
+  // Only the particle COUNT scales with the tier; keep the (cheap, most visible)
+  // network lattice on at every tier so a momentary FPS dip never guts the scene.
+  const count = tier === 'full' ? 3200 : 1600;
+  return <ParticleField count={count} network />;
 }

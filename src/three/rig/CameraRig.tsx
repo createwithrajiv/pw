@@ -24,14 +24,19 @@ export function CameraRig({ fx }: { fx: FxSignals }) {
     return { keyframes: kf, curve: buildPositionCurve(kf) };
   }, [sections]);
 
-  const targetPos = useRef(new THREE.Vector3(0, 0, 6));
+  const targetPos = useRef(new THREE.Vector3(0, 0.2, 7.5));
   const targetLook = useRef(new THREE.Vector3(0, 0, 0));
   const currentLook = useRef(new THREE.Vector3(0, 0, 0));
 
-  useFrame((_, delta) => {
+  useFrame((state, delta) => {
     const u = THREE.MathUtils.clamp(fx.scrollProgress.get(), 0, 1);
     curve.getPointAt(u, targetPos.current);
     sampleLookAt(keyframes, u, targetLook.current);
+
+    // Idle breathing drift so the space reads as 3D even at rest.
+    const t = state.clock.elapsedTime;
+    targetPos.current.x += Math.sin(t * 0.3) * 0.25;
+    targetPos.current.y += Math.cos(t * 0.23) * 0.18;
 
     // Critically-damped follow (frame-rate independent) for both position and
     // the look-at target, then orient the camera.

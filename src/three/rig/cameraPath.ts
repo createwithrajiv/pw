@@ -12,21 +12,25 @@ export interface CameraKeyframe {
  */
 const overrides: Record<string, CameraKeyframe> = {
   hero: {
-    position: new THREE.Vector3(0, 0, 6),
+    position: new THREE.Vector3(0, 0.2, 7.5),
     lookAt: new THREE.Vector3(0, 0, 0),
   },
 };
 
-/** A gentle drifting descent — the default "flying through space" stop. */
+/**
+ * A weaving descent that flies FORWARD through the scene (z: 7.5 → −5.5), so you
+ * pass through the constellation and the floating depth objects — an unmistakable
+ * "travelling through a 3D space" journey rather than a flat pan.
+ */
 function defaultKeyframe(i: number, n: number): CameraKeyframe {
   const t = n > 1 ? i / (n - 1) : 0;
-  const sway = Math.sin(t * Math.PI * 1.5);
-  const x = sway * 2.4;
-  const y = -t * 7;
-  const z = 6 + Math.sin(t * Math.PI) * -1.2; // dips a little closer mid-journey
+  const sway = Math.sin(t * Math.PI * 2.2);
+  const x = sway * 3.6;
+  const y = -t * 11;
+  const z = 7.5 - t * 13;
   return {
     position: new THREE.Vector3(x, y, z),
-    lookAt: new THREE.Vector3(x * 0.35, y - 0.6, z - 6),
+    lookAt: new THREE.Vector3(x * 0.25, y - 1.2, z - 7),
   };
 }
 

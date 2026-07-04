@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/utils/cn';
 import { fadeInUp, staggerContainer } from '@/animations/variants';
 import { EnterBurst } from '@/components/motion/EnterBurst';
+import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 
 type BurstVariant = 'ring' | 'sweep' | 'scatter' | 'ripple';
 
@@ -24,6 +25,7 @@ export function SectionHeading({
   className,
   burst = ['ring', 'sweep'],
 }: SectionHeadingProps) {
+  const reduced = useReducedMotion();
   const inner = (
     <motion.div
       variants={staggerContainer(0.1)}
@@ -55,10 +57,24 @@ export function SectionHeading({
     </motion.div>
   );
 
-  if (!burst) return inner;
-  return (
+  const content = !burst ? (
+    inner
+  ) : (
     <EnterBurst variant={burst} className={cn('w-fit', align === 'center' && 'mx-auto')}>
       {inner}
     </EnterBurst>
+  );
+
+  // Swing the heading block up out of depth as it enters — 3D on real DOM.
+  return (
+    <motion.div
+      initial={reduced ? false : { rotateX: 24, opacity: 0 }}
+      whileInView={reduced ? undefined : { rotateX: 0, opacity: 1 }}
+      viewport={{ once: true, amount: 0.4 }}
+      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+      style={reduced ? undefined : { transformPerspective: 1400, transformOrigin: 'center bottom' }}
+    >
+      {content}
+    </motion.div>
   );
 }
