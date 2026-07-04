@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/utils/cn';
@@ -22,22 +22,17 @@ export function Navbar() {
   const active = useActiveSection(ids);
 
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const lastY = useRef(0);
 
   useLockBodyScroll(menuOpen);
 
+  // Stays fixed at the top the whole time; only its background reacts to scroll.
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      if (!menuOpen) setHidden(y > lastY.current && y > 240);
-      lastY.current = y;
-    };
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [menuOpen]);
+  }, []);
 
   const go = (anchor: string) => {
     setMenuOpen(false);
@@ -46,12 +41,7 @@ export function Navbar() {
   };
 
   return (
-    <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: hidden ? '-110%' : '0%' }}
-      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-[95] flex justify-center px-4 pt-4"
-    >
+    <motion.header className="fixed inset-x-0 top-0 z-[95] flex justify-center px-4 pt-4">
       <nav
         aria-label="Primary"
         className={cn(

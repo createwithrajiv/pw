@@ -105,9 +105,8 @@ function Starfield({ palette }: { palette: WorldPalette }) {
   );
 }
 
-// A few widely-spaced gates only — enough to read as a tunnel, sparse enough to
-// keep text easily readable.
-const GATES = [0, -8, -18, -30];
+// Ten ring gates receding into the depth — a longer tunnel to fly through.
+const GATES = [2, -3, -8, -13, -18, -23, -28, -33, -38, -43];
 
 /**
  * The tunnel the camera dives through — deliberately minimal: a handful of ring

@@ -96,29 +96,31 @@ export default function MetricsSection() {
 
   return (
     <Section id="metrics" grid ambient={{ density: 'sparse' }}>
-      <Container className="relative">
-        {/* in-view glow pulse */}
-        <div
-          aria-hidden
-          className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grad-radial opacity-60 blur-3xl"
-        />
-        {metrics.eyebrow && (
-          <p className="eyebrow relative mb-3 flex items-center justify-center gap-2">
-            <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
-            {metrics.eyebrow}
-          </p>
-        )}
-        <motion.ul
-          variants={staggerContainer(0.1)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
-          className="relative grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4"
-        >
-          {items.map((m, i) => (
-            <MetricItem key={m.id} m={m} index={i} reduced={reduced} />
-          ))}
-        </motion.ul>
+      <Container>
+        <div className="glass relative overflow-hidden rounded-2xl px-6 py-10 sm:px-12 sm:py-14">
+          {/* in-view glow pulse, contained inside the box */}
+          <div
+            aria-hidden
+            className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 z-0 h-[80%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grad-radial opacity-50 blur-3xl"
+          />
+          {metrics.eyebrow && (
+            <p className="eyebrow relative mb-9 flex items-center justify-center gap-2">
+              <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
+              {metrics.eyebrow}
+            </p>
+          )}
+          <motion.ul
+            variants={staggerContainer(0.1)}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
+            className="relative z-10 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4"
+          >
+            {items.map((m, i) => (
+              <MetricItem key={m.id} m={m} index={i} reduced={reduced} />
+            ))}
+          </motion.ul>
+        </div>
       </Container>
     </Section>
   );
