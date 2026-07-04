@@ -1,3 +1,4 @@
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useNavSections } from '@/hooks/useSections';
 import { useProfile, useSocial, useNavigation } from '@/hooks/useContent';
 import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
@@ -13,13 +14,22 @@ export function Footer() {
   const navigation = useNavigation();
   const navSections = useNavSections();
   const { scrollTo } = useSmoothScroll();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  // On home, smooth-scroll to the section; elsewhere navigate home with the hash
+  // (useHashScroll in RootLayout finishes the scroll once HomePage mounts).
+  const go = (anchor: string) => {
+    if (pathname === '/') scrollTo(anchor);
+    else navigate(`/${anchor}`);
+  };
 
   return (
     <footer className="relative border-t border-border bg-base/40">
       <div className="mx-auto grid w-full max-w-container gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[1.5fr_1fr_auto] lg:px-8">
         <div className="flex flex-col gap-4">
           <button
-            onClick={() => scrollTo('#hero')}
+            onClick={() => go('#hero')}
             className="flex items-center gap-2 self-start text-lg font-display font-bold"
             aria-label="Back to top"
           >
@@ -50,12 +60,18 @@ export function Footer() {
           {navSections.map((s) => (
             <button
               key={s.id}
-              onClick={() => scrollTo(s.anchor)}
+              onClick={() => go(s.anchor)}
               className="self-start text-sm text-muted transition-colors hover:text-accent"
             >
               {s.label}
             </button>
           ))}
+          <Link
+            to="/blogs"
+            className="self-start text-sm text-muted transition-colors hover:text-accent"
+          >
+            My Blogs
+          </Link>
         </nav>
 
         <div className="flex flex-col gap-3">

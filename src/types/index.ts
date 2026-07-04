@@ -18,3 +18,14 @@ export type { FaqItem, FaqData } from './faq';
 export type { Technology, TechnologiesData } from './technology';
 export type { AnimationTokens } from './animations';
 export type { SectionCopy, SectionCopyData } from './section';
+export type {
+  Blog,
+  BlogArticleData,
+  BlogMeta,
+  BlogContent,
+  BlogArticleSection,
+  BlogArticleSubsection,
+  BlogCta,
+  BlogSeo,
+  BlogSocialSnippets,
+} from './blog-article';

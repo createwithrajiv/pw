@@ -10,10 +10,10 @@
   "resumeUrl": "https://drive.google.com/file/d/1yJlNl6lhyo_gt1BMsaMLlVVIXYHAen_3/view",
   "image": "src/data/profile_picture/jHSuCWRT.jpg",
   "stats": [
-    { "value": "10+", "label": "Production Models Deployed" },
+    { "value": "7+", "label": "Production Models Deployed" },
     { "value": "99.9%", "label": "System Uptime" },
-    { "value": "500K+", "label": "Daily API Requests Handled" },
-    { "value": "3+", "label": "Years of Experience" }
+    { "value": "100K+", "label": "Daily API Requests Handled" },
+    { "value": "2+", "label": "Years of Experience" }
   ]
 }
 

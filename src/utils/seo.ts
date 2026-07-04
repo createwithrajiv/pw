@@ -35,6 +35,37 @@ export function buildJsonLd(seo: Seo, opts: { image: string; canonical: string }
   };
 }
 
+/** Build schema.org/BlogPosting JSON-LD for an article page. */
+export function buildArticleJsonLd(
+  seo: Seo,
+  opts: {
+    headline: string;
+    description: string;
+    datePublished: string;
+    dateModified?: string;
+    author: string;
+    section?: string;
+    keywords: string[];
+    image: string;
+    canonical: string;
+  },
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: opts.headline,
+    description: opts.description,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified ?? opts.datePublished,
+    author: { '@type': 'Person', name: opts.author, url: seo.person.url },
+    publisher: { '@type': 'Person', name: seo.person.name },
+    keywords: opts.keywords.join(', '),
+    ...(opts.section ? { articleSection: opts.section } : {}),
+    image: opts.image,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': opts.canonical },
+  };
+}
+
 export function applyTitleTemplate(template: string, title: string): string {
   return template.includes('%s') ? template.replace('%s', title) : title;
 }

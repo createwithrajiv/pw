@@ -1,4 +1,5 @@
 import { motion, useMotionTemplate, useTransform } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { useFxSignals } from '@/hooks/useFxSignals';
 
 /**
@@ -9,6 +10,7 @@ import { useFxSignals } from '@/hooks/useFxSignals';
  */
 export function StoryBackdrop() {
   const fx = useFxSignals();
+  const { pathname } = useLocation();
   const cy = useTransform(fx.scrollProgress, [0, 1], [12, 90]);
   const alpha = useTransform(fx.velocityAbs, [0, 1], [0.14, 0.24]);
   const background = useMotionTemplate`radial-gradient(58% 46% at 50% ${cy}vh, hsl(${fx.hue} 90% 60% / ${alpha}), transparent 72%)`;
@@ -17,7 +19,8 @@ export function StoryBackdrop() {
   const hue2 = useTransform(fx.hue, (h) => h + 80);
   const background2 = useMotionTemplate`radial-gradient(52% 40% at 50% ${cy2}vh, hsl(${hue2} 80% 55% / 0.08), transparent 70%)`;
 
-  if (fx.reduced) {
+  // Blog routes read like reduced-motion — a calm static backdrop, no scroll-hue.
+  if (fx.reduced || pathname.startsWith('/blogs')) {
     return (
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-grad-radial opacity-50" />
     );

@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "title": "I Used the 80/20 Rule to Learn Agentic AI Faster — Here's the Framework",
+    "slug": "80-20-agentic-ai-learning-framework",
+    "author": "createwithrajiv",
+    "date": "2026-07-05",
+    "read_time_minutes": 6,
+    "category": "AI Engineering",
+    "tags": ["agentic ai", "langgraph", "learning frameworks", "AI engineer", "MCP", "multi-agent systems", "production AI"],
+    "seo": {
+      "meta_title": "80/20 Rule for Learning Agentic AI: A Working Engineer's Framework",
+      "meta_description": "How I used the 80/20 principle to cut through a 30-chapter agentic AI book and focus only on high-leverage patterns like MCP, memory agents, and multi-agent coordination — while working full-time.",
+      "keywords": ["agentic AI patterns", "learn AI engineering fast", "MCP protocol", "multi-agent systems", "AI engineer productivity", "LangGraph patterns", "80/20 learning framework"],
+      "og_title": "Skipping Half a Book on Purpose: How I Prioritize Learning Agentic AI",
+      "og_description": "Not all agent patterns are worth your time. Here's the exact framework I used to decide what to learn deeply and what to skip entirely."
+    },
+    "social_snippets": {
+      "twitter_hook": "I skipped 18 out of 30 chapters in an agentic AI book on purpose.\n\nNot because I was lazy. Because most of them wouldn't move the needle for me.\n\nHere's the 80/20 framework I used instead 🧵",
+      "linkedin_hook": "Everyone's racing to learn every agentic AI pattern that drops.\n\nI did the opposite. I skipped half a book on purpose.\n\nHere's why that's the smarter move when you're working full-time and can't afford to learn everything.",
+      "instagram_caption": "Bangalore grind + full time job + trying to stay current on agentic AI = you HAVE to be ruthless about what you learn. Here's how I do it 👇 (link in bio)"
+    }
+  },
+  "content": {
+    "hook": "There's a book called *30 Agents Every AI Engineer Must Build*. Thirty chapters, thirty agent patterns, and exactly zero extra hours in my week to learn all of them while shipping features full-time at a seed-stage startup. So I didn't try. I read the book through an 80/20 lens instead — and it turned out to be a better learning strategy than trying to absorb everything cover to cover.\n\nHere's the framework, and why not all agent patterns deserve equal time.",
+
+    "sections": [
+      {
+        "heading": "The Real Problem: Too Many Resources, Not Enough Runway",
+        "body": "AI engineering right now has an information problem, not an information shortage. New frameworks, new papers, new 'must-know' patterns drop weekly. If you're working full-time — especially at an early-stage startup where you're already wearing five hats — you cannot learn everything at the same depth. You have to make bets.\n\nMost people either try to consume everything shallowly (and retain none of it) or pick randomly based on whatever's trending on X that week. Neither works. I needed a filter."
+      },
+      {
+        "heading": "The 80/20 Framework I Actually Used",
+        "body": "My filter came down to one question for every chapter: will this pattern show up across multiple future projects, or is it a one-off vertical use case?\n\nPatterns that generalize — memory architecture, agent coordination, protocol design — show up again and again regardless of what you're building. Vertical chapters — an agent specifically for real estate listings, or one for niche e-commerce workflows — teach you a use case, not a transferable skill.\n\nSo I skipped domain-specific chapters like the vertical customer-support-bot walkthroughs and industry-specific automation examples. Not because they're bad content, but because I don't work in those domains and the underlying pattern was already covered elsewhere in more general form. I kept anything touching protocols, memory, coordination, and deployment — because those show up in literally every agentic system I build, regardless of industry."
+      },
+      {
+        "heading": "What I Prioritized Instead",
+        "subsections": [
+          {
+            "subheading": "MCP and A2A Protocols",
+            "body": "Model Context Protocol and agent-to-agent communication standards matter because they're becoming the plumbing layer for how agents talk to tools and to each other. Understanding these now means I'm not scrambling later when every framework assumes you already know them. The mental model that helped most: think of MCP as a USB-C port for AI tools — one interface, many devices — instead of a hardcoded connection for every single tool integration."
+          },
+          {
+            "subheading": "Planning and Memory Agents",
+            "body": "This is where things got genuinely interesting for me, especially after digging into the AtomMem paper separately — a hierarchical, atomic-fact memory architecture that outperforms simpler approaches like Mem0 on temporal reasoning while using fewer tokens. The chapter's coverage of memory agents gave me the applied context; the paper gave me the why behind the architecture. Together, they reframed how I think about state in agentic systems — memory isn't just a database call, it's an architectural decision that affects reasoning quality."
+          },
+          {
+            "subheading": "Multi-Agent Coordination",
+            "body": "Most 'multi-agent' content online is really just multiple prompts chained together with extra steps. The high-leverage version is understanding how agents hand off state, retry on failure, and avoid duplicated work — the coordination logic, not just the pipeline diagram. This is the part I'll actually reach for the next time I design a system with more than one specialized agent."
+          },
+          {
+            "subheading": "Production Deployment Concerns",
+            "body": "The unglamorous chapter nobody shares on LinkedIn, but the one that actually determines if your agent survives contact with real users: rate limiting, fallback behavior when a model call fails, observability, and cost control. Every viral agent demo skips this. Every production agent lives or dies by it."
+          }
+        ]
+      },
+      {
+        "heading": "What Changed in How I Think About Agent Architecture",
+        "body": "Before this, I treated 'agent patterns' as a checklist — learn pattern X, apply it, move to pattern Y. Now I think about it more like a stack of layers: protocol layer (how agents communicate), memory layer (how they retain and retrieve context), coordination layer (how multiple agents avoid stepping on each other), and operations layer (how it survives in production).\n\nThat reframing alone was worth more than reading all thirty chapters would have been. It gave me a mental map I can slot new patterns into, instead of a growing pile of disconnected examples."
+      },
+      {
+        "heading": "The Takeaway (Beyond This One Book)",
+        "body": "This isn't really about this specific book. It's a lens you can apply to any dense resource when you're time-constrained: before you consume a chapter, a course module, or a paper, ask whether it teaches a transferable pattern or a one-off use case. Transferable patterns compound. Use-case-specific content has a shelf life the moment your context changes.\n\nIf you're building agentic systems while also holding down a full-time role, you don't need to know everything. You need to know the 20% that shows up in 80% of the systems you'll actually build."
+      }
+    ],
+
+    "closing": "If you're working through similar material or building agentic systems of your own, I'd genuinely like to compare notes — reach out on LinkedIn or GitHub (createwithrajiv). And if you want to see this framework applied, my next post walks through a real take-home AI task I built under time pressure using the exact patterns above."
+  },
+
+  "cta": {
+    "primary": "Follow along as I document the real, unfiltered version of being an AI engineer navigating startup life in Bangalore.",
+    "links": {
+      "github": "https://github.com/createwithrajiv",
+      "linkedin": "https://linkedin.com/in/createwithrajiv",
+      "instagram": "https://instagram.com/createwithrajiv"
+    }
+  }
+}

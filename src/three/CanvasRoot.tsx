@@ -1,4 +1,5 @@
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useFxSignals } from '@/hooks/useFxSignals';
 import { useHydrated } from '@/hooks/useHydrated';
 import { useTheme } from '@/providers/ThemeProvider';
@@ -28,6 +29,7 @@ class SceneErrorBoundary extends Component<{ children: ReactNode }, { failed: bo
 export function CanvasRoot() {
   const fx = useFxSignals();
   const { resolved } = useTheme();
+  const { pathname } = useLocation();
   const hydrated = useHydrated();
   const [pageVisible, setPageVisible] = useState(true);
 
@@ -37,7 +39,9 @@ export function CanvasRoot() {
     return () => document.removeEventListener('visibilitychange', onVis);
   }, []);
 
-  if (!hydrated || fx.tier !== 'full') return null;
+  // Reading-focused blog routes get no scroll-driven 3D tunnel (the camera is
+  // driven by document scroll and would dive behind the article text).
+  if (!hydrated || fx.tier !== 'full' || pathname.startsWith('/blogs')) return null;
 
   return (
     // Additive screen blend glows on dark; on light we composite normally so the

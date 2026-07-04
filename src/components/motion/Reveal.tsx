@@ -9,7 +9,7 @@ interface RevealProps {
   amount?: number;
   once?: boolean;
   className?: string;
-  as?: 'div' | 'li' | 'span' | 'article';
+  as?: 'div' | 'li' | 'span' | 'article' | 'section';
   children: ReactNode;
 }
 

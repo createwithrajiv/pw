@@ -34,5 +34,10 @@ export const useAnimations = () => content.animations;
 /** Heading copy (eyebrow/title/subtitle) for a section id — source of truth for section headings. */
 export const useSectionCopy = (id: string) => content.sectionCopy[id];
 
+/** All blog articles, newest first. */
+export const useBlogs = () => content.blogs;
+/** A single blog by its slug (undefined if not found). */
+export const useBlogBySlug = (slug?: string) => (slug ? content.blogBySlug[slug] : undefined);
+
 /** Aggregate accessor if a component wants several datasets at once. */
 export const useContent = () => content;

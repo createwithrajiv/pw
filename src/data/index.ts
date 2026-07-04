@@ -52,6 +52,8 @@ import type {
   TechnologiesData,
   AnimationTokens,
   SectionCopyData,
+  Blog,
+  BlogArticleData,
 } from '@/types';
 import { resolveAsset } from '@/utils/asset';
 
@@ -102,6 +104,25 @@ export const animations = animationsJson as AnimationTokens;
 
 /** Section heading copy (eyebrow/title/subtitle) keyed by section id. */
 export const sectionCopy = sectionCopyJson as SectionCopyData;
+
+/**
+ * Long-form blog articles. Each blog is one JSON under `src/data/blogs/<id>/`,
+ * glob-loaded here (literal /src path — the @ alias doesn't work in glob). The
+ * folder id (e.g. "BLOG-0001") is derived from the path and also keys the
+ * per-blog UI folder in src/blogs/<id>/. Adding a blog = drop a JSON file.
+ */
+const blogModules = import.meta.glob('/src/data/blogs/*/*.json', {
+  eager: true,
+  import: 'default',
+}) as Record<string, BlogArticleData>;
+
+export const blogs: Blog[] = Object.entries(blogModules)
+  .map(([path, data]) => ({ id: path.split('/').slice(-2, -1)[0], ...data }))
+  .sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date)); // newest first
+
+export const blogBySlug: Record<string, Blog> = Object.fromEntries(
+  blogs.map((b) => [b.meta.slug, b]),
+);
 
 /* Derived selectors (still no hardcoded copy). */
 export const featuredProjects = projects.filter((p) => p.featured);
