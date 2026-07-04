@@ -34,7 +34,7 @@ function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number;
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
       onBlur={() => setOpen(false)}
-      className="group relative -m-2 flex flex-col gap-3 rounded-lg p-2 outline-none transition-colors focus-visible:bg-surface/40"
+      className="group relative -m-2 flex flex-col items-center gap-3 rounded-lg p-2 text-center outline-none transition-colors focus-visible:bg-surface/40"
     >
       {m.icon && (
         <span className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-accent transition-colors group-hover:border-accent/40">
@@ -52,7 +52,7 @@ function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number;
         whileInView={{ scaleX: 1 }}
         viewport={{ once: true }}
         transition={{ ...signatureSpring, delay: 0.25 }}
-        className="h-px w-12 origin-left bg-gradient-to-r from-accent to-accent-2"
+        className="h-px w-12 origin-center bg-gradient-to-r from-accent to-accent-2"
       />
       <span className="text-sm text-muted">{m.label}</span>
 
@@ -103,7 +103,7 @@ export default function MetricsSection() {
           className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 z-0 h-[60%] w-[70%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grad-radial opacity-60 blur-3xl"
         />
         {metrics.eyebrow && (
-          <p className="eyebrow relative mb-3 flex items-center gap-2">
+          <p className="eyebrow relative mb-3 flex items-center justify-center gap-2">
             <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
             {metrics.eyebrow}
           </p>

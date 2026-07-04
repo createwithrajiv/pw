@@ -1,4 +1,4 @@
-import { motion, useTransform, type MotionValue } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { GradientText } from '@/components/ui/GradientText';
@@ -6,37 +6,14 @@ import { TiltCard } from '@/components/ui/TiltCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { ScrubReveal } from '@/components/motion/ScrubReveal';
 import { SectionDivider } from '@/components/motion/SectionDivider';
-import { usePinScrub } from '@/hooks/usePinScrub';
 import { useSpotlight } from '@/hooks/useSpotlight';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { usePersonalStory, useValues } from '@/hooks/useContent';
 import { burstVariant, staggerContainer } from '@/animations/variants';
 import { cn } from '@/utils/cn';
 
-function WriteWord({
-  word,
-  i,
-  total,
-  progress,
-}: {
-  word: string;
-  i: number;
-  total: number;
-  progress: MotionValue<number>;
-}) {
-  const start = i / total;
-  const opacity = useTransform(progress, [Math.max(0, start - 0.06), start + 0.02], [0.12, 1], {
-    clamp: true,
-  });
-  return (
-    <motion.span style={{ opacity }} className="text-gradient">
-      {word}{' '}
-    </motion.span>
-  );
-}
-
-/** Pinned narrative: the heading writes on word-by-word as you scroll. */
-function StoryNarrativePin({
+/** Story heading — reveals with a gentle fade as it enters (no scroll pin). */
+function StoryNarrative({
   eyebrow,
   heading,
   subheading,
@@ -45,33 +22,25 @@ function StoryNarrativePin({
   heading: string;
   subheading?: string;
 }) {
-  const { ref, progress, pinned } = usePinScrub<HTMLDivElement>({
-    distance: '+=70%',
-    start: 'top 22%',
-  });
-  const words = heading.split(' ');
-
   return (
-    <div ref={ref} className="flex flex-col gap-6">
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.5 }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      className="flex flex-col gap-6"
+    >
       {eyebrow && (
         <p className="eyebrow flex items-center gap-2">
           <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
           {eyebrow}
         </p>
       )}
-      <h2 className="max-w-3xl text-h1 font-display font-semibold tracking-tight" aria-label={heading}>
-        {pinned ? (
-          <span aria-hidden>
-            {words.map((w, i) => (
-              <WriteWord key={i} word={w} i={i} total={words.length} progress={progress} />
-            ))}
-          </span>
-        ) : (
-          <GradientText>{heading}</GradientText>
-        )}
+      <h2 className="max-w-3xl text-h1 font-display font-semibold tracking-tight">
+        <GradientText>{heading}</GradientText>
       </h2>
       {subheading && <p className="text-lead text-muted">{subheading}</p>}
-    </div>
+    </motion.div>
   );
 }
 
@@ -90,7 +59,7 @@ export default function StorySection() {
         <div className="flex flex-col gap-14">
           {hasStory && (
             <div className="flex flex-col gap-6">
-              <StoryNarrativePin
+              <StoryNarrative
                 eyebrow={story.eyebrow}
                 heading={story.heading}
                 subheading={story.subheading}
