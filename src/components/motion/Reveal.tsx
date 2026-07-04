@@ -9,7 +9,8 @@ interface RevealProps {
   amount?: number;
   once?: boolean;
   className?: string;
-  as?: 'div' | 'li' | 'span' | 'article' | 'section';
+  as?: 'div' | 'li' | 'span' | 'article' | 'section' | 'header';
+  id?: string;
   children: ReactNode;
 }
 
@@ -21,12 +22,14 @@ export function Reveal({
   once = true,
   className,
   as = 'div',
+  id,
   children,
 }: RevealProps) {
   const MotionTag = motion[as];
   const variants = VARIANT_MAP[variant];
   return (
     <MotionTag
+      id={id}
       variants={variants}
       initial="hidden"
       whileInView="show"

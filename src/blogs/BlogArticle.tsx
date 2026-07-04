@@ -1,113 +1,245 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowUpRight } from 'lucide-react';
+import { motion, useScroll, useSpring } from 'framer-motion';
+import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/Badge';
 import { Tag } from '@/components/ui/Tag';
 import { Button } from '@/components/ui/Button';
-import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { Reveal } from '@/components/motion/Reveal';
 import { MarkdownLite } from './MarkdownLite';
+import { useProfile } from '@/hooks/useContent';
+import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { useActiveSection } from '@/hooks/useActiveSection';
 import { formatDate } from '@/utils/format';
 import { isRealHref } from '@/utils/href';
+import { cn } from '@/utils/cn';
 import type { Blog } from '@/types';
 
+/** Thin top progress bar — shows how far through the piece the reader is. */
+function ReadingProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
+  return (
+    <motion.div
+      aria-hidden
+      style={{ scaleX }}
+      className="fixed inset-x-0 top-0 z-[96] h-[3px] origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3"
+    />
+  );
+}
+
+const sectionId = (i: number) => `s-${i}`;
+
 /**
- * The shared, default article layout — renders any blog straight from its JSON.
- * A per-blog folder (src/blogs/<id>/index.tsx) can override this to customize a
- * specific article; by default it just re-exports this component.
+ * The shared, default article layout — a focused, editorial reading experience:
+ * reading-progress bar, author byline, drop-cap lead, numbered sections, a sticky
+ * table of contents on wide screens, and an author CTA. A per-blog folder can
+ * override this; by default it re-exports this component.
  */
 export default function BlogArticle({ blog }: { blog: Blog }) {
   const { meta, content, cta } = blog;
+  const profile = useProfile();
+  const { scrollTo } = useSmoothScroll();
+
+  const toc = content.sections.map((s, i) => ({ id: sectionId(i), label: s.heading }));
+  const active = useActiveSection(toc.map((t) => t.id));
 
   return (
-    <article className="relative pt-28 pb-24">
-      <Container width="narrow">
-        <Link
-          to="/blogs"
-          className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
-        >
-          <ArrowLeft className="h-4 w-4" aria-hidden />
-          All blogs
-        </Link>
+    <>
+      <ReadingProgress />
+      <article className="relative pb-28 pt-24">
+        <Container width="default">
+          <div className="mx-auto grid max-w-[44rem] grid-cols-1 gap-x-16 xl:max-w-[64rem] xl:grid-cols-[minmax(0,1fr)_13rem]">
+            {/* ---- Reading column ---- */}
+            <div className="min-w-0">
+              <Link
+                to="/blogs"
+                className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden />
+                All blogs
+              </Link>
 
-        {/* Header */}
-        <Reveal as="div" className="mt-8 flex flex-col gap-5">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <Badge tone="accent">{meta.category}</Badge>
-            <span className="text-sm text-subtle">
-              <time dateTime={meta.date}>{formatDate(meta.date)}</time> · {meta.read_time_minutes} min
-              read · {meta.author}
-            </span>
-          </div>
-          <h1 className="text-[clamp(2rem,1.4rem+2.6vw,3.25rem)] font-display font-semibold leading-[1.12] tracking-tight text-balance">
-            <GradientText>{meta.title}</GradientText>
-          </h1>
-          {meta.tags.length > 0 && (
-            <ul className="flex flex-wrap gap-2">
-              {meta.tags.map((t) => (
-                <li key={t}>
-                  <Tag>{t}</Tag>
-                </li>
-              ))}
-            </ul>
-          )}
-        </Reveal>
-
-        {/* Hook / lead */}
-        <Reveal as="div" className="mt-10 flex flex-col gap-5 text-lead leading-relaxed text-muted">
-          <MarkdownLite text={content.hook} />
-        </Reveal>
-
-        {/* Body sections */}
-        <div className="flex flex-col">
-          {content.sections.map((section, i) => (
-            <Reveal as="section" key={i} className="mt-12 flex flex-col gap-4">
-              <h2 className="text-h2 font-display font-semibold tracking-tight">{section.heading}</h2>
-              {section.body && (
-                <div className="flex flex-col gap-5 text-body leading-relaxed text-muted">
-                  <MarkdownLite text={section.body} />
+              {/* Header */}
+              <Reveal as="header" className="mt-7 flex flex-col gap-6">
+                <div className="flex flex-wrap items-center gap-3">
+                  <Badge tone="accent">{meta.category}</Badge>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-subtle">
+                    <Clock className="h-3.5 w-3.5" aria-hidden />
+                    {meta.read_time_minutes} min read
+                  </span>
                 </div>
-              )}
-              {section.subsections?.map((sub, j) => (
-                <div key={j} className="mt-4 flex flex-col gap-3">
-                  <h3 className="text-h3 font-display font-medium tracking-tight text-foreground">
-                    {sub.subheading}
-                  </h3>
-                  <div className="flex flex-col gap-5 text-body leading-relaxed text-muted">
-                    <MarkdownLite text={sub.body} />
+
+                <h1 className="text-balance text-[clamp(2.1rem,1.3rem+2.9vw,3.4rem)] font-display font-semibold leading-[1.1] tracking-tight">
+                  {meta.title}
+                </h1>
+
+                {/* Byline */}
+                <div className="flex items-center gap-3">
+                  <img
+                    src={profile.image}
+                    alt={profile.name}
+                    loading="eager"
+                    className="h-11 w-11 shrink-0 rounded-full object-cover ring-1 ring-border"
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-sm font-medium text-foreground">{profile.name}</span>
+                    <time dateTime={meta.date} className="text-xs text-subtle">
+                      {formatDate(meta.date)}
+                    </time>
                   </div>
                 </div>
+
+                {meta.tags.length > 0 && (
+                  <ul className="flex flex-wrap gap-2">
+                    {meta.tags.map((t) => (
+                      <li key={t}>
+                        <Tag>{t}</Tag>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </Reveal>
+
+              <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-border-strong to-transparent" />
+
+              {/* Lead / hook */}
+              <Reveal
+                as="div"
+                className="blog-lead mt-9 flex flex-col gap-5 text-[1.2rem] leading-[1.75] text-foreground/85"
+              >
+                <MarkdownLite text={content.hook} />
+              </Reveal>
+
+              {/* Sections */}
+              {content.sections.map((section, i) => (
+                <Reveal
+                  as="section"
+                  key={i}
+                  id={sectionId(i)}
+                  className="mt-14 scroll-mt-28 flex flex-col gap-5"
+                >
+                  <div className="flex items-baseline gap-3.5">
+                    <span className="font-mono text-sm font-medium text-accent">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h2 className="text-h2 font-display font-semibold tracking-tight">
+                      {section.heading}
+                    </h2>
+                  </div>
+
+                  {section.body && (
+                    <div className="flex flex-col gap-5 text-[1.075rem] leading-[1.85] text-muted">
+                      <MarkdownLite text={section.body} />
+                    </div>
+                  )}
+
+                  {section.subsections?.map((sub, j) => (
+                    <div
+                      key={j}
+                      className="mt-4 flex flex-col gap-3 border-l-2 border-accent/30 pl-5"
+                    >
+                      <h3 className="text-h3 font-display font-medium tracking-tight text-foreground">
+                        {sub.subheading}
+                      </h3>
+                      <div className="flex flex-col gap-5 text-[1.075rem] leading-[1.85] text-muted">
+                        <MarkdownLite text={sub.body} />
+                      </div>
+                    </div>
+                  ))}
+                </Reveal>
               ))}
-            </Reveal>
-          ))}
-        </div>
 
-        {/* Closing */}
-        {content.closing && (
-          <Reveal as="div" className="mt-14">
-            <div className="glass flex flex-col gap-5 rounded-xl p-6 text-body leading-relaxed text-foreground sm:p-8">
-              <MarkdownLite text={content.closing} />
+              {/* Closing callout */}
+              {content.closing && (
+                <Reveal as="div" className="mt-16">
+                  <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40 p-7 sm:p-9">
+                    <span
+                      aria-hidden
+                      className="pointer-events-none absolute -left-1 -top-8 select-none font-display text-[8rem] leading-none text-accent/10"
+                    >
+                      &ldquo;
+                    </span>
+                    <div className="relative flex flex-col gap-5 text-[1.075rem] leading-[1.8] text-foreground/90">
+                      <MarkdownLite text={content.closing} />
+                    </div>
+                  </div>
+                </Reveal>
+              )}
+
+              {/* Author + CTA */}
+              <Reveal as="div" className="mt-12">
+                <div className="glass flex flex-col gap-5 rounded-2xl p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
+                  <img
+                    src={profile.image}
+                    alt={profile.name}
+                    className="h-16 w-16 shrink-0 rounded-full object-cover ring-1 ring-border"
+                  />
+                  <div className="flex min-w-0 flex-col gap-3">
+                    <div className="flex flex-col">
+                      <span className="font-display font-medium text-foreground">{profile.name}</span>
+                      <span className="text-sm text-subtle">{profile.title}</span>
+                    </div>
+                    {cta.primary && <p className="text-sm leading-relaxed text-muted">{cta.primary}</p>}
+                    <div className="flex flex-wrap gap-2.5">
+                      {Object.entries(cta.links).map(([platform, url]) =>
+                        isRealHref(url) ? (
+                          <Button key={platform} href={url as string} variant="secondary" size="sm">
+                            <IconRenderer name={platform} className="h-4 w-4" />
+                            <span className="capitalize">{platform}</span>
+                            <ArrowUpRight className="h-4 w-4" aria-hidden />
+                          </Button>
+                        ) : null,
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+
+              {/* Footer nav */}
+              <div className="mt-12 border-t border-border pt-8">
+                <Link
+                  to="/blogs"
+                  className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
+                >
+                  <ArrowLeft className="h-4 w-4" aria-hidden />
+                  Back to all blogs
+                </Link>
+              </div>
             </div>
-          </Reveal>
-        )}
 
-        {/* CTA */}
-        <Reveal as="div" className="mt-10 flex flex-col gap-5">
-          {cta.primary && <p className="text-lead text-muted">{cta.primary}</p>}
-          <div className="flex flex-wrap gap-3">
-            {Object.entries(cta.links).map(([platform, url]) =>
-              isRealHref(url) ? (
-                <Button key={platform} href={url as string} variant="secondary" size="sm">
-                  <IconRenderer name={platform} className="h-4 w-4" />
-                  <span className="capitalize">{platform}</span>
-                  <ArrowUpRight className="h-4 w-4" aria-hidden />
-                </Button>
-              ) : null,
+            {/* ---- Sticky table of contents (wide screens) ---- */}
+            {toc.length > 1 && (
+              <aside className="hidden xl:block">
+                <nav aria-label="On this page" className="sticky top-28 flex flex-col gap-3">
+                  <span className="eyebrow text-subtle">On this page</span>
+                  <ul className="flex flex-col">
+                    {toc.map((t, i) => (
+                      <li key={t.id}>
+                        <button
+                          onClick={() => scrollTo(`#${t.id}`)}
+                          className={cn(
+                            '-ml-px flex w-full items-baseline gap-2 border-l-2 py-1.5 pl-4 text-left text-sm transition-colors',
+                            active === t.id
+                              ? 'border-accent text-foreground'
+                              : 'border-border text-muted hover:border-accent/50 hover:text-foreground',
+                          )}
+                        >
+                          <span className="font-mono text-xs text-subtle">
+                            {String(i + 1).padStart(2, '0')}
+                          </span>
+                          <span className="line-clamp-2">{t.label}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </aside>
             )}
           </div>
-        </Reveal>
-      </Container>
-    </article>
+        </Container>
+      </article>
+    </>
   );
 }
