@@ -1,24 +1,79 @@
 {
   "categories": [
-    {
-      "name": "AI / ML",
-      "skills": ["TensorFlow", "PyTorch", "Scikit-learn", "Hugging Face", "LangChain", "ONNX", "TensorRT"]
-    },
-    {
-      "name": "Backend & Infrastructure",
-      "skills": ["Python", "FastAPI", "gRPC", "Node.js", "PostgreSQL", "Redis", "Elasticsearch"]
-    },
-    {
-      "name": "Cloud & DevOps",
-      "skills": ["AWS", "GCP", "Azure", "Docker", "Kubernetes", "Terraform", "CI/CD"]
-    },
-    {
-      "name": "Data Engineering",
-      "skills": ["Apache Kafka", "Apache Spark", "Airflow", "dbt", "Snowflake", "BigQuery"]
-    },
-    {
-      "name": "MLOps & Monitoring",
-      "skills": ["MLflow", "Weights & Biases", "Grafana", "Prometheus", "Seldon", "BentoML"]
-    }
+  {
+  "name": "Core Concepts",
+  "skills": [
+  "Data Structures & Algorithms",
+  "System Design",
+  "Problem Solving",
+  "Complexity Analysis",
+  "Object-Oriented Programming"
   ]
-}
+  },
+  {
+  "name": "AI / ML & GenAI",
+  "skills": [
+  "TensorFlow",
+  "PyTorch",
+  "Scikit-learn",
+  "Hugging Face",
+  "LangChain",
+  "LangGraph",
+  "RAG",
+  "LLMs"
+  ]
+  },
+  {
+  "name": "Knowledge Graphs & Vector Databases",
+  "skills": [
+  "Neo4j",
+  "Qdrant",
+  "Milvus",
+  "Zilliz",
+  "Vector Databases",
+  "GraphRAG"
+  ]
+  },
+  {
+  "name": "Backend Development",
+  "skills": [
+  "Python",
+  "Go",
+  "FastAPI",
+  "gRPC",
+  "PostgreSQL",
+  "Redis"
+  ]
+  },
+  {
+  "name": "Databases & Data Engineering",
+  "skills": [
+  "MongoDB",
+  "MySQL",
+  "SQLite",
+  "Apache Kafka",
+  "Snowflake",
+  "Data Pipelines",
+  "ETL",
+  "ELT",
+  "Data Warehousing"
+  ]
+  },
+  {
+  "name": "Cloud, DevOps & Infrastructure",
+  "skills": [
+  "AWS",
+  "GCP",
+  "Azure",
+  "Docker",
+  "Kubernetes",
+  "CI/CD",
+  "Git",
+  "Linux",
+  "ONNX",
+  "TensorRT"
+  ]
+  }
+  ]
+  }
+  

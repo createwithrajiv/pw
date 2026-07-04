@@ -1,20 +1,29 @@
 [
   {
-    "quote": "Alex transformed our ML prototype into a production system that handles 10x our original traffic with half the infrastructure costs. Exceptional engineering.",
-    "author": "Sarah Kim",
-    "role": "CTO, ScaleAI Corp",
-    "company": "ScaleAI Corp"
+    "quote": "Rajiv has been a cornerstone in the development of the Test Case Genie and SQL Genie solution, driving key innovations such as LangGraph integration and parallel processing capabilities. His clarity of thought, rapid learning ability, and collaborative approach consistently elevate team performance and innovation.",
+    "author": "Naveen Kumar Chauhan",
+    "role": "Director, AI & Data Team, Axtria India",
+    "company": "Axtria India",
+    "company_logo":"src/data/company_logos/axtria.png",
+    "profile_picture":"src/data/profile_pictures/naveen_chauhan.jpg",
+    "detailed_quote": "Rajiv has been a cornerstone in the development of the Test Case Genie BI solution for BIM Generative AI Team, where he has not only contributed but also driven key innovations such as LangGraph integration and parallel processing capabilities. These advancements have significantly enhanced the efficiency, scalability, and robustness of the solution, directly contributing to its success and adoption. \n What sets Rajiv apart is his clarity of thought, rapid learning ability, and sharp problem-solving mindset. He has a unique talent for breaking down complex challenges into manageable solutions and communicating them with precision, enabling the entire team to align and execute effectively. \n Beyond his technical brilliance, Rajiv embodies the qualities of a true team player. His collaborative approach, positive mindset, and 'get-going' attitude create momentum and inspire those around him to perform at their best. He willingly steps in to support others, ensures deadlines are met, and consistently delivers outcomes that raise the bar for quality and innovation. In every sense, Rajiv exemplifies the spirit of this award—a blend of innovation, teamwork, and relentless dedication to excellence."
   },
   {
-    "quote": "The fraud detection system Alex built is the backbone of our risk management. It processes millions of transactions daily with incredible reliability.",
-    "author": "Michael Torres",
-    "role": "VP Engineering, FinSecure",
-    "company": "FinSecure"
+    "quote": "Rajiv consistently delivered impactful backend and AI infrastructure improvements at Karma AI, driving significant gains in system performance, reliability, and cost efficiency. His strong ownership, analytical mindset, and ability to solve complex engineering challenges made him a valuable contributor to the team and our platform's success.",
+    "author": "Neeraj Tiwari",
+    "role": "CEO & Founder, Karma AI",
+    "company": "Karma AI",
+    "company_logo":"src/data/company_logos/karma_ai.png",
+    "profile_picture":"src/data/profile_pictures/neeraj_tiwari.jpg",
+    "detailed_quote": "Rajiv consistently approaches engineering problems with a strong sense of ownership and a focus on measurable outcomes rather than just implementation.\nDuring his time with us, he delivered several impactful backend and AI infrastructure improvements, including significantly reducing system latency, improving AI agent reliability and execution speed, optimizing our caching strategy to lower inference costs, and streamlining our RAG pipeline while maintaining accuracy. His work contributed meaningfully to the performance and efficiency of our platform.\nBeyond the technical results, Rajiv is thoughtful, receptive to feedback, and willing to dig deep into complex problems until he finds practical solutions. He is someone who values continuous learning and takes pride in building reliable systems.\nI appreciate the contributions he made to Karma AI and wish him continued success in his future endeavors."
   },
   {
-    "quote": "Working with Alex on our LLM infrastructure was a game-changer. They brought deep systems knowledge that most ML engineers simply don't have.",
-    "author": "Priya Patel",
-    "role": "Head of AI, NeuralPath",
-    "company": "NeuralPath"
+    "quote": "Rajiv made a strong impact by quickly identifying and resolving a critical AI infrastructure challenge, delivering a scalable solution that significantly improved system performance and efficiency. His technical expertise, problem-solving ability, and ownership mindset enabled him to contribute meaningful results in a short period of time. Rajiv is a capable AI engineer who consistently focuses on practical solutions and measurable business outcomes.",
+    "author": "Sahng Ibrahim",
+    "role": "CEO, EQL Global",
+    "company": "EQL Global",
+    "company_logo":"src/data/company_logos/eql_global.jpg",
+    "profile_picture":"src/data/profile_pictures/sahng_ibrahim.jpg",
+    "detailed_quote": "Rajiv joined us to work on one of our key AI engineering challenges optimizing LLM latency. What stood out was his ability to quickly identify the root cause and deliver a scalable solution within just one day, solving an issue that had challenged the team for over a week.\nHis solution improved latency, increased throughput, and reduced inference costs without compromising output quality. Beyond his technical expertise in LLMs, AI infrastructure, and distributed systems, Rajiv demonstrated strong ownership, analytical thinking, and a clear focus on delivering business impact.\nRajiv is an exceptional AI engineer who combines deep technical knowledge with the ability to execute quickly and independently. I would confidently recommend him for any role involving LLMs, AI systems, or high-performance backend engineering."
   }
 ]

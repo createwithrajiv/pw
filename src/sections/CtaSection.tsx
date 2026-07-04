@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { GradientText } from '@/components/ui/GradientText';
 import { AnimatedText } from '@/components/motion/AnimatedText';
 import { Reveal } from '@/components/motion/Reveal';
+import { KineticMarquee } from '@/components/motion/KineticMarquee';
 import { usePointerGlow } from '@/hooks/usePointerGlow';
 import { useCta } from '@/hooks/useContent';
 
@@ -14,7 +15,8 @@ export default function CtaSection() {
   const glow = usePointerGlow<HTMLDivElement>({ size: 600, alpha: 0.12 });
 
   return (
-    <Section id="cta" className="overflow-hidden">
+    <Section id="cta" className="overflow-hidden" ambient>
+      <KineticMarquee words={['Build', 'Ship', 'Scale', 'Deploy', 'Observe']} className="mb-14" />
       <Container className="relative">
         {/* static glow (also the reduced-motion fallback) */}
         <div

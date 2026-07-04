@@ -1,33 +1,36 @@
-import { motion, useMotionTemplate, useScroll, useSpring, useTransform } from 'framer-motion';
-import { useReducedMotion } from '@/providers/ReducedMotionProvider';
+import { motion, useMotionTemplate, useTransform } from 'framer-motion';
+import { useFxSignals } from '@/hooks/useFxSignals';
 
 /**
  * Page-level "narrative light": a soft radial glow that descends and shifts hue
- * (cyan → violet → magenta, the dark-palette accent hues) as the user reads.
- * Fixed, behind all content. Static under reduced motion.
+ * (cyan → violet → magenta) as the user reads, plus a counter-glow for depth.
+ * Brightens with scroll velocity. Consumes the shared fx signals so the WebGL
+ * field and this layer move identically. Static under reduced motion.
  */
 export function StoryBackdrop() {
-  const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const p = useSpring(scrollYProgress, { stiffness: 50, damping: 20, mass: 0.5 });
-  const cy = useTransform(p, [0, 1], [14, 88]);
-  const hue = useTransform(p, [0, 0.5, 1], [190, 265, 330]);
-  const background = useMotionTemplate`radial-gradient(45% 35% at 50% ${cy}vh, hsl(${hue} 90% 60% / 0.13), transparent 70%)`;
+  const fx = useFxSignals();
+  const cy = useTransform(fx.scrollProgress, [0, 1], [12, 90]);
+  const alpha = useTransform(fx.velocityAbs, [0, 1], [0.14, 0.24]);
+  const background = useMotionTemplate`radial-gradient(58% 46% at 50% ${cy}vh, hsl(${fx.hue} 90% 60% / ${alpha}), transparent 72%)`;
 
-  if (reduced) {
+  const cy2 = useTransform(fx.scrollProgress, [0, 1], [88, 14]);
+  const hue2 = useTransform(fx.hue, (h) => h + 80);
+  const background2 = useMotionTemplate`radial-gradient(52% 40% at 50% ${cy2}vh, hsl(${hue2} 80% 55% / 0.08), transparent 70%)`;
+
+  if (fx.reduced) {
     return (
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 bg-grad-radial opacity-50"
-      />
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 bg-grad-radial opacity-50" />
     );
   }
 
   return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed inset-0 -z-10"
-      style={{ background }}
-    />
+    <>
+      <motion.div aria-hidden className="pointer-events-none fixed inset-0 -z-10" style={{ background }} />
+      <motion.div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10"
+        style={{ background: background2 }}
+      />
+    </>
   );
 }

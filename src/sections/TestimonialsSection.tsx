@@ -36,7 +36,7 @@ export default function TestimonialsSection() {
   }, []);
 
   return (
-    <Section id="testimonials">
+    <Section id="testimonials" ambient>
       <Container>
         <SectionHeading
           eyebrow="Social proof"
@@ -76,6 +76,8 @@ export default function TestimonialsSection() {
                   else if (info.offset.x > 60) go(-1);
                 }}
                 aria-live="polite"
+                data-cursor
+                data-cursor-label="DRAG"
                 className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
               >
                 <blockquote className="text-h3 font-display font-medium leading-snug text-foreground">

@@ -9,7 +9,7 @@ export interface PersonSchema {
 
 export interface Seo {
   title: string;
-  titleTemplate: string; // e.g. "%s · Rajiv Kumar Yadav"
+  titleTemplate: string; // e.g. "%s · Rajiv Yadav"
   description: string;
   keywords: string[];
   url: string; // canonical site URL

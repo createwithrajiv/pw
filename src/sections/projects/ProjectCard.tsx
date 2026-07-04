@@ -35,6 +35,7 @@ export function ProjectCard({
       variants={fadeInUp}
       layout
       data-cursor
+      data-cursor-label="VIEW"
       onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
       onFocus={onFocus}

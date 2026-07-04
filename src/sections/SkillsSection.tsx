@@ -6,7 +6,8 @@ import { TiltCard } from '@/components/ui/TiltCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { SectionDivider } from '@/components/motion/SectionDivider';
 import { useSkills } from '@/hooks/useContent';
-import { fadeInUp, staggerContainer } from '@/animations/variants';
+import { useReducedMotion } from '@/providers/ReducedMotionProvider';
+import { burstVariant, staggerContainer } from '@/animations/variants';
 
 const CATEGORY_ICONS: Record<string, string> = {
   'AI / ML': 'brain',
@@ -79,9 +80,10 @@ function Constellation() {
 
 export default function SkillsSection() {
   const skills = useSkills();
+  const reduced = useReducedMotion();
 
   return (
-    <Section id="skills">
+    <Section id="skills" ambient={{ density: 'sparse', motes: false }}>
       <Constellation />
       <Container className="relative z-10">
         <SectionDivider className="mb-12" />
@@ -98,8 +100,8 @@ export default function SkillsSection() {
           viewport={{ once: true, amount: 0.15 }}
           className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {skills.categories.map((cat) => (
-            <motion.div key={cat.name} variants={fadeInUp} className="h-full">
+          {skills.categories.map((cat, i) => (
+            <motion.div key={cat.name} variants={burstVariant(i, reduced)} className="h-full">
               <TiltCard className="flex h-full flex-col gap-4 p-6">
                 <div className="flex items-center gap-3">
                   <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-grad-accent/10 text-accent ring-1 ring-accent/20">

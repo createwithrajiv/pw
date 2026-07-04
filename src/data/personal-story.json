@@ -6,7 +6,7 @@
   "paragraphs": [
     {
       "heading": "The gap I close",
-      "body": "Most AI never makes it past the demo. I bridge research prototypes and reliable production systems — AI backends that survive real traffic, handle millions of requests, and hold sub-100ms latency under load."
+      "body": "Most AI never makes it past the demo. I bridge research prototypes and reliable production systems. My focus is on building AI backends that survive real traffic, handle millions of requests, and hold sub-300ms latency under load."
     },
     {
       "body": "My focus is machine learning infrastructure, distributed systems, and production-grade AI pipelines that never compromise on performance, reliability, or stability. The model is the easy part; making it dependable at scale is the craft."

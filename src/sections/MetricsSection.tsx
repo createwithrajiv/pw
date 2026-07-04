@@ -6,8 +6,9 @@ import { Counter } from '@/components/ui/Counter';
 import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useMetrics, useProfile } from '@/hooks/useContent';
+import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { parseStat } from '@/utils/format';
-import { blurScaleIn, signatureSpring, staggerContainer } from '@/animations/variants';
+import { burstVariant, signatureSpring, staggerContainer } from '@/animations/variants';
 
 interface NormalizedMetric {
   id: string;
@@ -20,13 +21,13 @@ interface NormalizedMetric {
   context?: string;
 }
 
-function MetricItem({ m }: { m: NormalizedMetric }) {
+function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number; reduced: boolean }) {
   const [open, setOpen] = useState(false);
   const ctxId = `metric-ctx-${m.id}`;
 
   return (
     <motion.li
-      variants={blurScaleIn}
+      variants={burstVariant(index, reduced)}
       tabIndex={m.context ? 0 : -1}
       aria-describedby={m.context ? ctxId : undefined}
       onMouseEnter={() => setOpen(true)}
@@ -74,6 +75,7 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
 export default function MetricsSection() {
   const metrics = useMetrics();
   const profile = useProfile();
+  const reduced = useReducedMotion();
 
   const items: NormalizedMetric[] =
     metrics.items.length > 0
@@ -93,7 +95,7 @@ export default function MetricsSection() {
         });
 
   return (
-    <Section id="metrics" grid>
+    <Section id="metrics" grid ambient={{ density: 'sparse' }}>
       <Container className="relative">
         {/* in-view glow pulse */}
         <div
@@ -113,8 +115,8 @@ export default function MetricsSection() {
           viewport={{ once: true, amount: 0.4 }}
           className="relative grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4"
         >
-          {items.map((m) => (
-            <MetricItem key={m.id} m={m} />
+          {items.map((m, i) => (
+            <MetricItem key={m.id} m={m} index={i} reduced={reduced} />
           ))}
         </motion.ul>
       </Container>

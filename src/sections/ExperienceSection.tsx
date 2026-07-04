@@ -6,7 +6,7 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
-import { Reveal } from '@/components/motion/Reveal';
+import { FlyIn } from '@/components/motion/FlyIn';
 import { useExperience } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import type { Experience } from '@/types';
@@ -15,9 +15,10 @@ interface TimelineItemProps {
   item: Experience;
   progress: MotionValue<number>;
   t: number; // fractional position of this node down the spine
+  index: number;
 }
 
-function TimelineItem({ item, progress, t }: TimelineItemProps) {
+function TimelineItem({ item, progress, t, index }: TimelineItemProps) {
   // "Ignite" as the spine fill reaches this node.
   const lit = useTransform(progress, [t - 0.08, t], [0, 1], { clamp: true });
   const nodeScale = useTransform(lit, [0, 1], [1, 1.14]);
@@ -36,7 +37,7 @@ function TimelineItem({ item, progress, t }: TimelineItemProps) {
         />
         <Briefcase className="relative z-10 h-4 w-4" aria-hidden />
       </motion.span>
-      <Reveal variant="fadeInUp">
+      <FlyIn direction={index % 2 === 0 ? 'left' : 'right'} blur={8}>
         <GlassCard interactive className="flex flex-col gap-4 p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -64,7 +65,7 @@ function TimelineItem({ item, progress, t }: TimelineItemProps) {
             </ul>
           )}
         </GlassCard>
-      </Reveal>
+      </FlyIn>
     </div>
   );
 }
@@ -83,7 +84,7 @@ export default function ExperienceSection() {
   const total = experience.length;
 
   return (
-    <Section id="experience">
+    <Section id="experience" ambient={{ density: 'sparse', motes: false }}>
       <Container>
         <SectionHeading
           eyebrow="The journey"
@@ -105,6 +106,7 @@ export default function ExperienceSection() {
                 item={item}
                 progress={progress}
                 t={total > 1 ? i / (total - 1) : 0}
+                index={i}
               />
             ))}
           </div>

@@ -26,7 +26,7 @@ export default function ProjectsSection() {
   );
 
   return (
-    <Section id="projects" grid>
+    <Section id="projects" grid ambient={{ density: 'sparse' }}>
       <Container>
         <SectionHeading
           eyebrow="Selected work"

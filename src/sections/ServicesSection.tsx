@@ -6,15 +6,17 @@ import { TiltCard } from '@/components/ui/TiltCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useServices } from '@/hooks/useContent';
 import { useSpotlight } from '@/hooks/useSpotlight';
-import { clipReveal, staggerContainer } from '@/animations/variants';
+import { useReducedMotion } from '@/providers/ReducedMotionProvider';
+import { burstVariant, staggerContainer } from '@/animations/variants';
 import { cn } from '@/utils/cn';
 
 export default function ServicesSection() {
   const services = useServices();
   const spotlight = useSpotlight();
+  const reduced = useReducedMotion();
 
   return (
-    <Section id="services">
+    <Section id="services" ambient={{ density: 'sparse' }}>
       <Container>
         <SectionHeading
           eyebrow="What I do"
@@ -31,7 +33,7 @@ export default function ServicesSection() {
           {services.map((service, i) => (
             <motion.div
               key={service.title}
-              variants={clipReveal}
+              variants={burstVariant(i, reduced)}
               data-cursor
               className={cn(
                 'h-full transition-[opacity,filter] duration-300',

@@ -1,4 +1,4 @@
-# Rajiv Kumar Yadav — Portfolio
+# Rajiv Yadav — Portfolio
 
 A premium, dark-first, single-page portfolio for an AI Engineer. Built with React 18,
 TypeScript, Vite, TailwindCSS, Framer Motion, GSAP, Lenis smooth scroll, and a React

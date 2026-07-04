@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Premium personal portfolio for Rajiv Kumar Yadav — AI Engineer. Data-driven from src/data.",
+  "description": "Premium personal portfolio for Rajiv Yadav — AI Engineer. Data-driven from src/data.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

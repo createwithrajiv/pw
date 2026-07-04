@@ -1,6 +1,6 @@
 [
-  { "platform": "GitHub", "url": "https://github.com", "icon": "github" },
-  { "platform": "LinkedIn", "url": "https://linkedin.com", "icon": "linkedin" },
-  { "platform": "Twitter", "url": "https://twitter.com", "icon": "twitter" },
-  { "platform": "Email", "url": "mailto:alex@example.com", "icon": "mail" }
+  { "platform": "GitHub", "url": "https://github.com/createwithrajiv", "icon": "github" },
+  { "platform": "LinkedIn", "url": "https://linkedin.com/in/createwithrajiv", "icon": "linkedin" },
+  { "platform": "Twitter", "url": "https://x.com/createwithrajiv", "icon": "twitter" },
+  { "platform": "Email", "url": "mailto:rajiv@rajivyadav.com", "icon": "mail" }
 ]

@@ -1,6 +1,6 @@
 {
-  "title": "Rajiv Kumar Yadav — AI Engineer",
-  "titleTemplate": "%s · Rajiv Kumar Yadav",
+  "title": "Rajiv Yadav - AI Engineer",
+  "titleTemplate": "%s · Rajiv Yadav",
   "description": "AI Engineer building production AI systems that scale — machine learning infrastructure, MLOps, and LLM orchestration that handle millions of requests at sub-100ms latency.",
   "keywords": [
     "AI Engineer",
@@ -11,18 +11,18 @@
     "Production AI",
     "ML Infrastructure",
     "Backend Engineer",
-    "Rajiv Kumar Yadav"
+    "Rajiv Yadav"
   ],
   "url": "https://rajivyadav.com",
-  "ogImage": "/og-image.png",
-  "twitterHandle": "",
+  "ogImage": "src/data/profile_picture/jHSuCWRT.jpg",
+  "twitterHandle": "@createwithrajiv",
   "locale": "en_US",
   "person": {
-    "name": "Rajiv Kumar Yadav",
+    "name": "Rajiv Yadav",
     "jobTitle": "AI Engineer",
     "url": "https://rajivyadav.com",
     "email": "rajiv@rajivyadav.com",
-    "sameAs": ["https://github.com", "https://linkedin.com"],
-    "address": { "locality": "Noida", "country": "India" }
+    "sameAs": ["https://github.com/createwithrajiv", "https://linkedin.com/in/createwithrajiv"],
+    "address": { "locality": "Bangalore", "country": "India" }
   }
 }

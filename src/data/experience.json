@@ -1,23 +1,43 @@
 [
+
+  {
+    "role": "R&D AI Engineer",
+    "department": "R&D Team",
+    "employment_type": "Full-time",
+    "company": "CraftifAI",
+    "company_logo": "src/data/company_logos/craftifai.png",
+    "location": "Bangalore, India",
+    "period": "April 2026 - June 2026",
+    "description": "Built a GraphRAG-powered Firmware Knowledge Base using Neo4j, PostgreSQL, and Qdrant, enabling 50K+ indexed firmware entities, sub-second retrieval, and 70%+ blueprint reuse while reducing manual design effort by 90%.",
+    "highlights": [
+    "50K+ firmware knowledge entities indexed",
+    "Sub-second semantic retrieval latency",
+    "70%+ blueprint reuse rate",
+    "80% reduction in manual firmware design effort"
+    ]
+  },
   {
     "role": "AI/ML Engineer",
+    "department": "AI Research Team",
     "employment_type": "Contract",
     "company": "EQL Global",
+    "company_logo": "src/data/company_logos/eql_global.png",
     "location": "Gothenburg, Sweden",
-    "period": "October 2025 - Present",
+    "period": "October 2025 - June 2026",
     "description": "Designing and deploying production AI systems processing 100K+ of daily requests. Reduced inference costs by 60% through model optimization and intelligent caching.",
     "highlights": [
       "100K+ daily requests",
-      "99.9% uptime SLA", 
       "60% cost reduction"
     ]
   },
   {
-    "role": "AI Engineer",
+    "role": "AI Engineer ",
+    "department": "Product Engineering Team",
     "employment_type": "Full-time",
-    "company": "Darpin Dynamics",
+    "company": "Karma AI",
+    "company_logo": "src/data/company_logos/karma_ai.png",
     "location": "Mumbai, India",
-    "period": "January 2026 - Present",
+    "period": "January 2026 - March 2026",
     "description": "Led architecture and deployment of production RAG and agentic retrieval systems, optimizing retrieval, caching, and database execution paths to deliver scalable, low-latency real-time inference across high-concurrency workloads.",
     "highlights": [
       "Led team of 4 engineers",
@@ -26,10 +46,12 @@
     ]
   },
   {
-    "role": "Analyst",
+    "role": "Analyst Trainee",
+    "department": "AI & Data Team",
     "employment_type": "Full-time",
     "company": "Axtria",
-    "location": "Gurugram, India",
+    "company_logo": "src/data/company_logos/axtria.png",
+    "location": "Noida, India",
     "period": "January 2025 - January 2026",
     "description": "Built an AI-driven agentic QA automation and RAG-powered query platform for BI systems, transforming business requirements into validated SQL through a test-first multi-agent workflow, significantly improving query accuracy and enabling scalable, production-grade analytics automation while achieving 10x faster query execution and 3x higher system throughput.",
     "highlights": [
@@ -41,8 +63,10 @@
   },
   {
     "role": "Junior Backend Engineer",
+    "department": null,
     "employment_type": "Full-time",
     "company": "Archmed Biotech",
+    "company_logo": "src/data/company_logos/archmed_biotech.png",
     "location": "Chandigarh, India",
     "period": "October 2023 - December 2024",
     "description": "Developed backend services and internal BI tooling for an inventory and operations platform using FastAPI and PostgreSQL, improving data processing reliability and automating operational workflows to enable real-time monitoring and reduce manual operational overhead.",

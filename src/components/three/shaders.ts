@@ -100,3 +100,67 @@ export const networkLineFragmentShader = /* glsl */ `
     gl_FragColor = vec4(color, alpha);
   }
 `;
+
+/** Page-wide "liquid light" background — fullscreen quad, reacts to scroll + cursor + velocity. */
+export const fxBackgroundVertexShader = /* glsl */ `
+  varying vec2 vUv;
+  void main() {
+    vUv = uv;
+    gl_Position = vec4(position.xy, 0.0, 1.0);
+  }
+`;
+
+export const fxBackgroundFragmentShader = /* glsl */ `
+  precision mediump float;
+
+  uniform float uTime;
+  uniform float uScroll;
+  uniform vec2 uMouse;
+  uniform float uVelocity;
+
+  varying vec2 vUv;
+
+  float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+
+  float noise(vec2 p) {
+    vec2 i = floor(p);
+    vec2 f = fract(p);
+    float a = hash(i);
+    float b = hash(i + vec2(1.0, 0.0));
+    float c = hash(i + vec2(0.0, 1.0));
+    float d = hash(i + vec2(1.0, 1.0));
+    vec2 u = f * f * (3.0 - 2.0 * f);
+    return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+  }
+
+  float fbm(vec2 p) {
+    float v = 0.0;
+    float a = 0.5;
+    for (int i = 0; i < 4; i++) {
+      v += a * noise(p);
+      p *= 2.0;
+      a *= 0.5;
+    }
+    return v;
+  }
+
+  void main() {
+    vec2 uv = vUv;
+    vec2 warp = uMouse * 0.06 + vec2(0.0, uVelocity * 0.05);
+    float n = fbm(uv * 2.2 + warp + uTime * 0.03);
+    float n2 = fbm(uv * 4.5 - warp + uTime * 0.05);
+
+    vec3 cyan = vec3(0.12, 0.85, 0.96);
+    vec3 violet = vec3(0.55, 0.35, 0.95);
+    vec3 magenta = vec3(0.96, 0.30, 0.62);
+    vec3 base = mix(cyan, violet, smoothstep(0.0, 0.5, uScroll));
+    base = mix(base, magenta, smoothstep(0.5, 1.0, uScroll));
+
+    float surge = 0.10 + abs(uVelocity) * 0.18;
+    float field = smoothstep(0.35, 0.85, n) * (0.5 + n2 * 0.5);
+    float vig = smoothstep(1.15, 0.2, length(vUv - 0.5));
+    float alpha = field * surge * vig;
+
+    gl_FragColor = vec4(base, alpha);
+  }
+`;

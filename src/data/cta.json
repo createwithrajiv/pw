@@ -1,12 +1,12 @@
 {
   "eyebrow": "What's next",
   "heading": "Let's build production AI that scales",
-  "subheading": "Open to consulting engagements and full-time roles. Based in Noida, India — working with teams worldwide.",
+  "subheading": "Open to consulting engagements and full-time roles. Working with teams worldwide.",
   "buttons": [
     { "label": "Start a conversation", "href": "mailto:rajiv@rajivyadav.com", "variant": "primary" },
     {
       "label": "View resume",
-      "href": "https://drive.google.com/file/d/1gVZtzOwn75b80kNmDFp5NG3yVlUWrP3L/view?usp=sharing",
+      "href": "https://drive.google.com/file/d/1yJlNl6lhyo_gt1BMsaMLlVVIXYHAen_3/view",
       "variant": "secondary",
       "external": true
     }

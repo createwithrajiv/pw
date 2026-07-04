@@ -9,6 +9,7 @@ import { SectionReveal } from '@/components/motion/SectionReveal';
 import { AnimatedText } from '@/components/motion/AnimatedText';
 import { Parallax } from '@/components/motion/Parallax';
 import { SectionDivider } from '@/components/motion/SectionDivider';
+import { EnterBurst } from '@/components/motion/EnterBurst';
 import { Marquee } from '@/components/ui/Marquee';
 import { Tag } from '@/components/ui/Tag';
 import { useProfile, useTechnologies } from '@/hooks/useContent';
@@ -27,12 +28,12 @@ export default function AboutSection() {
   const technologies = useTechnologies();
 
   return (
-    <Section id="about">
+    <Section id="about" ambient={{ density: 'sparse' }}>
       <Container>
         <SectionDivider className="mb-12" />
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="flex min-w-0 flex-col gap-6">
-            <div className="flex flex-col gap-4">
+            <EnterBurst variant={['ring', 'sweep']} className="flex flex-col gap-4">
               <span className="eyebrow flex items-center gap-2">
                 <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
                 About
@@ -51,7 +52,7 @@ export default function AboutSection() {
                   transition={{ duration: 1.1, ease: EASE, delay: 0.55 }}
                 />
               </div>
-            </div>
+            </EnterBurst>
             <SectionReveal variant="riseIn">
               <p className="text-lead text-foreground">{profile.description}</p>
             </SectionReveal>

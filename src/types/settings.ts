@@ -15,6 +15,7 @@ export interface FeatureFlags {
   animatedGrid: boolean;
   customCursor: boolean;
   marquee: boolean;
+  ambientFx: boolean;
 }
 
 export interface WebsiteSettings {

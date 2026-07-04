@@ -29,6 +29,7 @@
   --accent-2: 262 72% 52%;
   --accent-3: 330 72% 50%;
   --accent-fg: 0 0% 100%;
+  --accent-live: 196 92% 50%;
 
   --grad-from: 196 92% 42%;
   --grad-mid: 235 78% 56%;
@@ -70,6 +71,7 @@
   --accent-2: 265 89% 66%;
   --accent-3: 330 85% 62%;
   --accent-fg: 222 47% 6%;
+  --accent-live: 190 90% 60%;
 
   --grad-from: 190 95% 55%;
   --grad-mid: 235 90% 66%;
