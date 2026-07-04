@@ -60,8 +60,8 @@ export default function HeroSection() {
       />
 
       <motion.div style={outStyle} className="relative z-10">
-        <Container className="grid min-h-[100svh] grid-cols-1 items-center gap-12 pb-24 pt-32 lg:grid-cols-[1.3fr_minmax(0,20rem)] lg:gap-16">
-        <div className="flex max-w-2xl flex-col gap-7">
+        <Container className="grid min-h-[100svh] grid-cols-1 items-center gap-8 pb-12 pt-24 lg:grid-cols-[1.25fr_minmax(0,19rem)] lg:gap-12">
+        <div className="flex max-w-2xl flex-col gap-4 sm:gap-5">
           <motion.div variants={fadeInUp} initial="hidden" animate={show(2)}>
             <span className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface/50 px-3 py-1.5 text-sm text-muted backdrop-blur">
               <span className="relative flex h-2 w-2">
@@ -76,7 +76,7 @@ export default function HeroSection() {
             {profile.name} - {profile.title}
           </motion.p>
 
-          <h1 className="text-display font-display font-semibold leading-[1.02] tracking-tight">
+          <h1 className="text-[clamp(2.25rem,1.3rem+3.4vw,3.85rem)] font-display font-semibold leading-[1.05] tracking-tight">
             <AnimatedText text={profile.tagline} split="word" play={step >= 3} />
           </h1>
 
@@ -109,13 +109,13 @@ export default function HeroSection() {
             variants={staggerContainer(0.08)}
             initial="hidden"
             animate={show(4)}
-            className="mt-4 flex flex-wrap items-center gap-x-10 gap-y-6"
+            className="mt-1 flex flex-wrap items-center gap-x-8 gap-y-3"
           >
             {teaser.map((stat) => {
               const parsed = parseStat(stat.value);
               return (
                 <motion.div key={stat.label} variants={fadeInUp} className="flex flex-col">
-                  <span className="font-display text-3xl font-semibold">
+                  <span className="font-display text-2xl font-semibold sm:text-3xl">
                     <GradientText>
                       <Counter
                         value={parsed.value}
@@ -136,7 +136,7 @@ export default function HeroSection() {
             variants={fadeInUp}
             initial="hidden"
             animate={show(5)}
-            className="mt-2 flex items-center gap-4"
+            className="mt-1 flex items-center gap-4"
           >
             <span className="text-xs uppercase tracking-widest text-subtle">Find me</span>
             <div className="flex gap-2">
