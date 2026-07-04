@@ -1,20 +1,37 @@
 import type { Seo } from '@/types';
 
-/** Build a schema.org/Person JSON-LD object from the seo data. */
-export function buildPersonJsonLd(seo: Seo) {
+/** Build schema.org JSON-LD (Person + WebSite) from the seo data.
+ *  `image`/`canonical` should be absolute URLs (resolved in the Seo component). */
+export function buildJsonLd(seo: Seo, opts: { image: string; canonical: string }) {
+  const personId = `${seo.person.url}#person`;
+  const siteId = `${seo.url}#website`;
   return {
     '@context': 'https://schema.org',
-    '@type': 'Person',
-    name: seo.person.name,
-    jobTitle: seo.person.jobTitle,
-    url: seo.person.url,
-    email: seo.person.email,
-    sameAs: seo.person.sameAs,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: seo.person.address.locality,
-      addressCountry: seo.person.address.country,
-    },
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': personId,
+        name: seo.person.name,
+        jobTitle: seo.person.jobTitle,
+        url: seo.person.url,
+        email: seo.person.email,
+        image: opts.image,
+        sameAs: seo.person.sameAs,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: seo.person.address.locality,
+          addressCountry: seo.person.address.country,
+        },
+      },
+      {
+        '@type': 'WebSite',
+        '@id': siteId,
+        url: opts.canonical,
+        name: seo.title,
+        description: seo.description,
+        publisher: { '@id': personId },
+      },
+    ],
   };
 }
 

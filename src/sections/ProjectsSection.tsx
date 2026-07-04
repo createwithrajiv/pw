@@ -3,7 +3,7 @@ import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { useProjects, useProjectCategories } from '@/hooks/useContent';
+import { useProjects, useProjectCategories, useSectionCopy } from '@/hooks/useContent';
 import { useSpotlight } from '@/hooks/useSpotlight';
 import { ProjectCard } from '@/sections/projects/ProjectCard';
 import { ProjectModal } from '@/sections/projects/ProjectModal';
@@ -15,6 +15,7 @@ const ALL = 'All';
 export default function ProjectsSection() {
   const projects = useProjects();
   const categories = useProjectCategories();
+  const copy = useSectionCopy('projects');
   const spotlight = useSpotlight();
   const [filter, setFilter] = useState<string>(ALL);
   const [selected, setSelected] = useState<Project | null>(null);
@@ -28,11 +29,7 @@ export default function ProjectsSection() {
   return (
     <Section id="projects" grid ambient={{ density: 'sparse' }}>
       <Container>
-        <SectionHeading
-          eyebrow="Selected work"
-          title="Projects that shipped"
-          subtitle="Real systems with real numbers — click any card for the full breakdown."
-        />
+        <SectionHeading {...copy} />
 
         {/* Filter bar */}
         <div className="no-scrollbar mt-8 flex gap-2 overflow-x-auto pb-1">

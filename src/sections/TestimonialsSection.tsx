@@ -7,7 +7,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Modal } from '@/components/ui/Modal';
 import { AnimatedText } from '@/components/motion/AnimatedText';
-import { useTestimonials } from '@/hooks/useContent';
+import { useTestimonials, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { EASE } from '@/animations/variants';
 import { cn } from '@/utils/cn';
@@ -62,6 +62,7 @@ function CompanyLogo({ logo, company }: { logo?: string; company: string }) {
 
 export default function TestimonialsSection() {
   const testimonials = useTestimonials();
+  const copy = useSectionCopy('testimonials');
   const reduced = useReducedMotion();
   const count = testimonials.length;
   const [index, setIndex] = useState(0);
@@ -94,12 +95,7 @@ export default function TestimonialsSection() {
   return (
     <Section id="testimonials" ambient>
       <Container>
-        <SectionHeading
-          eyebrow="Social proof"
-          title="What people say"
-          subtitle="Engineering leaders on what it's like to ship with me."
-          align="center"
-        />
+        <SectionHeading {...copy} align="center" />
 
         <div
           className="relative mx-auto mt-14 max-w-3xl"

@@ -14,7 +14,8 @@
     "Rajiv Yadav"
   ],
   "url": "https://rajivyadav.com",
-  "ogImage": "src/data/profile_picture/jHSuCWRT.jpg",
+  "ogImage": "/profile.jpg",
+  "ogImageAlt": "Rajiv Yadav — AI Engineer",
   "twitterHandle": "@createwithrajiv",
   "locale": "en_US",
   "person": {

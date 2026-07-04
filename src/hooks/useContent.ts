@@ -31,5 +31,8 @@ export const useFaq = () => content.faq;
 export const useTechnologies = () => content.technologies;
 export const useAnimations = () => content.animations;
 
+/** Heading copy (eyebrow/title/subtitle) for a section id — source of truth for section headings. */
+export const useSectionCopy = (id: string) => content.sectionCopy[id];
+
 /** Aggregate accessor if a component wants several datasets at once. */
 export const useContent = () => content;

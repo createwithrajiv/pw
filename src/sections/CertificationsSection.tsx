@@ -5,22 +5,19 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { useCertifications } from '@/hooks/useContent';
+import { useCertifications, useSectionCopy } from '@/hooks/useContent';
 import { isRealHref } from '@/utils/href';
 import { fadeInUp, staggerContainer } from '@/animations/variants';
 
 export default function CertificationsSection() {
   const certifications = useCertifications();
+  const copy = useSectionCopy('certifications');
   if (certifications.length === 0) return null;
 
   return (
     <Section id="certifications">
       <Container>
-        <SectionHeading
-          eyebrow="Credentials"
-          title="Certifications"
-          subtitle="Verified, ongoing investment in the craft."
-        />
+        <SectionHeading {...copy} />
         <motion.div
           variants={staggerContainer(0.08)}
           initial="hidden"

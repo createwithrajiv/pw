@@ -1,0 +1,13 @@
+{
+  "name": "Rajiv Yadav — AI Engineer",
+  "short_name": "RKY",
+  "description": "AI Engineer building production AI systems that scale — ML infrastructure, MLOps, and LLM orchestration.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#060810",
+  "theme_color": "#060810",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" }
+  ]
+}

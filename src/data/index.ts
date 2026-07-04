@@ -28,6 +28,7 @@ import blogJson from './blog.json';
 import faqJson from './faq.json';
 import technologiesJson from './technologies.json';
 import animationsJson from './animations.json';
+import sectionCopyJson from './section-copy.json';
 
 import type {
   Profile,
@@ -50,6 +51,7 @@ import type {
   FaqData,
   TechnologiesData,
   AnimationTokens,
+  SectionCopyData,
 } from '@/types';
 import { resolveAsset } from '@/utils/asset';
 
@@ -83,8 +85,10 @@ export const companiesByName: Record<string, Company> = Object.fromEntries(
 );
 
 export const settings = settingsJson as WebsiteSettings;
-const rawSeo = seoJson as Seo;
-export const seo: Seo = { ...rawSeo, ogImage: resolveAsset(rawSeo.ogImage) ?? rawSeo.ogImage };
+/** ogImage is a stable public path (e.g. /profile.jpg) — do NOT run it through
+ *  resolveAsset (that hashes it and breaks social scrapers). It's resolved to an
+ *  absolute URL against `seo.url` in the Seo component. */
+export const seo = seoJson as Seo;
 export const navigation = navigationJson as NavigationData;
 export const metrics = metricsJson as MetricsData;
 export const personalStory = personalStoryJson as PersonalStory;
@@ -95,6 +99,9 @@ export const blog = blogJson as BlogData;
 export const faq = faqJson as FaqData;
 export const technologies = technologiesJson as TechnologiesData;
 export const animations = animationsJson as AnimationTokens;
+
+/** Section heading copy (eyebrow/title/subtitle) keyed by section id. */
+export const sectionCopy = sectionCopyJson as SectionCopyData;
 
 /* Derived selectors (still no hardcoded copy). */
 export const featuredProjects = projects.filter((p) => p.featured);

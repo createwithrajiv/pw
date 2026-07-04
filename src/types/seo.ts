@@ -13,7 +13,8 @@ export interface Seo {
   description: string;
   keywords: string[];
   url: string; // canonical site URL
-  ogImage: string;
+  ogImage: string; // absolute or root-relative path; resolved against `url` at render
+  ogImageAlt?: string;
   twitterHandle: string;
   locale: string; // "en_US"
   person: PersonSchema;

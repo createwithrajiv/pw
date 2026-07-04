@@ -7,7 +7,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { FlyIn } from '@/components/motion/FlyIn';
-import { useExperience, useCompanies } from '@/hooks/useContent';
+import { useExperience, useCompanies, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { cn } from '@/utils/cn';
 import type { Experience, Company } from '@/types';
@@ -126,6 +126,7 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
 export default function ExperienceSection() {
   const experience = useExperience();
   const companies = useCompanies();
+  const copy = useSectionCopy('experience');
   const reduced = useReducedMotion();
   const railRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: railRef, offset: ['start 70%', 'end 70%'] });
@@ -140,11 +141,7 @@ export default function ExperienceSection() {
   return (
     <Section id="experience" ambient={{ density: 'sparse', motes: false }}>
       <Container>
-        <SectionHeading
-          eyebrow="The journey"
-          title="Experience"
-          subtitle="Roles where I shipped AI systems that had to stay up."
-        />
+        <SectionHeading {...copy} />
 
         <div ref={railRef} className="relative mt-14">
           <div className="absolute bottom-0 left-2 top-0 w-px bg-border sm:left-3" aria-hidden />

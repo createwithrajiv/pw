@@ -5,7 +5,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { SectionDivider } from '@/components/motion/SectionDivider';
-import { useSkills } from '@/hooks/useContent';
+import { useSkills, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { burstVariant, staggerContainer } from '@/animations/variants';
 
@@ -80,6 +80,7 @@ function Constellation() {
 
 export default function SkillsSection() {
   const skills = useSkills();
+  const copy = useSectionCopy('skills');
   const reduced = useReducedMotion();
 
   return (
@@ -87,11 +88,7 @@ export default function SkillsSection() {
       <Constellation />
       <Container className="relative z-10">
         <SectionDivider className="mb-12" />
-        <SectionHeading
-          eyebrow="Toolkit"
-          title="Skills & technologies"
-          subtitle="The stack I reach for to take models from notebook to production — everything, upfront."
-        />
+        <SectionHeading {...copy} />
 
         <motion.div
           variants={staggerContainer(0.08)}

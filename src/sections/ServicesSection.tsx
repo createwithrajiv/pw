@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { useServices } from '@/hooks/useContent';
+import { useServices, useSectionCopy } from '@/hooks/useContent';
 import { useSpotlight } from '@/hooks/useSpotlight';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { burstVariant, staggerContainer } from '@/animations/variants';
@@ -12,17 +12,14 @@ import { cn } from '@/utils/cn';
 
 export default function ServicesSection() {
   const services = useServices();
+  const copy = useSectionCopy('services');
   const spotlight = useSpotlight();
   const reduced = useReducedMotion();
 
   return (
     <Section id="services" ambient={{ density: 'sparse' }}>
       <Container>
-        <SectionHeading
-          eyebrow="What I do"
-          title="Services built for scale"
-          subtitle="End-to-end ownership — from architecture to deployment, monitoring, and the latency budget."
-        />
+        <SectionHeading {...copy} />
         <motion.div
           variants={staggerContainer(0.08)}
           initial="hidden"
