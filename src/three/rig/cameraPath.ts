@@ -5,32 +5,27 @@ export interface CameraKeyframe {
   lookAt: THREE.Vector3;
 }
 
-/**
- * Bespoke camera keyframes by section id. Any section without an entry gets a
- * generated keyframe from `defaultKeyframe`, so the camera always has a coherent
- * stop. Phase 2 will register the rest as their 3D zones are authored.
- */
-const overrides: Record<string, CameraKeyframe> = {
-  hero: {
-    position: new THREE.Vector3(0, 0.2, 7.5),
-    lookAt: new THREE.Vector3(0, 0, 0),
-  },
+/** The camera's start pose — framing the constellation, looking INTO the screen. */
+const HERO: CameraKeyframe = {
+  position: new THREE.Vector3(0, 0, 8),
+  lookAt: new THREE.Vector3(0, 0, -6),
 };
 
+const overrides: Record<string, CameraKeyframe> = { hero: HERO };
+
 /**
- * A weaving descent that flies FORWARD through the scene (z: 7.5 → −5.5), so you
- * pass through the constellation and the floating depth objects — an unmistakable
- * "travelling through a 3D space" journey rather than a flat pan.
+ * The journey flies FORWARD into the screen (z: 8 → −38) with only a gentle
+ * lateral/vertical weave — never a big descent. Scrolling reads as "going deeper
+ * inside", diving through the tunnel of gates, not panning down a page.
  */
 function defaultKeyframe(i: number, n: number): CameraKeyframe {
   const t = n > 1 ? i / (n - 1) : 0;
-  const sway = Math.sin(t * Math.PI * 2.2);
-  const x = sway * 3.6;
-  const y = -t * 11;
-  const z = 7.5 - t * 13;
+  const x = Math.sin(t * Math.PI * 3.0) * 1.4;
+  const y = Math.sin(t * Math.PI * 2.0) * 0.8;
+  const z = 8 - t * 46;
   return {
     position: new THREE.Vector3(x, y, z),
-    lookAt: new THREE.Vector3(x * 0.25, y - 1.2, z - 7),
+    lookAt: new THREE.Vector3(x * 0.4, y * 0.4, z - 10),
   };
 }
 
@@ -44,7 +39,7 @@ export function buildKeyframes(sectionIds: string[]): CameraKeyframe[] {
 export function buildPositionCurve(keyframes: CameraKeyframe[]): THREE.CatmullRomCurve3 {
   const pts = keyframes.map((k) => k.position.clone());
   // Catmull-Rom needs >= 2 points; guard the degenerate single-section case.
-  if (pts.length < 2) pts.push((pts[0] ?? new THREE.Vector3()).clone().add(new THREE.Vector3(0, -1, 0)));
+  if (pts.length < 2) pts.push((pts[0] ?? new THREE.Vector3()).clone().add(new THREE.Vector3(0, 0, -1)));
   return new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.5);
 }
 

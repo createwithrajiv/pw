@@ -1,16 +1,15 @@
 import { ParticleField } from '@/components/three/ParticleField';
 import { useExperienceStore } from '@/store/experienceStore';
+import type { WorldPalette } from '../palette';
 
 /**
  * The hero constellation, anchored at the world origin — framed by the camera's
- * start keyframe (position [0,0,6], looking at origin) so it reads exactly like
- * the old hero, then recedes as the camera descends on scroll. Particle density
- * and the neural-network layer scale with the live quality tier.
+ * start pose (z 8, looking inward), then flown through as you scroll deeper. Only
+ * the particle COUNT scales with the tier; the network lattice stays on so a FPS
+ * dip never guts the scene.
  */
-export function HeroZone() {
+export function HeroZone({ palette }: { palette: WorldPalette }) {
   const tier = useExperienceStore((s) => s.qualityTier);
-  // Only the particle COUNT scales with the tier; keep the (cheap, most visible)
-  // network lattice on at every tier so a momentary FPS dip never guts the scene.
   const count = tier === 'full' ? 3200 : 1600;
-  return <ParticleField count={count} network />;
+  return <ParticleField count={count} network palette={palette} />;
 }

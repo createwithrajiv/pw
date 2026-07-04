@@ -1,6 +1,8 @@
 import { Component, lazy, Suspense, useEffect, useState, type ReactNode } from 'react';
 import { useFxSignals } from '@/hooks/useFxSignals';
 import { useHydrated } from '@/hooks/useHydrated';
+import { useTheme } from '@/providers/ThemeProvider';
+import { cn } from '@/utils/cn';
 
 const Experience = lazy(() => import('./Experience'));
 
@@ -25,6 +27,7 @@ class SceneErrorBoundary extends Component<{ children: ReactNode }, { failed: bo
  */
 export function CanvasRoot() {
   const fx = useFxSignals();
+  const { resolved } = useTheme();
   const hydrated = useHydrated();
   const [pageVisible, setPageVisible] = useState(true);
 
@@ -37,10 +40,17 @@ export function CanvasRoot() {
   if (!hydrated || fx.tier !== 'full') return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 mix-blend-screen">
+    // Additive screen blend glows on dark; on light we composite normally so the
+    // (deep-coloured) world reads as dark-on-light instead of a washed-out smear.
+    <div
+      className={cn(
+        'pointer-events-none fixed inset-0 -z-10',
+        resolved === 'dark' && 'mix-blend-screen',
+      )}
+    >
       <SceneErrorBoundary>
         <Suspense fallback={null}>
-          <Experience fx={fx} active={pageVisible} />
+          <Experience fx={fx} active={pageVisible} theme={resolved} />
         </Suspense>
       </SceneErrorBoundary>
     </div>

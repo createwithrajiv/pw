@@ -2,19 +2,18 @@ import { useMemo, useRef, type MutableRefObject } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { networkLineFragmentShader, networkLineVertexShader } from './shaders';
+import { darkPalette, type WorldPalette } from '@/three/world/palette';
 
 const NODE_COUNT = 28;
 const K = 2; // nearest neighbours per node
 const MAX_EDGES = 48;
 const RADIUS = 4.2;
 
-const COLOR_A = new THREE.Color('#1fd8f5'); // cyan
-const COLOR_C = new THREE.Color('#8b5cf6'); // violet
-const PULSE = new THREE.Color('#9fe9ff');
-
 interface NeuralNetworkProps {
   /** Shared intro reveal (0→1) so the network fades in with the cloud. */
   revealRef: MutableRefObject<number>;
+  /** Theme-reactive colors + blend mode. */
+  palette?: WorldPalette;
 }
 
 /**
@@ -23,10 +22,13 @@ interface NeuralNetworkProps {
  * the parent group's rotation/tilt animates the whole network. A bright data
  * pulse travels each edge in the shader (GPU-only, no per-frame CPU work).
  */
-export function NeuralNetwork({ revealRef }: NeuralNetworkProps) {
+export function NeuralNetwork({ revealRef, palette = darkPalette }: NeuralNetworkProps) {
   const lineMat = useRef<THREE.ShaderMaterial>(null);
 
   const { nodePositions, lineGeometry } = useMemo(() => {
+    const COLOR_A = new THREE.Color(palette.a);
+    const COLOR_C = new THREE.Color(palette.c);
+
     const nodes: THREE.Vector3[] = [];
     for (let i = 0; i < NODE_COUNT; i++) {
       const r = RADIUS * (0.4 + Math.random() * 0.6);
@@ -91,16 +93,16 @@ export function NeuralNetwork({ revealRef }: NeuralNetworkProps) {
     nodes.forEach((n, i) => nodePositions.set([n.x, n.y, n.z], i * 3));
 
     return { nodePositions, lineGeometry };
-  }, []);
+  }, [palette.a, palette.c]);
 
   const uniforms = useMemo(
     () => ({
       uTime: { value: 0 },
       uReveal: { value: 0 },
       uSpeed: { value: 0.12 },
-      uPulseColor: { value: PULSE },
+      uPulseColor: { value: new THREE.Color(palette.pulse) },
     }),
-    [],
+    [palette.pulse],
   );
 
   useFrame((_, delta) => {
@@ -120,7 +122,7 @@ export function NeuralNetwork({ revealRef }: NeuralNetworkProps) {
           uniforms={uniforms}
           transparent
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
+          blending={palette.blending}
         />
       </lineSegments>
       <points>
@@ -132,8 +134,8 @@ export function NeuralNetwork({ revealRef }: NeuralNetworkProps) {
           sizeAttenuation
           transparent
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
-          color="#9fe9ff"
+          blending={palette.blending}
+          color={palette.pulse}
           opacity={0.9}
         />
       </points>

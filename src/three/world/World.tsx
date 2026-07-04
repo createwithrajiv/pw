@@ -1,19 +1,17 @@
 import { HeroZone } from './zones/HeroZone';
-import { FocalCore } from './FocalCore';
 import { WorldScaffold } from './WorldScaffold';
+import type { WorldPalette } from './palette';
 
 /**
- * The 3D world content. Phase 1 slice: the hero constellation at origin, a focal
- * object, and the depth scaffold (grid horizon + forms at varied depths) the
- * camera weaves through. Phase 2 makes this registry-driven — one lazy zone per
- * section, keyed by the same `useSections()` list that drives the DOM.
+ * The 3D world content. Phase 1 slice: the hero constellation at origin + the
+ * tunnel scaffold the camera dives through. Phase 2 makes this registry-driven —
+ * one lazy zone per section, keyed by the same `useSections()` list as the DOM.
  */
-export function World() {
+export function World({ palette }: { palette: WorldPalette }) {
   return (
     <>
-      <HeroZone />
-      <FocalCore />
-      <WorldScaffold />
+      <HeroZone palette={palette} />
+      <WorldScaffold palette={palette} />
     </>
   );
 }

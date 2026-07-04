@@ -3,21 +3,24 @@ import { useFrame, useThree } from '@react-three/fiber';
 import * as THREE from 'three';
 import { particleFragmentShader, particleVertexShader } from './shaders';
 import { NeuralNetwork } from './NeuralNetwork';
+import { darkPalette, type WorldPalette } from '@/three/world/palette';
 
 interface ParticleFieldProps {
   count?: number;
   radius?: number;
   /** Render the sparse node+edge "AI network" layer (desktop only). */
   network?: boolean;
+  /** Theme-reactive colors + blend mode. */
+  palette?: WorldPalette;
 }
 
-// Cyan → indigo → violet, matching the site accents.
-const COLOR_A = new THREE.Color('#1fd8f5');
-const COLOR_B = new THREE.Color('#6366f1');
-const COLOR_C = new THREE.Color('#8b5cf6');
-
 /** GPU particle constellation that drifts and reacts to the cursor. */
-export function ParticleField({ count = 3200, radius = 4.2, network = false }: ParticleFieldProps) {
+export function ParticleField({
+  count = 3200,
+  radius = 4.2,
+  network = false,
+  palette = darkPalette,
+}: ParticleFieldProps) {
   const pointsRef = useRef<THREE.Points>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
   const groupRef = useRef<THREE.Group>(null);
@@ -29,6 +32,10 @@ export function ParticleField({ count = 3200, radius = 4.2, network = false }: P
     const scales = new Float32Array(count);
     const colors = new Float32Array(count * 3);
     const tmp = new THREE.Color();
+    // Cyan → indigo → violet ramp from the active theme palette.
+    const COLOR_A = new THREE.Color(palette.a);
+    const COLOR_B = new THREE.Color(palette.b);
+    const COLOR_C = new THREE.Color(palette.c);
 
     for (let i = 0; i < count; i++) {
       // Distribute in a soft spherical shell for volumetric depth.
@@ -49,7 +56,7 @@ export function ParticleField({ count = 3200, radius = 4.2, network = false }: P
       colors[i * 3 + 2] = tmp.b;
     }
     return { positions, scales, colors };
-  }, [count, radius]);
+  }, [count, radius, palette.a, palette.b, palette.c]);
 
   const uniforms = useMemo(
     () => ({
@@ -99,10 +106,10 @@ export function ParticleField({ count = 3200, radius = 4.2, network = false }: P
           uniforms={uniforms}
           transparent
           depthWrite={false}
-          blending={THREE.AdditiveBlending}
+          blending={palette.blending}
         />
       </points>
-      {network && <NeuralNetwork revealRef={revealRef} />}
+      {network && <NeuralNetwork revealRef={revealRef} palette={palette} />}
     </group>
   );
 }
