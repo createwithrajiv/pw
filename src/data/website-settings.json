@@ -12,6 +12,7 @@
   "sections": [
     { "id": "hero", "label": "Home", "anchor": "#hero", "enabled": true, "order": 0, "hideWhenEmpty": false },
     { "id": "metrics", "label": "Impact", "anchor": "#metrics", "enabled": true, "order": 10, "hideWhenEmpty": true },
+    { "id": "logos", "label": "", "anchor": "#logos", "enabled": true, "order": 15, "hideWhenEmpty": true },
     { "id": "about", "label": "About", "anchor": "#about", "enabled": true, "order": 20, "hideWhenEmpty": false },
     { "id": "services", "label": "Services", "anchor": "#services", "enabled": true, "order": 30, "hideWhenEmpty": true },
     { "id": "skills", "label": "Skills", "anchor": "#skills", "enabled": true, "order": 40, "hideWhenEmpty": true },

@@ -14,6 +14,7 @@ import experienceJson from './experience.json';
 import projectsJson from './projects.json';
 import testimonialsJson from './testimonials.json';
 import socialJson from './social.json';
+import companiesJson from './companies.json';
 
 import settingsJson from './website-settings.json';
 import seoJson from './seo.json';
@@ -36,6 +37,7 @@ import type {
   Project,
   Testimonial,
   Social,
+  Company,
   WebsiteSettings,
   Seo,
   NavigationData,
@@ -49,17 +51,40 @@ import type {
   TechnologiesData,
   AnimationTokens,
 } from '@/types';
+import { resolveAsset } from '@/utils/asset';
 
-export const profile = profileJson as Profile;
+const rawProfile = profileJson as Profile;
+export const profile: Profile = {
+  ...rawProfile,
+  image: resolveAsset(rawProfile.image) ?? rawProfile.image,
+};
 export const skills = skillsJson as SkillsData;
 export const services = servicesJson as Service[];
-export const experience = experienceJson as Experience[];
+export const experience: Experience[] = (experienceJson as Experience[]).map((e) => ({
+  ...e,
+  company_logo: resolveAsset(e.company_logo),
+}));
 export const projects = projectsJson as Project[];
-export const testimonials = testimonialsJson as Testimonial[];
+export const testimonials: Testimonial[] = (testimonialsJson as Testimonial[]).map((t) => ({
+  ...t,
+  company_logo: resolveAsset(t.company_logo),
+  profile_picture: resolveAsset(t.profile_picture),
+}));
 export const social = socialJson as Social[];
 
+/** Central company metadata (logo + website), logos resolved to built URLs. */
+export const companies: Company[] = (companiesJson as Company[]).map((c) => ({
+  ...c,
+  logo: resolveAsset(c.logo),
+}));
+/** Lookup a company by its exact name (matches `experience.company`). */
+export const companiesByName: Record<string, Company> = Object.fromEntries(
+  companies.map((c) => [c.name, c]),
+);
+
 export const settings = settingsJson as WebsiteSettings;
-export const seo = seoJson as Seo;
+const rawSeo = seoJson as Seo;
+export const seo: Seo = { ...rawSeo, ogImage: resolveAsset(rawSeo.ogImage) ?? rawSeo.ogImage };
 export const navigation = navigationJson as NavigationData;
 export const metrics = metricsJson as MetricsData;
 export const personalStory = personalStoryJson as PersonalStory;
@@ -76,3 +101,6 @@ export const featuredProjects = projects.filter((p) => p.featured);
 export const otherProjects = projects.filter((p) => !p.featured);
 export const publishedPosts = blog.posts.filter((p) => p.published);
 export const projectCategories = Array.from(new Set(projects.map((p) => p.category)));
+
+/** Companies that have a logo — the trust wall (each may carry a website link). */
+export const companyLogos: Company[] = companies.filter((c) => !!c.logo);

@@ -7,21 +7,68 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
 import { FlyIn } from '@/components/motion/FlyIn';
-import { useExperience } from '@/hooks/useContent';
+import { useExperience, useCompanies } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
-import type { Experience } from '@/types';
+import { cn } from '@/utils/cn';
+import type { Experience, Company } from '@/types';
+
+/** Company logo, linked to its website when one exists (from companies.json). */
+function CompanyLogoLink({
+  logo,
+  website,
+  name,
+}: {
+  logo?: string;
+  website?: string | null;
+  name: string;
+}) {
+  if (!logo) return null;
+  const base =
+    'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-white/95 p-1.5';
+  const img = (
+    <img
+      src={logo}
+      alt={name}
+      loading="lazy"
+      decoding="async"
+      className="max-h-full max-w-full object-contain"
+    />
+  );
+  if (website) {
+    return (
+      <a
+        href={website}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${name} website`}
+        data-cursor
+        data-cursor-label="VISIT"
+        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-glow')}
+      >
+        {img}
+      </a>
+    );
+  }
+  return (
+    <div className={base} aria-label={name}>
+      {img}
+    </div>
+  );
+}
 
 interface TimelineItemProps {
   item: Experience;
+  company?: Company;
   progress: MotionValue<number>;
   t: number; // fractional position of this node down the spine
   index: number;
 }
 
-function TimelineItem({ item, progress, t, index }: TimelineItemProps) {
+function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) {
   // "Ignite" as the spine fill reaches this node.
   const lit = useTransform(progress, [t - 0.08, t], [0, 1], { clamp: true });
   const nodeScale = useTransform(lit, [0, 1], [1, 1.14]);
+  const logo = company?.logo ?? item.company_logo;
 
   return (
     <div className="relative pl-12 sm:pl-16">
@@ -40,11 +87,17 @@ function TimelineItem({ item, progress, t, index }: TimelineItemProps) {
       <FlyIn direction={index % 2 === 0 ? 'left' : 'right'} blur={8}>
         <GlassCard interactive className="flex flex-col gap-4 p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
-            <div>
-              <h3 className="text-h3 font-display font-medium">{item.role}</h3>
-              <p className="mt-1 text-sm text-muted">
-                {item.company} · {item.location}
-              </p>
+            <div className="flex items-start gap-3">
+              <CompanyLogoLink logo={logo} website={company?.website} name={item.company} />
+              <div>
+                <h3 className="text-h3 font-display font-medium">{item.role}</h3>
+                <p className="mt-1 text-sm text-muted">
+                  {item.company} · {item.location}
+                </p>
+                {item.department && (
+                  <p className="mt-0.5 text-xs text-subtle">{item.department}</p>
+                )}
+              </div>
             </div>
             <Badge tone="accent">{item.employment_type}</Badge>
           </div>
@@ -72,6 +125,7 @@ function TimelineItem({ item, progress, t, index }: TimelineItemProps) {
 
 export default function ExperienceSection() {
   const experience = useExperience();
+  const companies = useCompanies();
   const reduced = useReducedMotion();
   const railRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: railRef, offset: ['start 70%', 'end 70%'] });
@@ -104,6 +158,7 @@ export default function ExperienceSection() {
               <TimelineItem
                 key={`${item.company}-${item.role}`}
                 item={item}
+                company={companies[item.company]}
                 progress={progress}
                 t={total > 1 ? i / (total - 1) : 0}
                 index={i}

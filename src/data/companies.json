@@ -1,0 +1,27 @@
+[
+  {
+    "name": "CraftifAI",
+    "logo": "src/data/company_logos/craftifai.jpeg",
+    "website": "https://craftifai.com/"
+  },
+  {
+    "name": "Karma AI",
+    "logo": "src/data/company_logos/karma_ai.png",
+    "website": "https://karma.law/"
+  },
+  {
+    "name": "EQL Global",
+    "logo": "src/data/company_logos/eql_global.jpeg",
+    "website": "https://www.eqlglobal.com/"
+  },
+  {
+    "name": "Axtria",
+    "logo": "src/data/company_logos/axtria.png",
+    "website": "https://www.axtria.com/"
+  },
+  {
+    "name": "Archmed Biotech",
+    "logo": "src/data/company_logos/archmed_biotech.jpeg",
+    "website": null
+  }
+]

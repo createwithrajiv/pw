@@ -14,6 +14,8 @@ export const useFeaturedProjects = () => content.featuredProjects;
 export const useOtherProjects = () => content.otherProjects;
 export const useProjectCategories = () => content.projectCategories;
 export const useTestimonials = () => content.testimonials;
+export const useCompanyLogos = () => content.companyLogos;
+export const useCompanies = () => content.companiesByName;
 export const useSocial = () => content.social;
 export const useSettings = () => content.settings;
 export const useSeo = () => content.seo;

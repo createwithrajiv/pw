@@ -4,6 +4,7 @@ export type { Service } from './service';
 export type { Experience } from './experience';
 export type { Project } from './project';
 export type { Testimonial } from './testimonial';
+export type { Company } from './company';
 export type { Social } from './social';
 export type { ThemeMode, SectionConfig, FeatureFlags, WebsiteSettings } from './settings';
 export type { Seo, PersonSchema } from './seo';

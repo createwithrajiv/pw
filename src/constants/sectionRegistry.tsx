@@ -11,6 +11,7 @@ import {
   values,
   faq,
   publishedPosts,
+  companyLogos,
 } from '@/data';
 
 export interface SectionRegistryEntry {
@@ -29,6 +30,10 @@ export const sectionRegistry: Record<string, SectionRegistryEntry> = {
   metrics: {
     Component: lazy(() => import('@/sections/MetricsSection')),
     isEmpty: () => metrics.items.length === 0,
+  },
+  logos: {
+    Component: lazy(() => import('@/sections/LogosSection')),
+    isEmpty: () => companyLogos.length === 0,
   },
   about: { Component: lazy(() => import('@/sections/AboutSection')), isEmpty: () => false },
   services: {
