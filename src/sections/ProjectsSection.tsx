@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react';
-import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -50,27 +49,17 @@ export default function ProjectsSection() {
           ))}
         </div>
 
-        <LayoutGroup>
-          <motion.div
-            layout
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            <AnimatePresence mode="popLayout">
-              {visible.map((project, i) => (
-                <ProjectCard
-                  key={project.title}
-                  project={project}
-                  onOpen={setSelected}
-                  dimmed={spotlight.dimmed(i)}
-                  {...spotlight.bind(i)}
-                />
-              ))}
-            </AnimatePresence>
-          </motion.div>
-        </LayoutGroup>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {visible.map((project, i) => (
+            <ProjectCard
+              key={project.title}
+              project={project}
+              onOpen={setSelected}
+              dimmed={spotlight.dimmed(i)}
+              {...spotlight.bind(i)}
+            />
+          ))}
+        </div>
       </Container>
 
       <ProjectModal project={selected} onClose={() => setSelected(null)} />

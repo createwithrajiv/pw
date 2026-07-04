@@ -3,7 +3,7 @@
   "items": [
     {
       "title": "Production over prototypes",
-      "description": "Code that survives real traffic — not just the happy-path demo.",
+      "description": "Code that survives real traffic - not just the happy-path demo.",
       "icon": "shield-check"
     },
     {

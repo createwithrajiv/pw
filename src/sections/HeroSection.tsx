@@ -73,7 +73,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.p variants={fadeInUp} initial="hidden" animate={show(2)} className="eyebrow">
-            {profile.name} — {profile.title}
+            {profile.name} - {profile.title}
           </motion.p>
 
           <h1 className="text-display font-display font-semibold leading-[1.02] tracking-tight">

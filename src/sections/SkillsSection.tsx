@@ -107,7 +107,9 @@ export default function SkillsSection() {
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-grad-accent/10 text-accent ring-1 ring-accent/20">
                     <IconRenderer name={CATEGORY_ICONS[cat.name]} className="h-[22px] w-[22px]" />
                   </span>
-                  <h3 className="font-display text-base font-medium leading-snug">{cat.name}</h3>
+                  <h3 className="font-display text-lg font-medium leading-snug text-foreground">
+                    {cat.name}
+                  </h3>
                 </div>
                 <ul className="flex flex-wrap gap-2">
                   {cat.skills.map((skill) => (

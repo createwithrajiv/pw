@@ -1,7 +1,7 @@
 {
   "title": "Rajiv Yadav - AI Engineer",
   "titleTemplate": "%s · Rajiv Yadav",
-  "description": "AI Engineer building production AI systems that scale — machine learning infrastructure, MLOps, and LLM orchestration that handle millions of requests at sub-100ms latency.",
+  "description": "AI Engineer building production AI systems that scale - machine learning infrastructure, MLOps, and LLM orchestration that handle millions of requests at sub-100ms latency.",
   "keywords": [
     "AI Engineer",
     "Machine Learning Engineer",
@@ -15,7 +15,7 @@
   ],
   "url": "https://rajivyadav.com",
   "ogImage": "/profile.jpg",
-  "ogImageAlt": "Rajiv Yadav — AI Engineer",
+  "ogImageAlt": "Rajiv Yadav - AI Engineer",
   "twitterHandle": "@createwithrajiv",
   "locale": "en_US",
   "person": {

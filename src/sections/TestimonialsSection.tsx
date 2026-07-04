@@ -20,7 +20,7 @@ function initials(name: string) {
 }
 
 function Avatar({ photo, name, size = 'md' }: { photo?: string; name: string; size?: 'md' | 'lg' }) {
-  const dim = size === 'lg' ? 'h-14 w-14 text-lg' : 'h-12 w-12 text-base';
+  const dim = size === 'lg' ? 'h-14 w-14 text-lg' : 'h-12 w-12 text-[1rem]';
   if (photo) {
     return (
       <img

@@ -59,7 +59,7 @@ export default function CtaSection() {
               </div>
             </Reveal>
             <p className="mt-6 font-display text-sm text-subtle">
-              <GradientText>Available now</GradientText> — let's talk.
+              <GradientText>Available now</GradientText> - let's talk.
             </p>
           </div>
         </div>

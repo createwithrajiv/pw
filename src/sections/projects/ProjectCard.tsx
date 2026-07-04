@@ -33,7 +33,9 @@ export function ProjectCard({
   return (
     <motion.div
       variants={fadeInUp}
-      layout
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.08 }}
       data-cursor
       data-cursor-label="VIEW"
       onPointerEnter={onPointerEnter}

@@ -2,12 +2,12 @@
   "services": {
     "eyebrow": "What I do",
     "title": "Services built for scale",
-    "subtitle": "End-to-end ownership — from architecture to deployment, monitoring, and the latency budget."
+    "subtitle": "End-to-end ownership - from architecture to deployment, monitoring, and the latency budget."
   },
   "skills": {
     "eyebrow": "Toolkit",
     "title": "Skills & technologies",
-    "subtitle": "The stack I reach for to take models from notebook to production — everything, upfront."
+    "subtitle": "The stack I reach for to take models from notebook to production - everything, upfront."
   },
   "experience": {
     "eyebrow": "The journey",
@@ -17,7 +17,7 @@
   "projects": {
     "eyebrow": "Selected work",
     "title": "Projects that shipped",
-    "subtitle": "Real systems with real numbers — click any card for the full breakdown."
+    "subtitle": "Real systems with real numbers - click any card for the full breakdown."
   },
   "testimonials": {
     "eyebrow": "Social proof",
