@@ -29,7 +29,7 @@ export const darkPalette: WorldPalette = {
   gridDim: '#173247',
   blending: AdditiveBlending,
   liquid: true,
-  lineOpacity: 0.55,
+  lineOpacity: 0.42,
 };
 
 export const lightPalette: WorldPalette = {
@@ -42,6 +42,7 @@ export const lightPalette: WorldPalette = {
   blending: NormalBlending,
   liquid: false,
   lineOpacity: 0.5,
+  // (light stays a touch stronger — deep colours on a bright page need it to read)
 };
 
 export function worldPalette(theme: 'light' | 'dark'): WorldPalette {

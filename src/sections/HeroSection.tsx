@@ -50,7 +50,7 @@ export default function HeroSection() {
       };
 
   return (
-    <Section ref={glow.ref} id="hero" className="!py-0">
+    <Section ref={glow.ref} id="hero" className="!py-0" depth={false}>
       <HeroBackdrop />
       {/* cursor-tracking glow */}
       <motion.div
