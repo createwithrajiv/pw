@@ -1,0 +1,82 @@
+/**
+ * Syntax-highlight theme for rehype-highlight (highlight.js token classes),
+ * mapped to the site's HSL design tokens. Because the tokens flip with `.dark`,
+ * this one theme covers both light and dark modes.
+ */
+
+.hljs {
+  color: hsl(var(--fg));
+  background: transparent;
+}
+
+/* comments */
+.hljs-comment,
+.hljs-quote {
+  color: hsl(var(--fg-subtle));
+  font-style: italic;
+}
+
+/* keywords / language constructs */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-type,
+.hljs-built_in,
+.hljs-name,
+.hljs-tag {
+  color: hsl(var(--accent));
+}
+
+/* functions / titles / classes */
+.hljs-title,
+.hljs-title.function_,
+.hljs-title.class_,
+.hljs-section,
+.hljs-selector-id,
+.hljs-selector-class {
+  color: hsl(var(--accent-2));
+  font-weight: 600;
+}
+
+/* strings / values */
+.hljs-string,
+.hljs-regexp,
+.hljs-attr,
+.hljs-attribute,
+.hljs-addition,
+.hljs-meta-string {
+  color: hsl(var(--accent-3));
+}
+
+/* numbers / symbols / constants */
+.hljs-number,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-template-variable {
+  color: hsl(var(--warning));
+}
+
+/* variables / params / punctuation-ish */
+.hljs-variable,
+.hljs-params,
+.hljs-property {
+  color: hsl(var(--fg) / 0.85);
+}
+
+/* meta (imports, decorators, preprocessor) */
+.hljs-meta,
+.hljs-meta .hljs-keyword {
+  color: hsl(var(--fg-subtle));
+}
+
+.hljs-deletion {
+  color: hsl(var(--danger));
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+.hljs-strong {
+  font-weight: 700;
+}

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Copy, Mail, MapPin } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
@@ -10,23 +9,19 @@ import { IconRenderer } from '@/components/ui/IconRenderer';
 import { Reveal } from '@/components/motion/Reveal';
 import { SectionDivider } from '@/components/motion/SectionDivider';
 import { usePointerGlow } from '@/hooks/usePointerGlow';
+import { useCopy } from '@/hooks/useCopy';
 import { useProfile, useSocial } from '@/hooks/useContent';
 import { EASE } from '@/animations/variants';
 
 export default function ContactSection() {
   const profile = useProfile();
   const social = useSocial();
-  const [copied, setCopied] = useState(false);
+  const { copied, copy } = useCopy();
   const glow = usePointerGlow<HTMLDivElement>({ size: 460, alpha: 0.08 });
 
   const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(profile.email);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2000);
-    } catch {
-      window.location.href = `mailto:${profile.email}`;
-    }
+    const ok = await copy(profile.email);
+    if (!ok) window.location.href = `mailto:${profile.email}`;
   };
 
   return (

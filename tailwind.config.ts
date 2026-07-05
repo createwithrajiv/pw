@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import animate from 'tailwindcss-animate';
+import typography from '@tailwindcss/typography';
 
 /**
  * Dark-first, token-driven config. Every color resolves to an HSL channel CSS
@@ -63,6 +64,43 @@ export default {
         lead: ['clamp(1.125rem, 1rem + 0.5vw, 1.375rem)', { lineHeight: '1.5' }],
         body: ['clamp(1rem, 0.96rem + 0.18vw, 1.0625rem)', { lineHeight: '1.65' }],
         eyebrow: ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em' }],
+      },
+      // `prose-blog` — long-form article typography mapped to the site's HSL
+      // tokens. Tokens flip with `.dark`, so one definition covers both themes.
+      typography: {
+        blog: {
+          css: {
+            maxWidth: 'none',
+            fontSize: '1.075rem',
+            lineHeight: '1.8',
+            '--tw-prose-body': 'hsl(var(--fg-muted))',
+            '--tw-prose-headings': 'hsl(var(--fg))',
+            '--tw-prose-lead': 'hsl(var(--fg-muted))',
+            '--tw-prose-links': 'hsl(var(--accent))',
+            '--tw-prose-bold': 'hsl(var(--fg))',
+            '--tw-prose-counters': 'hsl(var(--accent) / 0.85)',
+            '--tw-prose-bullets': 'hsl(var(--accent) / 0.7)',
+            '--tw-prose-hr': 'hsl(var(--border))',
+            '--tw-prose-quotes': 'hsl(var(--fg) / 0.9)',
+            '--tw-prose-quote-borders': 'hsl(var(--accent) / 0.4)',
+            '--tw-prose-captions': 'hsl(var(--fg-subtle))',
+            '--tw-prose-code': 'hsl(var(--accent))',
+            '--tw-prose-pre-code': 'hsl(var(--fg))',
+            '--tw-prose-pre-bg': 'transparent',
+            '--tw-prose-th-borders': 'hsl(var(--border-strong))',
+            '--tw-prose-td-borders': 'hsl(var(--border))',
+            'h1, h2, h3, h4': {
+              fontFamily: '"Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif',
+              fontWeight: '600',
+              letterSpacing: '-0.01em',
+            },
+            // strip the default backticks around inline code (styled by MarkdownBody)
+            'code::before': { content: '""' },
+            'code::after': { content: '""' },
+            a: { fontWeight: '500', textUnderlineOffset: '3px' },
+            'a:hover': { color: 'hsl(var(--accent))' },
+          },
+        },
       },
       borderRadius: {
         sm: '8px',
@@ -151,5 +189,5 @@ export default {
       },
     },
   },
-  plugins: [animate],
+  plugins: [animate, typography],
 } satisfies Config;

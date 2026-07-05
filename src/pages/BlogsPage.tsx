@@ -1,23 +1,46 @@
-import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Search, X } from 'lucide-react';
 import { Seo } from '@/components/seo/Seo';
 import { Container } from '@/components/ui/Container';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { Badge } from '@/components/ui/Badge';
-import { Tag } from '@/components/ui/Tag';
 import { GradientText } from '@/components/ui/GradientText';
+import { BlogCard } from '@/blogs/BlogCard';
 import { useBlogs } from '@/hooks/useContent';
-import { formatDate } from '@/utils/format';
-import { fadeInUp, staggerContainer } from '@/animations/variants';
-
-/** Excerpt = the hook's first paragraph, emphasis markers stripped. */
-function excerpt(hook: string): string {
-  return (hook.split(/\n{2,}/)[0] ?? '').replace(/\*/g, '');
-}
+import { fadeInUp } from '@/animations/variants';
+import { excerpt } from '@/utils/excerpt';
+import { cn } from '@/utils/cn';
 
 export default function BlogsPage() {
   const blogs = useBlogs();
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [query, setQuery] = useState('');
+
+  const categories = useMemo(
+    () => ['All', ...Array.from(new Set(blogs.map((b) => b.meta.category)))],
+    [blogs],
+  );
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return blogs.filter((b) => {
+      if (activeCategory !== 'All' && b.meta.category !== activeCategory) return false;
+      if (!q) return true;
+      const haystack = [b.meta.title, b.meta.category, ...b.meta.tags, excerpt(b.content.hook)]
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(q);
+    });
+  }, [blogs, activeCategory, query]);
+
+  const isBrowsingAll = activeCategory === 'All' && query.trim() === '';
+  const featured = isBrowsingAll ? filtered[0] : undefined;
+  const gridItems = featured ? filtered.slice(1) : filtered;
+  const showControls = blogs.length > 1;
+
+  const clearFilters = () => {
+    setActiveCategory('All');
+    setQuery('');
+  };
 
   return (
     <div className="relative min-h-[70vh] pb-24 pt-32">
@@ -41,55 +64,128 @@ export default function BlogsPage() {
           </p>
         </div>
 
-        {/* Grid */}
         {blogs.length === 0 ? (
-          <GlassCard className="mt-12 text-center text-muted">
+          <div className="glass mt-12 rounded-2xl p-10 text-center text-muted">
             No posts yet - check back soon.
-          </GlassCard>
+          </div>
         ) : (
-          <motion.ul
-            variants={staggerContainer(0.08)}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.1 }}
-            className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
-          >
-            {blogs.map((b) => (
-              <motion.li key={b.id} variants={fadeInUp} className="h-full">
-                <Link to={`/blogs/${b.meta.slug}`} className="group block h-full">
-                  <GlassCard interactive className="flex h-full flex-col gap-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <Badge tone="accent">{b.meta.category}</Badge>
-                      <time dateTime={b.meta.date} className="text-xs text-subtle">
-                        {formatDate(b.meta.date)}
-                      </time>
-                    </div>
-                    <h2 className="text-h3 font-display font-medium leading-snug transition-colors group-hover:text-accent">
-                      {b.meta.title}
-                    </h2>
-                    <p className="line-clamp-3 text-sm leading-relaxed text-muted">
-                      {excerpt(b.content.hook)}
-                    </p>
-                    <div className="mt-auto flex flex-wrap gap-2 pt-2">
-                      {b.meta.tags.slice(0, 3).map((t) => (
-                        <Tag key={t}>{t}</Tag>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between border-t border-border pt-4 text-sm">
-                      <span className="text-subtle">{b.meta.read_time_minutes} min read</span>
-                      <span className="flex items-center gap-1 font-medium text-accent">
-                        Read
-                        <ArrowUpRight
-                          className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                          aria-hidden
-                        />
-                      </span>
-                    </div>
-                  </GlassCard>
-                </Link>
-              </motion.li>
-            ))}
-          </motion.ul>
+          <>
+            {/* Controls: category chips + search */}
+            {showControls && (
+              <div className="mt-10 flex flex-col gap-4 border-b border-border pb-8 md:flex-row md:items-center md:justify-between">
+                <div
+                  role="tablist"
+                  aria-label="Filter posts by category"
+                  className="flex flex-wrap gap-2"
+                >
+                  {categories.map((cat) => {
+                    const active = activeCategory === cat;
+                    return (
+                      <button
+                        key={cat}
+                        role="tab"
+                        aria-selected={active}
+                        onClick={() => setActiveCategory(cat)}
+                        className={cn(
+                          'rounded-pill border px-3.5 py-1.5 text-sm transition-colors duration-200',
+                          'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
+                          active
+                            ? 'border-accent/40 bg-accent/10 font-medium text-accent'
+                            : 'border-border text-muted hover:border-accent/40 hover:text-foreground',
+                        )}
+                      >
+                        {cat}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <label className="group relative flex w-full items-center md:w-72">
+                  <Search
+                    className="pointer-events-none absolute left-3.5 h-4 w-4 text-subtle transition-colors group-focus-within:text-accent"
+                    aria-hidden
+                  />
+                  <span className="sr-only">Search posts</span>
+                  <input
+                    type="search"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Search posts..."
+                    className={cn(
+                      'w-full rounded-pill border border-border bg-surface/60 py-2 pl-10 pr-9 text-sm text-foreground',
+                      'placeholder:text-subtle transition-colors duration-200',
+                      'focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20',
+                    )}
+                  />
+                  {query && (
+                    <button
+                      type="button"
+                      onClick={() => setQuery('')}
+                      aria-label="Clear search"
+                      className="absolute right-2.5 rounded-full p-0.5 text-subtle transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <X className="h-4 w-4" aria-hidden />
+                    </button>
+                  )}
+                </label>
+              </div>
+            )}
+
+            {/* Results */}
+            {filtered.length === 0 ? (
+              <div className="glass mt-12 flex flex-col items-center gap-4 rounded-2xl p-12 text-center">
+                <p className="text-muted">
+                  No posts match{' '}
+                  {query ? (
+                    <>
+                      &ldquo;<span className="text-foreground">{query}</span>&rdquo;
+                    </>
+                  ) : (
+                    <span className="text-foreground">{activeCategory}</span>
+                  )}
+                  .
+                </p>
+                <button
+                  onClick={clearFilters}
+                  className="text-sm font-medium text-accent transition-colors hover:text-accent-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base"
+                >
+                  Clear filters
+                </button>
+              </div>
+            ) : (
+              <div className="mt-10 flex flex-col gap-8">
+                {/* Featured (latest) */}
+                {featured && (
+                  <motion.div
+                    initial="hidden"
+                    whileInView="show"
+                    viewport={{ once: true, amount: 0.15 }}
+                    variants={fadeInUp}
+                  >
+                    <BlogCard blog={featured} featured />
+                  </motion.div>
+                )}
+
+                {/* Grid */}
+                {gridItems.length > 0 && (
+                  <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {gridItems.map((b) => (
+                      <motion.li
+                        key={b.id}
+                        initial="hidden"
+                        whileInView="show"
+                        viewport={{ once: true, amount: 0.15 }}
+                        variants={fadeInUp}
+                        className="h-full"
+                      >
+                        <BlogCard blog={b} className="h-full" />
+                      </motion.li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+          </>
         )}
       </Container>
     </div>

@@ -1,18 +1,23 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Check, ChevronDown, Clock, Hash, List } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/Badge';
 import { Tag } from '@/components/ui/Tag';
 import { Button } from '@/components/ui/Button';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { Reveal } from '@/components/motion/Reveal';
-import { MarkdownLite } from './MarkdownLite';
+import { MarkdownBody } from './MarkdownBody';
+import { BlogCover } from './BlogCover';
+import { ShareBar } from './ShareBar';
+import { RelatedPosts } from './RelatedPosts';
 import { useProfile } from '@/hooks/useContent';
 import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
 import { useActiveSection } from '@/hooks/useActiveSection';
+import { useCopy } from '@/hooks/useCopy';
 import { formatDate } from '@/utils/format';
 import { isRealHref } from '@/utils/href';
+import { uniqueSlugs, slugify } from '@/utils/slug';
 import { cn } from '@/utils/cn';
 import type { Blog } from '@/types';
 
@@ -29,7 +34,30 @@ function ReadingProgress() {
   );
 }
 
-const sectionId = (i: number) => `s-${i}`;
+/** Hover-revealed permalink beside a heading — copies the deep link and smooth-scrolls to it. */
+function HeadingAnchor({ id }: { id: string }) {
+  const { copied, copy } = useCopy();
+  const { scrollTo } = useSmoothScroll();
+  return (
+    <a
+      href={`#${id}`}
+      onClick={(e) => {
+        e.preventDefault();
+        scrollTo(`#${id}`);
+        copy(`${window.location.origin}${window.location.pathname}#${id}`);
+        history.replaceState(null, '', `#${id}`);
+      }}
+      aria-label={copied ? 'Link copied' : 'Copy link to this section'}
+      className="inline-flex shrink-0 items-center self-center rounded text-subtle opacity-0 transition-opacity duration-200 hover:text-accent focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent group-hover/heading:opacity-100"
+    >
+      {copied ? (
+        <Check className="h-4 w-4 text-success" aria-hidden />
+      ) : (
+        <Hash className="h-4 w-4" aria-hidden />
+      )}
+    </a>
+  );
+}
 
 /**
  * The shared, default article layout — a focused, editorial reading experience:
@@ -42,7 +70,9 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
   const profile = useProfile();
   const { scrollTo } = useSmoothScroll();
 
-  const toc = content.sections.map((s, i) => ({ id: sectionId(i), label: s.heading }));
+  // Stable, human-readable anchor ids shared by the TOC, scroll-spy, and permalinks.
+  const sectionIds = uniqueSlugs(content.sections.map((s) => s.heading));
+  const toc = content.sections.map((s, i) => ({ id: sectionIds[i], label: s.heading }));
   const active = useActiveSection(toc.map((t) => t.id));
 
   return (
@@ -50,17 +80,31 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
       <ReadingProgress />
       <article className="relative pb-28 pt-24">
         <Container width="default">
-          <div className="mx-auto grid max-w-[44rem] grid-cols-1 gap-x-16 xl:max-w-[64rem] xl:grid-cols-[minmax(0,1fr)_13rem]">
-            {/* ---- Reading column ---- */}
-            <div className="min-w-0">
+          {/* Breadcrumb + cover banner */}
+          <div className="mx-auto max-w-[64rem]">
+            <nav aria-label="Breadcrumb" className="text-sm">
               <Link
                 to="/blogs"
-                className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-accent"
+                className="inline-flex items-center gap-1.5 text-muted transition-colors hover:text-accent"
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden />
                 All blogs
               </Link>
+              <span className="mx-2 text-border-strong">/</span>
+              <span className="text-subtle">{meta.category}</span>
+            </nav>
+            <BlogCover
+              variant="hero"
+              cover={meta.cover}
+              title={meta.title}
+              category={meta.category}
+              className="mt-5 rounded-2xl border border-border"
+            />
+          </div>
 
+          <div className="mx-auto mt-10 grid max-w-[44rem] grid-cols-1 gap-x-16 xl:max-w-[64rem] xl:grid-cols-[minmax(0,1fr)_13rem]">
+            {/* ---- Reading column ---- */}
+            <div className="min-w-0">
               {/* Header */}
               <Reveal as="header" className="mt-7 flex flex-col gap-6">
                 <div className="flex flex-wrap items-center gap-3">
@@ -102,52 +146,98 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                 )}
               </Reveal>
 
-              <div className="mt-8 h-px w-full bg-gradient-to-r from-transparent via-border-strong to-transparent" />
+              <div className="mt-8 flex items-center justify-between gap-4">
+                <div className="h-px flex-1 bg-gradient-to-r from-border-strong to-transparent" />
+                <ShareBar title={meta.title} snippets={meta.social_snippets} />
+              </div>
 
               {/* Lead / hook */}
-              <Reveal
-                as="div"
-                className="blog-lead mt-9 flex flex-col gap-5 text-[1.2rem] leading-[1.75] text-foreground/85"
-              >
-                <MarkdownLite text={content.hook} />
+              <Reveal as="div" className="blog-lead prose prose-blog prose-lg mt-9 max-w-none">
+                <MarkdownBody text={content.hook} />
               </Reveal>
+
+              {/* Contents (mobile / tablet) — desktop uses the sticky rail instead */}
+              {toc.length > 1 && (
+                <details className="group/toc mt-9 overflow-hidden rounded-xl border border-border bg-surface/30 xl:hidden">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-sm font-medium text-foreground [&::-webkit-details-marker]:hidden">
+                    <span className="inline-flex items-center gap-2">
+                      <List className="h-4 w-4 text-accent" aria-hidden />
+                      Contents
+                    </span>
+                    <ChevronDown
+                      className="h-4 w-4 text-subtle transition-transform duration-200 group-open/toc:rotate-180"
+                      aria-hidden
+                    />
+                  </summary>
+                  <nav aria-label="On this page" className="border-t border-border p-2">
+                    <ol className="flex flex-col">
+                      {toc.map((t, i) => (
+                        <li key={t.id}>
+                          <a
+                            href={`#${t.id}`}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              scrollTo(`#${t.id}`);
+                              history.replaceState(null, '', `#${t.id}`);
+                            }}
+                            className="flex items-baseline gap-2.5 rounded-lg px-3 py-2 text-sm text-muted transition-colors hover:bg-surface hover:text-foreground focus-visible:bg-surface focus-visible:text-foreground focus-visible:outline-none"
+                          >
+                            <span className="font-mono text-xs text-subtle">
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span>{t.label}</span>
+                          </a>
+                        </li>
+                      ))}
+                    </ol>
+                  </nav>
+                </details>
+              )}
 
               {/* Sections */}
               {content.sections.map((section, i) => (
                 <Reveal
                   as="section"
                   key={i}
-                  id={sectionId(i)}
+                  id={sectionIds[i]}
                   className="mt-14 scroll-mt-28 flex flex-col gap-5"
                 >
-                  <div className="flex items-baseline gap-3.5">
+                  <div className="group/heading flex items-baseline gap-3.5">
                     <span className="font-mono text-sm font-medium text-accent">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <h2 className="text-h2 font-display font-semibold tracking-tight">
                       {section.heading}
                     </h2>
+                    <HeadingAnchor id={sectionIds[i]} />
                   </div>
 
                   {section.body && (
-                    <div className="flex flex-col gap-5 text-[1.075rem] leading-[1.85] text-muted">
-                      <MarkdownLite text={section.body} />
+                    <div className="prose prose-blog max-w-none">
+                      <MarkdownBody text={section.body} />
                     </div>
                   )}
 
-                  {section.subsections?.map((sub, j) => (
-                    <div
-                      key={j}
-                      className="mt-4 flex flex-col gap-3 border-l-2 border-accent/30 pl-5"
-                    >
-                      <h3 className="text-h3 font-display font-medium tracking-tight text-foreground">
-                        {sub.subheading}
-                      </h3>
-                      <div className="flex flex-col gap-5 text-[1.075rem] leading-[1.85] text-muted">
-                        <MarkdownLite text={sub.body} />
+                  {section.subsections?.map((sub, j) => {
+                    const subId = `${sectionIds[i]}-${slugify(sub.subheading)}`;
+                    return (
+                      <div
+                        key={j}
+                        id={subId}
+                        className="mt-4 flex scroll-mt-28 flex-col gap-3 border-l-2 border-accent/30 pl-5"
+                      >
+                        <div className="group/heading flex items-baseline gap-2.5">
+                          <h3 className="text-h3 font-display font-medium tracking-tight text-foreground">
+                            {sub.subheading}
+                          </h3>
+                          <HeadingAnchor id={subId} />
+                        </div>
+                        <div className="prose prose-blog max-w-none">
+                          <MarkdownBody text={sub.body} />
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </Reveal>
               ))}
 
@@ -161,12 +251,17 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                     >
                       &ldquo;
                     </span>
-                    <div className="relative flex flex-col gap-5 text-[1.075rem] leading-[1.8] text-foreground/90">
-                      <MarkdownLite text={content.closing} />
+                    <div className="prose prose-blog relative max-w-none">
+                      <MarkdownBody text={content.closing} />
                     </div>
                   </div>
                 </Reveal>
               )}
+
+              {/* Share (foot) */}
+              <div className="mt-10 flex items-center gap-4 border-t border-border pt-8">
+                <ShareBar title={meta.title} snippets={meta.social_snippets} />
+              </div>
 
               {/* Author + CTA */}
               <Reveal as="div" className="mt-12">
@@ -197,6 +292,9 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                 </div>
               </Reveal>
 
+              {/* Read next */}
+              <RelatedPosts current={blog} />
+
               {/* Footer nav */}
               <div className="mt-12 border-t border-border pt-8">
                 <Link
@@ -218,9 +316,14 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                     {toc.map((t, i) => (
                       <li key={t.id}>
                         <button
-                          onClick={() => scrollTo(`#${t.id}`)}
+                          onClick={() => {
+                            scrollTo(`#${t.id}`);
+                            history.replaceState(null, '', `#${t.id}`);
+                          }}
+                          aria-current={active === t.id ? 'true' : undefined}
                           className={cn(
                             '-ml-px flex w-full items-baseline gap-2 border-l-2 py-1.5 pl-4 text-left text-sm transition-colors',
+                            'rounded-r focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
                             active === t.id
                               ? 'border-accent text-foreground'
                               : 'border-border text-muted hover:border-accent/50 hover:text-foreground',

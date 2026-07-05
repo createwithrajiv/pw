@@ -10,6 +10,8 @@ interface SeoArticle {
   author?: string;
   section?: string;
   tags?: string[];
+  wordCount?: number;
+  timeRequired?: string;
 }
 
 interface SeoProps {
@@ -18,12 +20,14 @@ interface SeoProps {
   /** Overrides the keywords meta (defaults to the site keywords). */
   keywords?: string[];
   ogType?: 'website' | 'article';
+  /** Per-page og/twitter image (absolute or root/served path). Defaults to site OG. */
+  image?: string;
   /** When present, emits article OG tags + BlogPosting JSON-LD. */
   article?: SeoArticle;
 }
 
 /** Dynamic document head fed from seo.json (+ optional per-page overrides). */
-export function Seo({ title, description, keywords, ogType, article }: SeoProps) {
+export function Seo({ title, description, keywords, ogType, image, article }: SeoProps) {
   const seo = useSeo();
   const { pathname } = useLocation();
   const pageTitle = title ? applyTitleTemplate(seo.titleTemplate, title) : seo.title;
@@ -32,7 +36,7 @@ export function Seo({ title, description, keywords, ogType, article }: SeoProps)
 
   // Absolute URLs — social scrapers and canonical tags require them.
   const canonical = new URL(pathname, seo.url).toString();
-  const ogImage = new URL(seo.ogImage, seo.url).toString();
+  const ogImage = new URL(image ?? seo.ogImage, seo.url).toString();
   const jsonLd = article
     ? buildArticleJsonLd(seo, {
         headline: article.headline,
@@ -44,6 +48,8 @@ export function Seo({ title, description, keywords, ogType, article }: SeoProps)
         keywords: keywords ?? seo.keywords,
         image: ogImage,
         canonical,
+        wordCount: article.wordCount,
+        timeRequired: article.timeRequired,
       })
     : buildJsonLd(seo, { image: ogImage, canonical });
 

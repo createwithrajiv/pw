@@ -48,6 +48,8 @@ export function buildArticleJsonLd(
     keywords: string[];
     image: string;
     canonical: string;
+    wordCount?: number;
+    timeRequired?: string;
   },
 ) {
   return {
@@ -61,6 +63,8 @@ export function buildArticleJsonLd(
     publisher: { '@type': 'Person', name: seo.person.name },
     keywords: opts.keywords.join(', '),
     ...(opts.section ? { articleSection: opts.section } : {}),
+    ...(opts.wordCount ? { wordCount: opts.wordCount } : {}),
+    ...(opts.timeRequired ? { timeRequired: opts.timeRequired } : {}),
     image: opts.image,
     mainEntityOfPage: { '@type': 'WebPage', '@id': opts.canonical },
   };
