@@ -23,8 +23,8 @@ function systemReduced(): boolean {
 
 export function ReducedMotionProvider({ children }: { children: React.ReactNode }) {
   const [preference, setPreferenceState] = useState<MotionPreference>(() => {
-    if (typeof window === 'undefined') return 'system';
-    return (localStorage.getItem(STORAGE_KEY) as MotionPreference | null) ?? 'system';
+    if (typeof window === 'undefined') return 'on';
+    return (localStorage.getItem(STORAGE_KEY) as MotionPreference | null) ?? 'on';
   });
   const [systemValue, setSystemValue] = useState<boolean>(systemReduced);
 
