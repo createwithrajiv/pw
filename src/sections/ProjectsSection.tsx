@@ -35,7 +35,7 @@ export default function ProjectsSection() {
               onClick={() => setFilter(cat)}
               aria-pressed={filter === cat}
               className={cn(
-                'shrink-0 rounded-pill border px-4 py-1.5 text-sm font-medium transition-colors',
+                'shrink-0 rounded-md border px-4 py-1.5 text-sm font-medium transition-colors',
                 filter === cat
                   ? 'border-accent/50 bg-accent/10 text-accent'
                   : 'border-border bg-surface/40 text-muted hover:text-foreground',

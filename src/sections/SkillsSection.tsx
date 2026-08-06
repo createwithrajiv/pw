@@ -98,10 +98,10 @@ export default function SkillsSection() {
             <motion.div key={cat.name} variants={fadeInUp} className="h-full">
               <GlassCard className="flex h-full flex-col gap-5 p-6">
                 <div className="flex items-center gap-3.5 border-b border-border/60 pb-4">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-grad-accent/10 text-accent ring-1 ring-accent/20">
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent ring-1 ring-accent/20">
                     <IconRenderer name={CATEGORY_ICONS[cat.name]} className="h-[22px] w-[22px]" />
                   </span>
-                  <h3 className="font-display text-lg font-medium leading-snug text-foreground">
+                  <h3 className="font-sans text-lg font-medium leading-snug text-foreground">
                     {cat.name}
                   </h3>
                 </div>
@@ -110,7 +110,7 @@ export default function SkillsSection() {
                     <li
                       key={skill}
                       data-cursor
-                      className="rounded-pill border border-border bg-surface/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:text-accent"
+                      className="rounded-md border border-border bg-surface/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:text-accent"
                     >
                       {skill}
                     </li>

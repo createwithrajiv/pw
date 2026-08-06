@@ -36,7 +36,7 @@ export function SectionHeading({
           {eyebrow}
         </motion.span>
       )}
-      <motion.h2 variants={fadeInUp} className="text-h1 font-display tracking-tight">
+      <motion.h2 variants={fadeInUp} className="text-h1 font-sans tracking-tight">
         {title}
       </motion.h2>
       {subtitle && (

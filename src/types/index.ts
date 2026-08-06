@@ -6,7 +6,7 @@ export type { Project } from './project';
 export type { Testimonial } from './testimonial';
 export type { Company } from './company';
 export type { Social } from './social';
-export type { ThemeMode, SectionConfig, FeatureFlags, WebsiteSettings } from './settings';
+export type { ThemeMode, SectionConfig, WebsiteSettings } from './settings';
 export type { Seo, PersonSchema } from './seo';
 export type { NavLink, NavigationData } from './navigation';
 export type { Metric, MetricsData } from './metrics';

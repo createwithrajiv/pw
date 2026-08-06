@@ -28,11 +28,11 @@ export default function CertificationsSection() {
           {certifications.map((cert) => (
             <motion.div key={`${cert.title}-${cert.issuer}`} variants={fadeInUp}>
               <GlassCard interactive className="flex h-full items-start gap-4 p-5">
-                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-grad-accent/10 text-accent ring-1 ring-accent/20">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20">
                   <IconRenderer name={cert.icon ?? 'award'} className="h-5 w-5" />
                 </span>
                 <div className="flex flex-col gap-1">
-                  <h3 className="font-display font-medium leading-snug">{cert.title}</h3>
+                  <h3 className="font-sans font-medium leading-snug">{cert.title}</h3>
                   <p className="text-sm text-muted">{cert.issuer}</p>
                   <p className="text-xs text-subtle">{cert.issuedDate}</p>
                   {isRealHref(cert.credentialUrl) && (

@@ -42,7 +42,7 @@ function CompanyLogoLink({
         aria-label={`${name} website`}
         data-cursor
         data-cursor-label="VISIT"
-        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-glow')}
+        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm')}
       >
         {img}
       </a>
@@ -73,12 +73,12 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
       {/* Node */}
       <motion.span
         style={{ scale: nodeScale }}
-        className="absolute left-2 top-1.5 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border border-border bg-elevated text-accent sm:left-3"
+        className="absolute left-2 top-1.5 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border border-border bg-surface text-accent sm:left-3"
       >
         <motion.span
           aria-hidden
           style={{ opacity: lit }}
-          className="absolute inset-0 rounded-full bg-grad-accent shadow-glow"
+          className="absolute inset-0 rounded-full bg-accent shadow-sm"
         />
         <Briefcase className="relative z-10 h-4 w-4" aria-hidden />
       </motion.span>
@@ -88,7 +88,7 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
             <div className="flex items-start gap-3">
               <CompanyLogoLink logo={logo} website={company?.website} name={item.company} />
               <div>
-                <h3 className="text-h3 font-display font-medium">{item.role}</h3>
+                <h3 className="text-h3 font-sans font-medium">{item.role}</h3>
                 <p className="mt-1 text-sm text-muted">
                   {item.company} · {item.location}
                 </p>
@@ -99,7 +99,7 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
             </div>
             <Badge tone="accent">{item.employment_type}</Badge>
           </div>
-          <span className="w-fit rounded-pill bg-surface/70 px-3 py-1 font-mono text-xs text-subtle">
+          <span className="w-fit rounded-md bg-surface/70 px-3 py-1 font-mono text-xs text-subtle">
             {item.period}
           </span>
           <p className="text-sm leading-relaxed text-muted">{item.description}</p>
@@ -145,7 +145,7 @@ export default function ExperienceSection() {
           <div className="absolute bottom-0 left-2 top-0 w-px bg-border sm:left-3" aria-hidden />
           <motion.div
             style={{ scaleY }}
-            className="absolute bottom-0 left-2 top-0 w-px origin-top bg-gradient-to-b from-accent via-accent-2 to-accent-3 sm:left-3"
+            className="absolute bottom-0 left-2 top-0 w-px origin-top bg-gradient-to-b from-accent via-accent to-accent sm:left-3"
             aria-hidden
           />
           <div className="flex flex-col gap-10">

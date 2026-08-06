@@ -29,9 +29,9 @@ export function BlogCard({ blog, featured = false, className }: BlogCardProps) {
     <Link
       to={`/blogs/${meta.slug}`}
       className={cn(
-        'group glass relative flex overflow-hidden rounded-2xl',
+        'group panel relative flex overflow-hidden rounded-2xl',
         'transition-[transform,box-shadow,border-color] duration-300 will-change-transform',
-        'hover:-translate-y-1 hover:border-accent/40 hover:shadow-glow',
+        'hover:-translate-y-1 hover:border-accent/40 hover:shadow-sm',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
         featured ? 'flex-col lg:flex-row' : 'flex-col',
         className,
@@ -67,7 +67,7 @@ export function BlogCard({ blog, featured = false, className }: BlogCardProps) {
 
         <h3
           className={cn(
-            'text-balance font-display font-semibold tracking-tight transition-colors group-hover:text-accent',
+            'text-balance font-sans font-semibold tracking-tight transition-colors group-hover:text-accent',
             featured
               ? 'text-[clamp(1.5rem,1.1rem+1.5vw,2.15rem)] leading-[1.14]'
               : 'text-h3 leading-snug',

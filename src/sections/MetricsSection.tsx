@@ -39,7 +39,7 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
           <IconRenderer name={m.icon} className="h-5 w-5" />
         </span>
       )}
-      <span className="font-display text-5xl font-semibold tracking-tight sm:text-6xl">
+      <span className="font-sans text-5xl font-semibold tracking-tight sm:text-6xl">
         <Counter value={m.value} decimals={m.decimals} prefix={m.prefix} suffix={m.suffix} />
       </span>
       <span aria-hidden className="h-px w-12 bg-border" />
@@ -84,11 +84,11 @@ export default function MetricsSection() {
   return (
     <Section id="metrics" band>
       <Container>
-        <div className="glass relative overflow-hidden rounded-2xl px-6 py-10 sm:px-12 sm:py-14">
+        <div className="panel relative overflow-hidden rounded-2xl px-6 py-10 sm:px-12 sm:py-14">
           {/* in-view glow pulse, contained inside the box */}
           <div
             aria-hidden
-            className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 z-0 h-[80%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-grad-radial opacity-50 blur-3xl"
+            className=" pointer-events-none absolute left-1/2 top-1/2 z-0 h-[80%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-transparent opacity-50 blur-3xl"
           />
           {metrics.eyebrow && (
             <p className="eyebrow relative mb-9 flex items-center justify-center gap-2">

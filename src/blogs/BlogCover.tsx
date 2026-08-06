@@ -40,7 +40,7 @@ export function BlogCover({
   const src = coverSrc(cover);
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className={cn('relative overflow-hidden bg-elevated', ASPECT[variant], className)}>
+    <div className={cn('relative overflow-hidden bg-surface', ASPECT[variant], className)}>
       {src ? (
         <>
           {!loaded && <div className="skeleton absolute inset-0" aria-hidden />}
@@ -58,9 +58,9 @@ export function BlogCover({
         </>
       ) : (
         <div aria-hidden className="absolute inset-0">
-          <div className="grid-overlay absolute inset-0 opacity-40" />
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/15 via-transparent to-accent-3/15" />
-          <div className="bg-grad-radial absolute inset-0 opacity-70" />
+          <div className=" absolute inset-0 opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/15 via-transparent to-accent/15" />
+          <div className="bg-transparent absolute inset-0 opacity-70" />
           {category && (
             <span className="absolute bottom-3 left-4 font-mono text-[11px] uppercase tracking-[0.2em] text-accent/80">
               {category}

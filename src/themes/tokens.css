@@ -1,9 +1,12 @@
 /**
- * Design tokens — dark-first AI/tech.
+ * Design tokens.
+ *
  * Authored as raw HSL channels so Tailwind can apply alpha:
  *   hsl(var(--token) / <alpha-value>)
- * `.dark` (default on <html>) holds the primary dark palette;
- * `:root` holds an intentionally-designed light palette (not an inversion).
+ *
+ * `:root` is LIGHT — the default and the primary experience. `.dark` holds the
+ * dark palette. Every colour pair that carries text has been checked against
+ * WCAG AA; the ratios are noted inline where the margin matters.
  */
 
 :root {
@@ -11,85 +14,97 @@
      directly, and src/utils/scroll.ts parses it for anchored jumps. */
   --nav-h: 88px;
 
-  /* ---- LIGHT (intentional, warm-paper "daylight lab") ---- */
-  --bg-base: 220 30% 96%;
-  --bg-canvas: 210 36% 98%;
-  --bg-elevated: 0 0% 100%;
-  --bg-overlay: 220 30% 90%;
+  /* ---------- LIGHT ---------- */
 
-  --surface: 0 0% 100%;
-  --surface-hi: 220 28% 96%;
-  --glass-bg: 0 0% 100%;
-  --glass-border: 222 30% 30%;
+  /* Surfaces */
+  --bg-base: 0 0% 100%; /* #FFFFFF */
+  --bg-canvas: 0 0% 100%;
+  --surface: 210 20% 98%; /* #F9FAFB — bands and cards */
+  --surface-hi: 220 14% 96%;
 
-  --fg: 224 44% 12%;
-  --fg-muted: 222 16% 38%;
-  --fg-subtle: 220 14% 52%;
+  /* Text — the doc defines two tiers; --fg-subtle aliases --fg-muted because
+     anything dimmer than #6B7280 fails AA at body size. Hierarchy below muted
+     is expressed with size and weight instead of colour. */
+  --fg: 221 39% 11%; /* #111827 — 16.9:1 on white */
+  --fg-muted: 220 9% 46%; /* #6B7280 — 4.83:1 on white, 4.62:1 on surface */
+  --fg-subtle: 220 9% 46%;
 
-  --border: 220 20% 88%;
-  --border-strong: 220 18% 78%;
+  /* Borders. --border is decorative (1.24:1) and must never be the only thing
+     identifying a control; --border-strong is the one that can outline one. */
+  --border: 220 13% 91%; /* #E5E7EB */
+  --border-strong: 220 9% 46%; /* #6B7280 — 4.83:1 */
 
-  --accent: 196 92% 38%;
-  --accent-2: 262 72% 52%;
-  --accent-3: 330 72% 50%;
-  --accent-fg: 0 0% 100%;
-  --accent-live: 196 92% 50%;
+  /* Accent — the only chromatic colour in the UI. */
+  --accent: 221 83% 53%; /* #2563EB — 5.17:1 on white */
+  --accent-hover: 224 76% 48%; /* #1D4ED8 */
+  --accent-strong: 224 76% 48%; /* accent text sitting on an accent tint */
+  --accent-fg: 0 0% 100%; /* label on a filled accent button — 5.17:1 */
 
-  --grad-from: 196 92% 42%;
-  --grad-mid: 235 78% 56%;
-  --grad-to: 278 70% 54%;
+  /* Status. The doc's six-colour palette has no green, but the availability
+     dot and eight check-mark call sites need one. */
+  --success: 142 72% 29%; /* #15803D — 5.02:1 on white, 4.80:1 on surface */
 
-  --glow-cyan: 196 92% 50%;
-  --glow-violet: 262 72% 58%;
+  /* Modal / drawer backdrop. Used with alpha; dark in BOTH themes — the old
+     light value was a light grey, so it dimmed nothing. */
+  --scrim: 221 39% 11%;
 
-  --success: 152 60% 40%;
-  --warning: 33 90% 48%;
-  --danger: 0 74% 50%;
+  /* Elevation. Authored per-theme because a black shadow on a near-black
+     background is invisible (1.12:1). */
+  --shadow-sm: 0 1px 2px 0 hsl(221 39% 11% / 0.05);
+  --shadow-md:
+    0 2px 8px -2px hsl(221 39% 11% / 0.08), 0 1px 2px 0 hsl(221 39% 11% / 0.04);
+  --shadow-lg:
+    0 8px 24px -6px hsl(221 39% 11% / 0.1), 0 2px 6px -2px hsl(221 39% 11% / 0.05);
 
-  --grid-line: 222 30% 30%;
-
-  --glass-alpha: 0.7;
-  --glass-border-alpha: 0.14;
+  /* Syntax highlighting. Deliberately outside the single-accent rule: code
+     colour is semantic information, not decoration. All ≥4.5:1 on --surface. */
+  --code-keyword: 262 83% 58%; /* 5.45:1 */
+  --code-string: 142 72% 29%; /* 4.80:1 */
+  --code-number: 26 90% 37%; /* 4.81:1 */
+  --code-comment: 215 16% 47%; /* 4.55:1 */
+  --code-function: 221 83% 53%; /* 4.95:1 */
+  --code-type: 175 77% 26%; /* 5.24:1 */
+  --code-tag: 345 83% 41%; /* 6.01:1 */
 }
 
 .dark {
-  /* ---- DARK (primary) ---- */
-  --bg-base: 222 47% 4%;
-  --bg-canvas: 223 44% 6%;
-  --bg-elevated: 222 32% 10%;
-  --bg-overlay: 223 40% 7%;
+  /* ---------- DARK ---------- */
 
-  --surface: 222 30% 12%;
-  --surface-hi: 220 26% 16%;
-  --glass-bg: 222 40% 10%;
-  --glass-border: 220 35% 80%;
+  --bg-base: 223 49% 8%; /* #0B1120 */
+  --bg-canvas: 223 49% 8%;
+  --surface: 221 39% 11%; /* #111827 */
+  --surface-hi: 217 33% 17%;
 
-  --fg: 210 40% 98%;
-  --fg-muted: 217 18% 66%;
-  --fg-subtle: 218 16% 46%;
+  --fg: 210 40% 98%; /* #F8FAFC — 18.3:1 */
+  --fg-muted: 213 27% 84%; /* #CBD5E1 — 12.7:1 on bg, 11.9:1 on surface */
+  --fg-subtle: 213 27% 84%;
 
-  --border: 220 24% 18%;
-  --border-strong: 219 24% 28%;
+  --border: 217 33% 17%; /* #1E293B */
+  --border-strong: 215 16% 47%; /* #64748B */
 
-  --accent: 190 95% 55%;
-  --accent-2: 265 89% 66%;
-  --accent-3: 330 85% 62%;
-  --accent-fg: 222 47% 6%;
-  --accent-live: 190 90% 60%;
+  --accent: 217 91% 60%; /* #3B82F6 — 5.12:1 on bg, 4.82:1 on surface */
+  --accent-hover: 213 94% 68%; /* #60A5FA */
+  --accent-strong: 212 96% 78%; /* #93C5FD — 10.4:1 */
+  /* NOT white: #FFFFFF on #3B82F6 is 3.68:1 and FAILS AA. Near-black is 5.12:1. */
+  --accent-fg: 223 49% 8%;
 
-  --grad-from: 190 95% 55%;
-  --grad-mid: 235 90% 66%;
-  --grad-to: 285 88% 66%;
+  --success: 142 69% 58%; /* #4ADE80 — 10.8:1 on bg, 10.2:1 on surface */
 
-  --glow-cyan: 190 95% 55%;
-  --glow-violet: 265 89% 66%;
+  --scrim: 223 49% 4%;
 
-  --success: 152 70% 50%;
-  --warning: 38 92% 58%;
-  --danger: 0 84% 63%;
+  /* Cast shadows barely register here, so elevation leans on a top inset
+     highlight and the surface step instead. */
+  --shadow-sm: 0 1px 2px 0 hsl(223 60% 2% / 0.4);
+  --shadow-md:
+    0 2px 8px -2px hsl(223 60% 2% / 0.5), inset 0 1px 0 0 hsl(210 40% 98% / 0.04);
+  --shadow-lg:
+    0 8px 24px -6px hsl(223 60% 2% / 0.6), inset 0 1px 0 0 hsl(210 40% 98% / 0.05);
 
-  --grid-line: 215 40% 60%;
-
-  --glass-alpha: 0.55;
-  --glass-border-alpha: 0.12;
+  --code-keyword: 253 95% 85%;
+  --code-string: 142 77% 73%;
+  --code-number: 46 97% 65%;
+  --code-comment: 215 20% 65%; /* 6.92:1 */
+  --code-function: 212 96% 78%; /* 9.84:1 */
+  --code-type: 171 77% 64%;
+  --code-tag: 353 96% 82%;
 }

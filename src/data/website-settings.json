@@ -1,14 +1,6 @@
 {
-  "themeDefault": "dark",
+  "themeDefault": "light",
   "brandShortName": "RKY",
-  "features": {
-    "smoothScroll": true,
-    "hero3D": true,
-    "animatedGrid": true,
-    "customCursor": true,
-    "marquee": true,
-    "ambientFx": true
-  },
   "sections": [
     { "id": "hero", "label": "Home", "anchor": "#hero", "enabled": true, "order": 0, "hideWhenEmpty": false },
     { "id": "metrics", "label": "Impact", "anchor": "#metrics", "enabled": true, "order": 10, "hideWhenEmpty": true },

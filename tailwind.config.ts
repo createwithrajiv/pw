@@ -2,189 +2,167 @@ import type { Config } from 'tailwindcss';
 import typography from '@tailwindcss/typography';
 
 /**
- * Dark-first, token-driven config. Every color resolves to an HSL channel CSS
+ * Light-first, token-driven config. Every colour resolves to an HSL channel CSS
  * variable defined in src/themes/tokens.css so utilities can apply alpha via
- * `hsl(var(--token) / <alpha-value>)`. Light + dark are both authored there.
+ * `hsl(var(--token) / <alpha-value>)`.
+ *
+ * `borderRadius` and `boxShadow` sit OUTSIDE `extend` on purpose: `extend`
+ * merges key-by-key into Tailwind's defaults, which is exactly why the old
+ * config left stock `2xl` (16px) reachable and smaller than its own overridden
+ * `xl` (28px). Replacing the scales makes the ceiling real.
+ *
+ * `keyframes`/`animation` must stay INSIDE `extend`, or core utilities like
+ * `animate-ping` (the availability dot) disappear.
  */
 export default {
   darkMode: 'class',
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
-    container: {
-      center: true,
-      padding: { DEFAULT: '1.25rem', sm: '1.5rem', lg: '2rem' },
-      screens: { '2xl': '1400px' },
+    // 10-12px everywhere. xl/2xl/3xl are capped aliases so existing call sites
+    // keep compiling but can never render larger than lg.
+    borderRadius: {
+      none: '0px',
+      sm: '6px',
+      DEFAULT: '8px',
+      md: '10px',
+      lg: '12px',
+      xl: '12px',
+      '2xl': '12px',
+      '3xl': '12px',
+      full: '9999px', // avatars, the profile portrait, and the status dot only
+    },
+    boxShadow: {
+      none: 'none',
+      sm: 'var(--shadow-sm)',
+      DEFAULT: 'var(--shadow-md)',
+      md: 'var(--shadow-md)',
+      lg: 'var(--shadow-lg)',
     },
     extend: {
       colors: {
-        // background layers
         base: 'hsl(var(--bg-base) / <alpha-value>)',
         canvas: 'hsl(var(--bg-canvas) / <alpha-value>)',
-        elevated: 'hsl(var(--bg-elevated) / <alpha-value>)',
-        overlay: 'hsl(var(--bg-overlay) / <alpha-value>)',
-        // surfaces / glass
         surface: {
           DEFAULT: 'hsl(var(--surface) / <alpha-value>)',
           hi: 'hsl(var(--surface-hi) / <alpha-value>)',
         },
-        glass: 'hsl(var(--glass-bg) / <alpha-value>)',
-        // foreground
         foreground: 'hsl(var(--fg) / <alpha-value>)',
         muted: 'hsl(var(--fg-muted) / <alpha-value>)',
         subtle: 'hsl(var(--fg-subtle) / <alpha-value>)',
-        // borders
         border: 'hsl(var(--border) / <alpha-value>)',
         'border-strong': 'hsl(var(--border-strong) / <alpha-value>)',
-        // accents
+        accent: {
+          DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
+          hover: 'hsl(var(--accent-hover) / <alpha-value>)',
+          strong: 'hsl(var(--accent-strong) / <alpha-value>)',
+        },
         primary: {
           DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
           foreground: 'hsl(var(--accent-fg) / <alpha-value>)',
         },
-        accent: 'hsl(var(--accent) / <alpha-value>)',
-        'accent-2': 'hsl(var(--accent-2) / <alpha-value>)',
-        'accent-3': 'hsl(var(--accent-3) / <alpha-value>)',
-        neon: 'hsl(var(--accent-2) / <alpha-value>)',
-        'grid-line': 'hsl(var(--grid-line) / <alpha-value>)',
         ring: 'hsl(var(--accent) / <alpha-value>)',
         success: 'hsl(var(--success) / <alpha-value>)',
-        warning: 'hsl(var(--warning) / <alpha-value>)',
-        danger: 'hsl(var(--danger) / <alpha-value>)',
+        scrim: 'hsl(var(--scrim) / <alpha-value>)',
+        code: {
+          keyword: 'hsl(var(--code-keyword) / <alpha-value>)',
+          string: 'hsl(var(--code-string) / <alpha-value>)',
+          number: 'hsl(var(--code-number) / <alpha-value>)',
+          comment: 'hsl(var(--code-comment) / <alpha-value>)',
+          function: 'hsl(var(--code-function) / <alpha-value>)',
+          type: 'hsl(var(--code-type) / <alpha-value>)',
+          tag: 'hsl(var(--code-tag) / <alpha-value>)',
+        },
       },
       fontFamily: {
-        sans: ['"Inter Variable"', 'Inter', 'system-ui', 'sans-serif'],
-        display: ['"Space Grotesk Variable"', '"Space Grotesk"', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono Variable"', '"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        sans: ['"Geist Variable"', 'system-ui', 'sans-serif'],
+        // One family for headings and body. `font-display` is kept as an alias
+        // so its 40-odd call sites stay valid.
+        display: ['"Geist Variable"', 'system-ui', 'sans-serif'],
+        mono: ['"Geist Mono Variable"', 'ui-monospace', 'monospace'],
       },
+      // Weights are baked into the scale (headings 700, section/card titles
+      // 600, body 400) so components stop hand-setting them. These land in the
+      // utilities layer, so they win over the base layer's heading weight.
       fontSize: {
-        display: ['clamp(2.75rem, 1.6rem + 5.6vw, 6rem)', { lineHeight: '1.02', letterSpacing: '-0.03em' }],
-        h1: ['clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
-        h2: ['clamp(1.75rem, 1.3rem + 2vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
-        h3: ['clamp(1.25rem, 1.05rem + 0.9vw, 1.625rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
-        lead: ['clamp(1.125rem, 1rem + 0.5vw, 1.375rem)', { lineHeight: '1.5' }],
-        body: ['clamp(1rem, 0.96rem + 0.18vw, 1.0625rem)', { lineHeight: '1.65' }],
-        eyebrow: ['0.8125rem', { lineHeight: '1', letterSpacing: '0.2em' }],
+        display: [
+          'clamp(2.25rem, 1.3rem + 3.4vw, 3.5rem)',
+          { lineHeight: '1.08', letterSpacing: '-0.025em', fontWeight: '700' },
+        ],
+        h1: [
+          'clamp(1.875rem, 1.4rem + 1.8vw, 2.5rem)',
+          { lineHeight: '1.15', letterSpacing: '-0.02em', fontWeight: '600' },
+        ],
+        h2: [
+          'clamp(1.5rem, 1.25rem + 1vw, 1.875rem)',
+          { lineHeight: '1.2', letterSpacing: '-0.015em', fontWeight: '600' },
+        ],
+        h3: [
+          'clamp(1.125rem, 1.05rem + 0.4vw, 1.25rem)',
+          { lineHeight: '1.35', letterSpacing: '-0.01em', fontWeight: '600' },
+        ],
+        lead: ['clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem)', { lineHeight: '1.6' }],
+        body: ['1rem', { lineHeight: '1.65' }],
+        eyebrow: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.12em', fontWeight: '500' }],
       },
-      // `prose-blog` — long-form article typography mapped to the site's HSL
-      // tokens. Tokens flip with `.dark`, so one definition covers both themes.
+      // Long-form article typography, mapped to the same tokens so one
+      // definition covers both themes.
       typography: {
         blog: {
           css: {
             maxWidth: 'none',
-            fontSize: '1.075rem',
-            lineHeight: '1.8',
+            fontSize: '1.0625rem',
+            lineHeight: '1.75',
             '--tw-prose-body': 'hsl(var(--fg-muted))',
             '--tw-prose-headings': 'hsl(var(--fg))',
             '--tw-prose-lead': 'hsl(var(--fg-muted))',
             '--tw-prose-links': 'hsl(var(--accent))',
             '--tw-prose-bold': 'hsl(var(--fg))',
-            '--tw-prose-counters': 'hsl(var(--accent) / 0.85)',
-            '--tw-prose-bullets': 'hsl(var(--accent) / 0.7)',
+            '--tw-prose-counters': 'hsl(var(--fg-muted))',
+            '--tw-prose-bullets': 'hsl(var(--border-strong))',
             '--tw-prose-hr': 'hsl(var(--border))',
-            '--tw-prose-quotes': 'hsl(var(--fg) / 0.9)',
-            '--tw-prose-quote-borders': 'hsl(var(--accent) / 0.4)',
-            '--tw-prose-captions': 'hsl(var(--fg-subtle))',
-            '--tw-prose-code': 'hsl(var(--accent))',
+            '--tw-prose-quotes': 'hsl(var(--fg))',
+            '--tw-prose-quote-borders': 'hsl(var(--accent))',
+            '--tw-prose-captions': 'hsl(var(--fg-muted))',
+            '--tw-prose-code': 'hsl(var(--fg))',
             '--tw-prose-pre-code': 'hsl(var(--fg))',
             '--tw-prose-pre-bg': 'transparent',
             '--tw-prose-th-borders': 'hsl(var(--border-strong))',
             '--tw-prose-td-borders': 'hsl(var(--border))',
-            'h1, h2, h3, h4': {
-              fontFamily: '"Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif',
-              fontWeight: '600',
-              letterSpacing: '-0.01em',
-            },
-            // strip the default backticks around inline code (styled by MarkdownBody)
+            'h1, h2, h3, h4': { fontWeight: '600', letterSpacing: '-0.015em' },
             'code::before': { content: '""' },
             'code::after': { content: '""' },
             a: { fontWeight: '500', textUnderlineOffset: '3px' },
-            'a:hover': { color: 'hsl(var(--accent))' },
           },
         },
       },
-      borderRadius: {
-        sm: '8px',
-        md: '12px',
-        lg: '18px',
-        xl: '28px',
-        pill: '999px',
-      },
       maxWidth: {
+        // 1200px everywhere per the design doc. `container-wide` is an alias so
+        // the chrome that used 1320px lands on the same measure.
         container: '1200px',
-        'container-wide': '1320px',
+        'container-wide': '1200px',
       },
       spacing: {
-        section: 'clamp(5rem, 3rem + 8vw, 9rem)',
+        section: 'clamp(4rem, 2.5rem + 4vw, 7rem)',
       },
-      boxShadow: {
-        sm: '0 1px 2px hsl(var(--bg-base) / 0.6)',
-        md: '0 8px 24px -8px hsl(var(--bg-base) / 0.7)',
-        lg: '0 24px 60px -20px hsl(var(--bg-base) / 0.8)',
-        glow: '0 0 0 1px hsl(var(--accent) / 0.25), 0 4px 30px -6px hsl(var(--glow-cyan) / 0.4)',
-        'glow-lg': '0 0 40px -6px hsl(var(--glow-cyan) / 0.45), 0 0 80px -24px hsl(var(--glow-violet) / 0.4)',
+      transitionDuration: {
+        DEFAULT: '200ms',
       },
-      backgroundImage: {
-        'grad-accent':
-          'linear-gradient(135deg, hsl(var(--grad-from)), hsl(var(--grad-mid)) 50%, hsl(var(--grad-to)))',
-        'grad-text': 'linear-gradient(120deg, hsl(var(--grad-from)), hsl(var(--grad-to)))',
-        'grad-radial':
-          'radial-gradient(60% 50% at 50% 0%, hsl(var(--glow-violet) / 0.18), transparent 70%)',
+      transitionTimingFunction: {
+        DEFAULT: 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
+      // Only the marquee survives — it is a documented, deliberate exception to
+      // the 150-300ms rule. `animate-ping` (the status dot) is a core utility
+      // and is preserved by keeping this block inside `extend`.
       keyframes: {
-        'grid-pan': {
-          '0%': { backgroundPosition: '0 0' },
-          '100%': { backgroundPosition: '56px 56px' },
-        },
-        'glow-pulse': {
-          '0%, 100%': { opacity: '0.5' },
-          '50%': { opacity: '1' },
-        },
-        'gradient-shift': {
-          '0%, 100%': { backgroundPosition: '0% 50%' },
-          '50%': { backgroundPosition: '100% 50%' },
-        },
-        marquee: {
-          from: { transform: 'translateX(0)' },
-          to: { transform: 'translateX(-50%)' },
-        },
+        marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
         'marquee-reverse': {
           from: { transform: 'translateX(-50%)' },
           to: { transform: 'translateX(0)' },
         },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-8px)' },
-        },
-        'scroll-cue': {
-          '0%': { transform: 'translateY(0)', opacity: '0' },
-          '40%': { opacity: '1' },
-          '80%': { transform: 'translateY(10px)', opacity: '0' },
-          '100%': { opacity: '0' },
-        },
-        'conic-spin': {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
-        },
-        'beam-sweep': {
-          '0%': { transform: 'translateX(-60%) rotate(12deg)', opacity: '0' },
-          '50%': { opacity: '1' },
-          '100%': { transform: 'translateX(160%) rotate(12deg)', opacity: '0' },
-        },
-        orbit: {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
-        },
       },
       animation: {
-        'grid-pan': 'grid-pan 14s linear infinite',
-        'glow-pulse': 'glow-pulse 4s ease-in-out infinite',
-        'gradient-shift': 'gradient-shift 8s ease infinite',
         marquee: 'marquee var(--marquee-duration, 36s) linear infinite',
         'marquee-reverse': 'marquee-reverse var(--marquee-duration, 36s) linear infinite',
-        float: 'float 5s ease-in-out infinite',
-        'scroll-cue': 'scroll-cue 1.8s ease-in-out infinite',
-        'conic-spin': 'conic-spin 18s linear infinite',
-        'beam-sweep': 'beam-sweep 12s ease-in-out infinite',
-        orbit: 'orbit 26s linear infinite',
       },
     },
   },

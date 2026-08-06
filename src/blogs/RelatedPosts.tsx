@@ -13,7 +13,7 @@ function Pager({ dir, blog }: { dir: 'prev' | 'next'; blog: Blog }) {
     <Link
       to={`/blogs/${blog.meta.slug}`}
       className={cn(
-        'group glass flex flex-col gap-1.5 rounded-xl p-5 transition-colors duration-200 hover:border-accent/40',
+        'group panel flex flex-col gap-1.5 rounded-xl p-5 transition-colors duration-200 hover:border-accent/40',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
         isPrev ? 'items-start text-left' : 'items-end text-right',
       )}
@@ -23,7 +23,7 @@ function Pager({ dir, blog }: { dir: 'prev' | 'next'; blog: Blog }) {
         {isPrev ? 'Older' : 'Newer'}
         {!isPrev && <ArrowRight className="h-3.5 w-3.5" aria-hidden />}
       </span>
-      <span className="line-clamp-2 font-display font-medium leading-snug text-foreground transition-colors group-hover:text-accent">
+      <span className="line-clamp-2 font-sans font-medium leading-snug text-foreground transition-colors group-hover:text-accent">
         {blog.meta.title}
       </span>
     </Link>

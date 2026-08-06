@@ -41,12 +41,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 16 }}
         transition={{ duration: 0.35, ease: EASE }}
-        className="glass relative rounded-xl p-7 sm:p-9"
+        className="panel relative rounded-xl p-7 sm:p-9"
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-pill border border-border bg-surface/70 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface/70 text-muted transition-colors hover:border-accent/50 hover:text-accent"
         >
           <X className="h-4 w-4" />
         </button>
@@ -54,7 +54,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         <Badge tone="accent" className="mb-4">
           {data.category}
         </Badge>
-        <h2 id="project-modal-title" className="pr-10 text-h2 font-display font-semibold">
+        <h2 id="project-modal-title" className="pr-10 text-h2 font-sans font-semibold">
           {data.title}
         </h2>
         <p id="project-modal-desc" className="mt-4 text-body leading-relaxed text-muted">

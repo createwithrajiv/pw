@@ -8,9 +8,9 @@ export default function NotFoundPage() {
     <>
       <Seo title="Not found" />
       <Container className="flex min-h-[100svh] flex-col items-center justify-center gap-6 text-center">
-        <div className="bg-grid-static absolute inset-0 -z-10 opacity-30" aria-hidden />
+        <div className=" absolute inset-0 -z-10 opacity-30" aria-hidden />
         <p className="eyebrow">Error 404</p>
-        <h1 className="text-display font-display font-semibold">
+        <h1 className="text-display font-sans font-semibold">
           Lost in the vector space
         </h1>
         <p className="max-w-md text-lead text-muted">

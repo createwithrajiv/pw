@@ -13,7 +13,7 @@ export default function CtaSection() {
         <div className="relative overflow-hidden rounded-lg border border-border bg-base px-6 py-20 text-center sm:px-12">
           <div className="relative z-10 flex flex-col items-center gap-7">
             {cta.eyebrow && <p className="eyebrow">{cta.eyebrow}</p>}
-            <h2 className="max-w-3xl text-balance text-display font-display font-semibold leading-[1.05] tracking-tight">
+            <h2 className="max-w-3xl text-balance text-display font-sans font-semibold leading-[1.05] tracking-tight">
               {cta.heading}
             </h2>
             <Reveal variant="fadeIn" delay={0.1}>
@@ -35,7 +35,7 @@ export default function CtaSection() {
                 ))}
               </div>
             </Reveal>
-            <p className="mt-6 font-display text-sm text-subtle">
+            <p className="mt-6 font-sans text-sm text-subtle">
               Available now - let's talk.
             </p>
           </div>

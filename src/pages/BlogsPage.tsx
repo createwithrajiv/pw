@@ -54,7 +54,7 @@ export default function BlogsPage() {
             <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
             Writing
           </p>
-          <h1 className="text-display font-display font-semibold tracking-tight">
+          <h1 className="text-display font-sans font-semibold tracking-tight">
             My Blogs
           </h1>
           <p className="text-lead text-muted">
@@ -64,7 +64,7 @@ export default function BlogsPage() {
         </div>
 
         {blogs.length === 0 ? (
-          <div className="glass mt-12 rounded-2xl p-10 text-center text-muted">
+          <div className="panel mt-12 rounded-2xl p-10 text-center text-muted">
             No posts yet - check back soon.
           </div>
         ) : (
@@ -86,7 +86,7 @@ export default function BlogsPage() {
                         aria-selected={active}
                         onClick={() => setActiveCategory(cat)}
                         className={cn(
-                          'rounded-pill border px-3.5 py-1.5 text-sm transition-colors duration-200',
+                          'rounded-md border px-3.5 py-1.5 text-sm transition-colors duration-200',
                           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
                           active
                             ? 'border-accent/40 bg-accent/10 font-medium text-accent'
@@ -111,7 +111,7 @@ export default function BlogsPage() {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search posts..."
                     className={cn(
-                      'w-full rounded-pill border border-border bg-surface/60 py-2 pl-10 pr-9 text-sm text-foreground',
+                      'w-full rounded-md border border-border bg-surface/60 py-2 pl-10 pr-9 text-sm text-foreground',
                       'placeholder:text-subtle transition-colors duration-200',
                       'focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20',
                     )}
@@ -132,7 +132,7 @@ export default function BlogsPage() {
 
             {/* Results */}
             {filtered.length === 0 ? (
-              <div className="glass mt-12 flex flex-col items-center gap-4 rounded-2xl p-12 text-center">
+              <div className="panel mt-12 flex flex-col items-center gap-4 rounded-2xl p-12 text-center">
                 <p className="text-muted">
                   No posts match{' '}
                   {query ? (
@@ -146,7 +146,7 @@ export default function BlogsPage() {
                 </p>
                 <button
                   onClick={clearFilters}
-                  className="text-sm font-medium text-accent transition-colors hover:text-accent-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base"
+                  className="text-sm font-medium text-accent transition-colors hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base"
                 >
                   Clear filters
                 </button>

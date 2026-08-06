@@ -56,7 +56,7 @@ export function ScrollProgress() {
       <motion.div
         aria-hidden
         style={{ scaleX: progress }}
-        className="fixed inset-x-0 top-0 z-[90] h-0.5 origin-left bg-grad-accent lg:hidden"
+        className="fixed inset-x-0 top-0 z-[90] h-0.5 origin-left bg-accent lg:hidden"
       />
 
       {/* desktop: vertical beam + ticks */}
@@ -65,13 +65,13 @@ export function ScrollProgress() {
         <motion.div
           aria-hidden
           style={{ scaleY: progress }}
-          className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-grad-accent shadow-glow"
+          className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-accent shadow-sm"
         />
         {!reduced && (
           <motion.span
             aria-hidden
             style={{ top: cometTop }}
-            className="animate-glow-pulse absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-glow"
+            className=" absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-sm"
           />
         )}
         {marks.map((m) => (
@@ -83,7 +83,7 @@ export function ScrollProgress() {
             className={cn(
               'group absolute left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300',
               active === m.id
-                ? 'scale-125 border-accent bg-accent shadow-glow'
+                ? 'scale-125 border-accent bg-accent shadow-sm'
                 : 'border-border-strong bg-canvas hover:border-accent',
             )}
           >

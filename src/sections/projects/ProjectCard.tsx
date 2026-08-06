@@ -60,19 +60,19 @@ export function ProjectCard({
       >
         {/* Hover sheen */}
         <span
-          className="pointer-events-none absolute inset-0 bg-grad-radial opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 bg-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           aria-hidden
         />
         <div className="flex items-center justify-between gap-3">
           <Badge tone="accent">{project.category}</Badge>
           {project.featured && (
-            <span className="flex items-center gap-1 text-xs text-accent-2">
+            <span className="flex items-center gap-1 text-xs text-accent">
               <Star className="h-3.5 w-3.5 fill-current" aria-hidden /> Featured
             </span>
           )}
         </div>
 
-        <h3 className="text-h3 font-display font-medium leading-snug transition-colors group-hover:text-accent">
+        <h3 className="text-h3 font-sans font-medium leading-snug transition-colors group-hover:text-accent">
           {project.title}
         </h3>
         <p className="line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>

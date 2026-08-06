@@ -53,16 +53,16 @@ export function Navbar() {
       <nav
         aria-label="Primary"
         className={cn(
-          'flex w-full max-w-container-wide items-center justify-between gap-4 rounded-pill px-4 py-2.5 transition-all duration-300',
-          scrolled ? 'glass shadow-md' : 'border border-transparent',
+          'flex w-full max-w-container items-center justify-between gap-4 rounded-md px-4 py-2.5 transition-all duration-300',
+          scrolled ? 'panel shadow-md' : 'border border-transparent',
         )}
       >
         <button
           onClick={() => go('#hero')}
-          className="flex items-center gap-2 rounded-pill px-1 text-sm font-display font-bold"
+          className="flex items-center gap-2 rounded-md px-1 text-sm font-sans font-bold"
           aria-label="Back to top"
         >
-          <span className="grid h-8 w-8 place-items-center rounded-md bg-grad-accent text-primary-foreground shadow-glow">
+          <span className="grid h-8 w-8 place-items-center rounded-md bg-accent text-primary-foreground shadow-sm">
             {settings.brandShortName.slice(0, 1)}
           </span>
           <span className="hidden sm:inline">{settings.brandShortName}</span>
@@ -79,14 +79,14 @@ export function Navbar() {
                   onClick={() => go(s.anchor)}
                   aria-current={isActive ? 'true' : undefined}
                   className={cn(
-                    'relative rounded-pill px-3.5 py-1.5 text-sm font-medium transition-colors',
+                    'relative rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors',
                     isActive ? 'text-foreground' : 'text-muted hover:text-foreground',
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 -z-10 rounded-pill bg-surface"
+                      className="absolute inset-0 -z-10 rounded-md bg-surface"
                       transition={{ type: 'spring', stiffness: 200, damping: 26, mass: 0.6 }}
                     />
                   )}
@@ -100,14 +100,14 @@ export function Navbar() {
               to="/blogs"
               aria-current={onBlog ? 'page' : undefined}
               className={cn(
-                'relative rounded-pill px-3.5 py-1.5 text-sm font-medium transition-colors',
+                'relative rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors',
                 onBlog ? 'text-foreground' : 'text-muted hover:text-foreground',
               )}
             >
               {onBlog && (
                 <motion.span
                   layoutId="nav-active"
-                  className="absolute inset-0 -z-10 rounded-pill bg-surface"
+                  className="absolute inset-0 -z-10 rounded-md bg-surface"
                   transition={{ type: 'spring', stiffness: 200, damping: 26, mass: 0.6 }}
                 />
               )}
@@ -129,7 +129,7 @@ export function Navbar() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-pill border border-border bg-surface/60 text-foreground lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-foreground lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -146,7 +146,7 @@ export function Navbar() {
             className="fixed inset-0 z-[-1] lg:hidden"
           >
             <div
-              className="absolute inset-0 bg-overlay/70 backdrop-blur-md"
+              className="absolute inset-0 bg-scrim/70 backdrop-blur-md"
               onClick={() => setMenuOpen(false)}
               aria-hidden
             />
@@ -155,7 +155,7 @@ export function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', stiffness: 320, damping: 34 }}
-              className="glass absolute right-0 top-0 flex h-full w-[min(80vw,320px)] flex-col gap-2 overflow-y-auto p-6 pt-24"
+              className="panel absolute right-0 top-0 flex h-full w-[min(80vw,320px)] flex-col gap-2 overflow-y-auto p-6 pt-24"
               role="dialog"
               aria-label="Navigation menu"
             >
@@ -166,7 +166,7 @@ export function Navbar() {
                     key={s.id}
                     onClick={() => go(s.anchor)}
                     className={cn(
-                      'rounded-md px-3 py-3 text-left text-h3 font-display transition-colors',
+                      'rounded-md px-3 py-3 text-left text-h3 font-sans transition-colors',
                       !onBlog && active === id ? 'text-accent' : 'text-foreground hover:text-accent',
                     )}
                   >
@@ -178,7 +178,7 @@ export function Navbar() {
                 to="/blogs"
                 onClick={() => setMenuOpen(false)}
                 className={cn(
-                  'rounded-md px-3 py-3 text-left text-h3 font-display transition-colors',
+                  'rounded-md px-3 py-3 text-left text-h3 font-sans transition-colors',
                   onBlog ? 'text-accent' : 'text-foreground hover:text-accent',
                 )}
               >
@@ -199,7 +199,7 @@ export function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.platform}
-                    className="grid h-10 w-10 place-items-center rounded-pill border border-border text-muted hover:border-accent/50 hover:text-accent"
+                    className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted hover:border-accent/50 hover:text-accent"
                   >
                     <IconRenderer name={s.icon} className="h-5 w-5" />
                   </a>

@@ -30,7 +30,7 @@ function StoryNarrative({
           {eyebrow}
         </p>
       )}
-      <h2 className="max-w-3xl text-h1 font-display font-semibold tracking-tight">
+      <h2 className="max-w-3xl text-h1 font-sans font-semibold tracking-tight">
         {heading}
       </h2>
       {subheading && <p className="text-lead text-muted">{subheading}</p>}
@@ -87,10 +87,10 @@ export default function StorySection() {
                     className="h-full"
                   >
                     <GlassCard className="flex h-full flex-col gap-3 p-6">
-                      <span className="grid h-10 w-10 place-items-center rounded-md bg-grad-accent/10 text-accent ring-1 ring-accent/20">
+                      <span className="grid h-10 w-10 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20">
                         <IconRenderer name={v.icon} className="h-5 w-5" />
                       </span>
-                      <h3 className="font-display font-medium">{v.title}</h3>
+                      <h3 className="font-sans font-medium">{v.title}</h3>
                       <p className="text-sm leading-relaxed text-muted">{v.description}</p>
                     </GlassCard>
                   </motion.div>

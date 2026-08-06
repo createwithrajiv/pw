@@ -30,7 +30,7 @@ export default function AboutSection() {
                 About
               </span>
               {/* Emphasis is carried by colour now that the gradient text is gone. */}
-              <h2 className="text-h1 font-display tracking-tight">
+              <h2 className="text-h1 font-sans tracking-tight">
                 {HEADLINE.map((w, i) => (
                   <span key={w.text} className={w.emphasis ? 'text-accent' : undefined}>
                     {w.text}
@@ -52,7 +52,7 @@ export default function AboutSection() {
               <GlassCard className="flex flex-col gap-6 p-8">
                 <div className="flex flex-col gap-1">
                   <span className="eyebrow">Currently</span>
-                  <span className="text-h3 font-display font-medium">{profile.title}</span>
+                  <span className="text-h3 font-sans font-medium">{profile.title}</span>
                 </div>
                 <div className="flex flex-col gap-3 text-sm">
                   <span className="flex items-center gap-3 text-muted">
@@ -69,7 +69,7 @@ export default function AboutSection() {
                 <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
                   {profile.stats.map((s) => (
                     <div key={s.label} className="flex flex-col gap-1">
-                      <dt className="font-display text-h3 font-semibold">
+                      <dt className="font-sans text-h3 font-semibold">
                         {s.value}
                       </dt>
                       <dd className="text-xs leading-snug text-muted">{s.label}</dd>

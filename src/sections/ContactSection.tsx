@@ -28,7 +28,7 @@ export default function ContactSection() {
               Get in touch
             </p>
             <Reveal variant="fadeInUp">
-              <h2 className="text-h1 font-display font-semibold tracking-tight">
+              <h2 className="text-h1 font-sans font-semibold tracking-tight">
                 Let's build something that scales.
               </h2>
             </Reveal>
@@ -98,7 +98,7 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.platform}
-                    className="grid h-11 w-11 place-items-center rounded-pill border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                    className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
                   >
                     <IconRenderer name={s.icon} className="h-5 w-5" />
                   </a>

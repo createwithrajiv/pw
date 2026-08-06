@@ -27,10 +27,10 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <button
             onClick={() => go('#hero')}
-            className="flex items-center gap-2 self-start text-lg font-display font-bold"
+            className="flex items-center gap-2 self-start text-lg font-sans font-bold"
             aria-label="Back to top"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-md bg-grad-accent text-primary-foreground shadow-glow">
+            <span className="grid h-9 w-9 place-items-center rounded-md bg-accent text-primary-foreground shadow-sm">
               {settings.brandShortName.slice(0, 1)}
             </span>
             {navigation.brand}
@@ -44,7 +44,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.platform}
-                className="grid h-10 w-10 place-items-center rounded-pill border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
               >
                 <IconRenderer name={s.icon} className="h-5 w-5" />
               </a>

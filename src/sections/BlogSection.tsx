@@ -42,7 +42,7 @@ export default function BlogSection() {
                     <time>{formatDate(post.date)}</time>
                     {post.readingTime && <span>· {post.readingTime}</span>}
                   </div>
-                  <h3 className="text-h3 font-display font-medium leading-snug transition-colors group-hover:text-accent">
+                  <h3 className="text-h3 font-sans font-medium leading-snug transition-colors group-hover:text-accent">
                     {post.title}
                   </h3>
                   <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-muted">

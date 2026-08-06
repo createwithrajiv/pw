@@ -1,7 +1,11 @@
 /**
- * Syntax-highlight theme for rehype-highlight (highlight.js token classes),
- * mapped to the site's HSL design tokens. Because the tokens flip with `.dark`,
- * this one theme covers both light and dark modes.
+ * Syntax-highlight theme for rehype-highlight (highlight.js token classes).
+ *
+ * Mapped to the dedicated `--code-*` tokens rather than the UI accent. This is
+ * the one sanctioned exception to the single-accent rule: code colour carries
+ * semantic information, and collapsing it onto one blue makes code unreadable.
+ * Every colour clears 4.5:1 against `--surface` in both themes; the tokens flip
+ * with `.dark`, so this one theme covers both.
  */
 
 .hljs {
@@ -12,7 +16,7 @@
 /* comments */
 .hljs-comment,
 .hljs-quote {
-  color: hsl(var(--fg-subtle));
+  color: hsl(var(--code-comment));
   font-style: italic;
 }
 
@@ -20,21 +24,29 @@
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-literal,
-.hljs-type,
-.hljs-built_in,
-.hljs-name,
-.hljs-tag {
-  color: hsl(var(--accent));
+.hljs-built_in {
+  color: hsl(var(--code-keyword));
 }
 
-/* functions / titles / classes */
+/* types / classes */
+.hljs-type,
+.hljs-title.class_ {
+  color: hsl(var(--code-type));
+}
+
+/* markup tags */
+.hljs-name,
+.hljs-tag {
+  color: hsl(var(--code-tag));
+}
+
+/* functions / titles / sections */
 .hljs-title,
 .hljs-title.function_,
-.hljs-title.class_,
 .hljs-section,
 .hljs-selector-id,
 .hljs-selector-class {
-  color: hsl(var(--accent-2));
+  color: hsl(var(--code-function));
   font-weight: 600;
 }
 
@@ -45,7 +57,7 @@
 .hljs-attribute,
 .hljs-addition,
 .hljs-meta-string {
-  color: hsl(var(--accent-3));
+  color: hsl(var(--code-string));
 }
 
 /* numbers / symbols / constants */
@@ -54,24 +66,24 @@
 .hljs-bullet,
 .hljs-link,
 .hljs-template-variable {
-  color: hsl(var(--warning));
+  color: hsl(var(--code-number));
 }
 
-/* variables / params / punctuation-ish */
+/* variables / params / properties */
 .hljs-variable,
 .hljs-params,
 .hljs-property {
-  color: hsl(var(--fg) / 0.85);
+  color: hsl(var(--fg));
 }
 
 /* meta (imports, decorators, preprocessor) */
 .hljs-meta,
 .hljs-meta .hljs-keyword {
-  color: hsl(var(--fg-subtle));
+  color: hsl(var(--code-comment));
 }
 
 .hljs-deletion {
-  color: hsl(var(--danger));
+  color: hsl(var(--code-tag));
 }
 
 .hljs-emphasis {

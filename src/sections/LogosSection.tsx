@@ -7,7 +7,7 @@ import type { Company } from '@/types';
 
 function LogoChip({ company }: { company: Company }) {
   const chip = (
-    <div className="flex h-16 items-center justify-center rounded-xl border border-border bg-white/95 px-5 shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/40 group-hover:shadow-glow">
+    <div className="flex h-16 items-center justify-center rounded-xl border border-border bg-white/95 px-5 shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/40 group-hover:shadow-sm">
       <img
         src={company.logo}
         alt={company.name}

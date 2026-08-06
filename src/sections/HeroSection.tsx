@@ -43,7 +43,7 @@ export default function HeroSection() {
               the first frame rather than at the end of the animation. */}
           <motion.h1
             variants={slideUp}
-            className="text-display font-display tracking-tight"
+            className="text-display font-sans tracking-tight"
           >
             {profile.tagline}
           </motion.h1>
@@ -71,7 +71,7 @@ export default function HeroSection() {
               const parsed = parseStat(stat.value);
               return (
                 <div key={stat.label} className="flex flex-col">
-                  <span className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                  <span className="font-sans text-2xl font-bold text-foreground sm:text-3xl">
                     <Counter
                       value={parsed.value}
                       decimals={parsed.decimals}

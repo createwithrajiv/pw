@@ -15,9 +15,9 @@ export const GlassCard = forwardRef<HTMLDivElement, GlassCardProps>(
     <motion.div
       ref={ref}
       className={cn(
-        'glass rounded-lg p-6',
+        'panel rounded-lg p-6',
         interactive &&
-          'group transition-[transform,box-shadow,border-color] duration-300 will-change-transform hover:-translate-y-1 hover:border-accent/40 hover:shadow-glow',
+          'group transition-[transform,box-shadow,border-color] duration-300 will-change-transform hover:-translate-y-1 hover:border-accent/40 hover:shadow-sm',
         className,
       )}
       {...rest}

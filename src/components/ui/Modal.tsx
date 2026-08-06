@@ -85,7 +85,7 @@ export function Modal({ open, onClose, children, labelledBy, describedBy, classN
           onKeyDown={onKeyDown}
         >
           <motion.div
-            className="absolute inset-0 bg-overlay/70 backdrop-blur-md"
+            className="absolute inset-0 bg-scrim/70 backdrop-blur-md"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

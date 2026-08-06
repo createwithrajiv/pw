@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight, Check, ChevronDown, Clock, Hash, List } from 'lucide-react';
 import { Container } from '@/components/ui/Container';
 import { Badge } from '@/components/ui/Badge';
@@ -20,19 +19,6 @@ import { isRealHref } from '@/utils/href';
 import { uniqueSlugs, slugify } from '@/utils/slug';
 import { cn } from '@/utils/cn';
 import type { Blog } from '@/types';
-
-/** Thin top progress bar — shows how far through the piece the reader is. */
-function ReadingProgress() {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
-  return (
-    <motion.div
-      aria-hidden
-      style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[96] h-[3px] origin-left bg-gradient-to-r from-accent via-accent-2 to-accent-3"
-    />
-  );
-}
 
 /** Hover-revealed permalink beside a heading — copies the deep link and smooth-scrolls to it. */
 function HeadingAnchor({ id }: { id: string }) {
@@ -60,7 +46,7 @@ function HeadingAnchor({ id }: { id: string }) {
 
 /**
  * The shared, default article layout — a focused, editorial reading experience:
- * reading-progress bar, author byline, drop-cap lead, numbered sections, a sticky
+ * author byline, numbered sections, a sticky
  * table of contents on wide screens, and an author CTA. A per-blog folder can
  * override this; by default it re-exports this component.
  */
@@ -75,7 +61,6 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
 
   return (
     <>
-      <ReadingProgress />
       <article className="relative pb-28 pt-24">
         <Container width="default">
           {/* Breadcrumb + cover banner */}
@@ -113,7 +98,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                   </span>
                 </div>
 
-                <h1 className="text-balance text-[clamp(2.1rem,1.3rem+2.9vw,3.4rem)] font-display font-semibold leading-[1.1] tracking-tight">
+                <h1 className="text-balance text-[clamp(2.1rem,1.3rem+2.9vw,3.4rem)] font-sans font-semibold leading-[1.1] tracking-tight">
                   {meta.title}
                 </h1>
 
@@ -150,7 +135,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
               </div>
 
               {/* Lead / hook */}
-              <Reveal as="div" className="blog-lead prose prose-blog prose-lg mt-9 max-w-none">
+              <Reveal as="div" className="prose prose-blog prose-lg mt-9 max-w-none">
                 <MarkdownBody text={content.hook} />
               </Reveal>
 
@@ -204,7 +189,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                     <span className="font-mono text-sm font-medium text-accent">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <h2 className="text-h2 font-display font-semibold tracking-tight">
+                    <h2 className="text-h2 font-sans font-semibold tracking-tight">
                       {section.heading}
                     </h2>
                     <HeadingAnchor id={sectionIds[i]} />
@@ -225,7 +210,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                         className="mt-4 flex scroll-mt-28 flex-col gap-3 border-l-2 border-accent/30 pl-5"
                       >
                         <div className="group/heading flex items-baseline gap-2.5">
-                          <h3 className="text-h3 font-display font-medium tracking-tight text-foreground">
+                          <h3 className="text-h3 font-sans font-medium tracking-tight text-foreground">
                             {sub.subheading}
                           </h3>
                           <HeadingAnchor id={subId} />
@@ -245,7 +230,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                   <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40 p-7 sm:p-9">
                     <span
                       aria-hidden
-                      className="pointer-events-none absolute -left-1 -top-8 select-none font-display text-[8rem] leading-none text-accent/10"
+                      className="pointer-events-none absolute -left-1 -top-8 select-none font-sans text-[8rem] leading-none text-accent/10"
                     >
                       &ldquo;
                     </span>
@@ -263,7 +248,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
 
               {/* Author + CTA */}
               <Reveal as="div" className="mt-12">
-                <div className="glass flex flex-col gap-5 rounded-2xl p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
+                <div className="panel flex flex-col gap-5 rounded-2xl p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
                   <img
                     src={profile.image}
                     alt={profile.name}
@@ -271,7 +256,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                   />
                   <div className="flex min-w-0 flex-col gap-3">
                     <div className="flex flex-col">
-                      <span className="font-display font-medium text-foreground">{profile.name}</span>
+                      <span className="font-sans font-medium text-foreground">{profile.name}</span>
                       <span className="text-sm text-subtle">{profile.title}</span>
                     </div>
                     {cta.primary && <p className="text-sm leading-relaxed text-muted">{cta.primary}</p>}

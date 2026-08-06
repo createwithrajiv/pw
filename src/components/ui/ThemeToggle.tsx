@@ -17,7 +17,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       onClick={cycle}
       aria-label={`Switch to ${isDark ? 'light' : 'dark'} theme`}
       className={cn(
-        'relative grid h-10 w-10 place-items-center rounded-pill border border-border bg-surface/60 text-foreground transition-colors hover:border-accent/50 hover:text-accent',
+        'relative grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-foreground transition-colors hover:border-accent/50 hover:text-accent',
         className,
       )}
     >

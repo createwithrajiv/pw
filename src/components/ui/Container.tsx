@@ -11,7 +11,7 @@ interface ContainerProps {
 const widths = {
   narrow: 'max-w-3xl',
   default: 'max-w-container',
-  wide: 'max-w-container-wide',
+  wide: 'max-w-container',
 };
 
 /** Centered, responsive, ultrawide-capped content wrapper. */
