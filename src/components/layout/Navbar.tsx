@@ -10,6 +10,7 @@ import { useNavigation, useSocial } from '@/hooks/useContent';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { BrandMark } from '@/components/ui/BrandMark';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { settings } from '@/data';
 
@@ -60,11 +61,9 @@ export function Navbar() {
         <button
           onClick={() => go('#hero')}
           className="flex items-center gap-2 rounded-md px-1 text-sm font-sans font-bold"
-          aria-label="Back to top"
+          aria-label={`${settings.brandShortName} - back to top`}
         >
-          <span className="grid h-8 w-8 place-items-center rounded-md bg-accent text-primary-foreground shadow-sm">
-            {settings.brandShortName.slice(0, 1)}
-          </span>
+          <BrandMark className="h-8 w-8 shadow-sm" />
           <span className="hidden sm:inline">{settings.brandShortName}</span>
         </button>
 

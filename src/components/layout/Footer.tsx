@@ -3,8 +3,8 @@ import { useNavSections } from '@/hooks/useSections';
 import { useProfile, useSocial, useNavigation } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
 import { IconRenderer } from '@/components/ui/IconRenderer';
+import { BrandMark } from '@/components/ui/BrandMark';
 import { currentYear } from '@/utils/format';
-import { settings } from '@/data';
 
 export function Footer() {
   const profile = useProfile();
@@ -28,11 +28,9 @@ export function Footer() {
           <button
             onClick={() => go('#hero')}
             className="flex items-center gap-2 self-start text-lg font-sans font-bold"
-            aria-label="Back to top"
+            aria-label={`${navigation.brand} - back to top`}
           >
-            <span className="grid h-9 w-9 place-items-center rounded-md bg-accent text-primary-foreground shadow-sm">
-              {settings.brandShortName.slice(0, 1)}
-            </span>
+            <BrandMark className="h-9 w-9 shadow-sm" />
             {navigation.brand}
           </button>
           <p className="max-w-sm text-sm text-muted">{profile.tagline}.</p>

@@ -164,18 +164,25 @@ export default function TestimonialsSection() {
 
           {count > 1 && (
             <div className="mt-6 flex items-center justify-between">
-              <div className="flex gap-2">
+              <div className="-m-2 flex">
                 {testimonials.map((t, i) => (
                   <button
                     key={t.author}
                     onClick={() => setIndex(i)}
-                    aria-label={`Show testimonial ${i + 1}`}
+                    aria-label={`Show testimonial ${i + 1} of ${count}`}
                     aria-current={i === index}
-                    className={cn(
-                      'h-2 rounded-full transition-all duration-300',
-                      i === index ? 'w-6 bg-accent' : 'w-2 bg-border-strong hover:bg-accent/50',
-                    )}
-                  />
+                    className="group/dot grid h-9 w-9 place-items-center rounded-md"
+                  >
+                    <span
+                      aria-hidden
+                      className={cn(
+                        'block h-2 rounded-full transition-all duration-200',
+                        i === index
+                          ? 'w-6 bg-accent'
+                          : 'w-2 bg-border-strong group-hover/dot:bg-accent',
+                      )}
+                    />
+                  </button>
                 ))}
               </div>
               <div className="flex gap-2">

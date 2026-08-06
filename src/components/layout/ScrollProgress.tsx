@@ -32,11 +32,14 @@ export function ScrollProgress() {
   useEffect(() => {
     const compute = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
+      // Sections that aren't on this route resolve to null. Dropping them keeps
+      // the rail off the blog pages instead of stacking every tick at 0%.
       setMarks(
-        navSections.map((s) => {
+        navSections.flatMap((s) => {
           const el = document.getElementById(s.anchor.replace('#', ''));
-          const pos = el && max > 0 ? Math.min(1, Math.max(0, el.offsetTop / max)) : 0;
-          return { id: s.id, anchor: s.anchor, label: s.label, pos };
+          if (!el || max <= 0) return [];
+          const pos = Math.min(1, Math.max(0, el.offsetTop / max));
+          return [{ id: s.id, anchor: s.anchor, label: s.label, pos }];
         }),
       );
     };
@@ -58,33 +61,42 @@ export function ScrollProgress() {
         className="fixed inset-x-0 top-0 z-[90] h-0.5 origin-left bg-accent lg:hidden"
       />
 
-      {/* desktop: vertical beam + ticks */}
-      <div className="fixed right-5 top-1/2 z-[90] hidden h-[44vh] w-[3px] -translate-y-1/2 lg:block">
-        <div aria-hidden className="absolute inset-0 rounded-full bg-border/60" />
-        <motion.div
-          aria-hidden
-          style={{ scaleY: progress }}
-          className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-accent shadow-sm"
-        />
-        {marks.map((m) => (
-          <button
-            key={m.id}
-            onClick={() => scrollTo(m.anchor)}
-            aria-label={`Go to ${m.label}`}
-            style={{ top: `${m.pos * 100}%` }}
-            className={cn(
-              'group absolute left-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300',
-              active === m.id
-                ? 'scale-125 border-accent bg-accent shadow-sm'
-                : 'border-border-strong bg-canvas hover:border-accent',
-            )}
-          >
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-0.5 text-[11px] text-muted opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
-              {m.label}
-            </span>
-          </button>
-        ))}
-      </div>
+      {/* desktop: vertical rail + section ticks */}
+      {marks.length > 1 && (
+        <div className="fixed right-5 top-1/2 z-[90] hidden h-[44vh] w-[3px] -translate-y-1/2 lg:block">
+          <div aria-hidden className="absolute inset-0 rounded-full bg-border" />
+          <motion.div
+            aria-hidden
+            style={{ scaleY: progress }}
+            className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-accent"
+          />
+          {marks.map((m) => (
+            // The visible tick is 8px, but the button carries a 24px hit area
+            // so it clears the minimum touch-target size.
+            <button
+              key={m.id}
+              onClick={() => scrollTo(m.anchor)}
+              aria-label={`Go to ${m.label}`}
+              aria-current={active === m.id ? 'true' : undefined}
+              style={{ top: `${m.pos * 100}%` }}
+              className="group absolute left-1/2 grid h-6 w-6 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full"
+            >
+              <span
+                aria-hidden
+                className={cn(
+                  'block h-2 w-2 rounded-full border transition-colors duration-200',
+                  active === m.id
+                    ? 'border-accent bg-accent'
+                    : 'border-border-strong bg-canvas group-hover:border-accent',
+                )}
+              />
+              <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-0.5 text-[11px] text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                {m.label}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 }
