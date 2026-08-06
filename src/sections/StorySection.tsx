@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { usePersonalStory, useValues } from '@/hooks/useContent';
 import { fadeInUp, staggerContainer } from '@/animations/variants';
@@ -86,13 +86,13 @@ export default function StorySection() {
                     variants={fadeInUp}
                     className="h-full"
                   >
-                    <GlassCard className="flex h-full flex-col gap-3 p-6">
+                    <Card className="flex h-full flex-col gap-3 p-6">
                       <span className="grid h-10 w-10 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20">
                         <IconRenderer name={v.icon} className="h-5 w-5" />
                       </span>
                       <h3 className="font-sans font-medium">{v.title}</h3>
                       <p className="text-sm leading-relaxed text-muted">{v.description}</p>
-                    </GlassCard>
+                    </Card>
                   </motion.div>
                 ))}
               </motion.div>

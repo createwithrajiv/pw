@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useServices, useSectionCopy } from '@/hooks/useContent';
 import { fadeInUp, staggerContainer } from '@/animations/variants';
@@ -28,13 +28,13 @@ export default function ServicesSection() {
               data-cursor
               className="h-full"
             >
-              <GlassCard className="flex h-full flex-col gap-4 p-6">
+              <Card className="flex h-full flex-col gap-4 p-6">
                 <span className="grid h-12 w-12 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 transition-[transform,color] duration-300 group-hover:scale-105 group-hover:text-accent">
                   <IconRenderer name={service.icon} className="h-6 w-6" />
                 </span>
                 <h3 className="text-h3 font-sans font-medium leading-snug">{service.title}</h3>
                 <p className="text-sm leading-relaxed text-muted">{service.description}</p>
-              </GlassCard>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

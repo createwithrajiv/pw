@@ -35,7 +35,7 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
       className="group relative -m-2 flex flex-col items-center gap-3 rounded-lg p-2 text-center outline-none transition-colors focus-visible:bg-surface/40"
     >
       {m.icon && (
-        <span className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-accent transition-colors group-hover:border-accent/40">
+        <span className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-accent transition-colors group-hover:border-accent">
           <IconRenderer name={m.icon} className="h-5 w-5" />
         </span>
       )}

@@ -14,7 +14,7 @@ interface ShareBarProps {
 
 const btn =
   'inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted ' +
-  'transition-colors duration-200 hover:border-accent/40 hover:text-accent ' +
+  'transition-colors duration-200 hover:border-accent hover:text-accent ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base';
 
 /**
@@ -84,7 +84,7 @@ export function ShareBar({ title, snippets, className }: ShareBarProps) {
           onClick={() => caption.copy(snippets.linkedin_hook!)}
           className={cn(
             'inline-flex items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-medium text-muted',
-            'transition-colors duration-200 hover:border-accent/40 hover:text-foreground',
+            'transition-colors duration-200 hover:border-accent hover:text-foreground',
             'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
           )}
         >

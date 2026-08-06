@@ -199,7 +199,7 @@ export function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.platform}
-                    className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted hover:border-accent/50 hover:text-accent"
+                    className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted hover:border-accent hover:text-accent"
                   >
                     <IconRenderer name={s.icon} className="h-5 w-5" />
                   </a>

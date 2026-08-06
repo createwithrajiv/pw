@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Star } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Tag } from '@/components/ui/Tag';
 import { isRealHref } from '@/utils/href';
@@ -44,7 +44,7 @@ export function ProjectCard({
       onBlur={onBlur}
       className={cn('transition-[opacity,filter] duration-300', dimmed && 'opacity-50 saturate-50')}
     >
-      <GlassCard
+      <Card
         interactive
         onClick={() => onOpen(project)}
         role="button"
@@ -93,7 +93,7 @@ export function ProjectCard({
             <Github className="h-4 w-4 text-subtle" aria-hidden />
           )}
         </div>
-      </GlassCard>
+      </Card>
     </motion.div>
   );
 }

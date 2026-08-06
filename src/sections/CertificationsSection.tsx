@@ -3,7 +3,7 @@ import { BadgeCheck, ExternalLink } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useCertifications, useSectionCopy } from '@/hooks/useContent';
 import { isRealHref } from '@/utils/href';
@@ -27,7 +27,7 @@ export default function CertificationsSection() {
         >
           {certifications.map((cert) => (
             <motion.div key={`${cert.title}-${cert.issuer}`} variants={fadeInUp}>
-              <GlassCard interactive className="flex h-full items-start gap-4 p-5">
+              <Card interactive className="flex h-full items-start gap-4 p-5">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20">
                   <IconRenderer name={cert.icon ?? 'award'} className="h-5 w-5" />
                 </span>
@@ -47,7 +47,7 @@ export default function CertificationsSection() {
                     </a>
                   )}
                 </div>
-              </GlassCard>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

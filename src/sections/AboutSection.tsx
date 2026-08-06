@@ -1,7 +1,7 @@
 import { MapPin, CheckCircle2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Reveal } from '@/components/motion/Reveal';
 import { Marquee } from '@/components/ui/Marquee';
 import { Tag } from '@/components/ui/Tag';
@@ -49,7 +49,7 @@ export default function AboutSection() {
 
           <div className="min-w-0 lg:self-center">
             <Reveal variant="fadeInUp">
-              <GlassCard className="flex flex-col gap-6 p-8">
+              <Card className="flex flex-col gap-6 p-8">
                 <div className="flex flex-col gap-1">
                   <span className="eyebrow">Currently</span>
                   <span className="text-h3 font-sans font-medium">{profile.title}</span>
@@ -85,7 +85,7 @@ export default function AboutSection() {
                     ))}
                   </Marquee>
                 </div>
-              </GlassCard>
+              </Card>
             </Reveal>
           </div>
         </div>

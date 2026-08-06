@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useSkills, useSectionCopy } from '@/hooks/useContent';
 import { fadeInUp, staggerContainer } from '@/animations/variants';
@@ -96,7 +96,7 @@ export default function SkillsSection() {
         >
           {skills.categories.map((cat) => (
             <motion.div key={cat.name} variants={fadeInUp} className="h-full">
-              <GlassCard className="flex h-full flex-col gap-5 p-6">
+              <Card className="flex h-full flex-col gap-5 p-6">
                 <div className="flex items-center gap-3.5 border-b border-border/60 pb-4">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-accent/10 text-accent ring-1 ring-accent/20">
                     <IconRenderer name={CATEGORY_ICONS[cat.name]} className="h-[22px] w-[22px]" />
@@ -110,13 +110,13 @@ export default function SkillsSection() {
                     <li
                       key={skill}
                       data-cursor
-                      className="rounded-md border border-border bg-surface/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent/50 hover:text-accent"
+                      className="rounded-md border border-border bg-surface/60 px-3 py-1.5 text-sm font-medium text-foreground transition-colors hover:border-accent hover:text-accent"
                     >
                       {skill}
                     </li>
                   ))}
                 </ul>
-              </GlassCard>
+              </Card>
             </motion.div>
           ))}
         </motion.div>

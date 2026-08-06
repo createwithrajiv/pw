@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Check, Copy, Mail, MapPin } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { Reveal } from '@/components/motion/Reveal';
@@ -41,7 +41,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <GlassCard className="relative flex flex-col gap-6 overflow-hidden p-8">
+          <Card className="relative flex flex-col gap-6 overflow-hidden p-8">
             <div className="relative z-10 flex flex-col gap-2">
               <span className="eyebrow">Email</span>
               <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface/50 p-4">
@@ -53,7 +53,7 @@ export default function ContactSection() {
                   <button
                     onClick={copyEmail}
                     aria-label={copied ? 'Email copied' : 'Copy email address'}
-                    className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                    className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
                   >
                     {copied ? (
                       <Check className="h-4 w-4 text-success" />
@@ -98,14 +98,14 @@ export default function ContactSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.platform}
-                    className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                    className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
                   >
                     <IconRenderer name={s.icon} className="h-5 w-5" />
                   </a>
                 ))}
               </div>
             </div>
-          </GlassCard>
+          </Card>
         </div>
       </Container>
     </Section>

@@ -4,7 +4,7 @@ import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Modal } from '@/components/ui/Modal';
 import { useTestimonials, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
@@ -110,7 +110,7 @@ export default function TestimonialsSection() {
             &ldquo;
           </span>
 
-          <GlassCard className="relative min-h-[340px] overflow-hidden p-8 sm:p-10">
+          <Card className="relative min-h-[340px] overflow-hidden p-8 sm:p-10">
             <AnimatePresence mode="wait">
               <motion.figure
                 key={index}
@@ -156,7 +156,7 @@ export default function TestimonialsSection() {
                 </figcaption>
               </motion.figure>
             </AnimatePresence>
-          </GlassCard>
+          </Card>
 
           {count > 1 && (
             <div className="mt-6 flex items-center justify-between">
@@ -178,14 +178,14 @@ export default function TestimonialsSection() {
                 <button
                   onClick={() => go(-1)}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -210,7 +210,7 @@ export default function TestimonialsSection() {
           <button
             onClick={() => setDetailOpen(false)}
             aria-label="Close"
-            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface/70 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface/70 text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <X className="h-4 w-4" />
           </button>

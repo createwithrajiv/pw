@@ -13,7 +13,7 @@ function Pager({ dir, blog }: { dir: 'prev' | 'next'; blog: Blog }) {
     <Link
       to={`/blogs/${blog.meta.slug}`}
       className={cn(
-        'group panel flex flex-col gap-1.5 rounded-xl p-5 transition-colors duration-200 hover:border-accent/40',
+        'group panel flex flex-col gap-1.5 rounded-xl p-5 transition-colors duration-200 hover:border-accent',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
         isPrev ? 'items-start text-left' : 'items-end text-right',
       )}

@@ -309,7 +309,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                             'rounded-r focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
                             active === t.id
                               ? 'border-accent text-foreground'
-                              : 'border-border text-muted hover:border-accent/50 hover:text-foreground',
+                              : 'border-border text-muted hover:border-accent hover:text-foreground',
                           )}
                         >
                           <span className="font-mono text-xs text-subtle">

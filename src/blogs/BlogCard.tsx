@@ -31,7 +31,7 @@ export function BlogCard({ blog, featured = false, className }: BlogCardProps) {
       className={cn(
         'group panel relative flex overflow-hidden rounded-2xl',
         'transition-[transform,box-shadow,border-color] duration-300 will-change-transform',
-        'hover:-translate-y-1 hover:border-accent/40 hover:shadow-sm',
+        'hover:-translate-y-1 hover:border-accent hover:shadow-sm',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
         featured ? 'flex-col lg:flex-row' : 'flex-col',
         className,

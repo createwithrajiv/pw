@@ -23,7 +23,7 @@ export function BackToTop() {
           exit={{ opacity: 0, scale: 0.8, y: 12 }}
           onClick={() => scrollTo(0)}
           aria-label="Back to top"
-          className="panel fixed bottom-6 right-6 z-[90] grid h-12 w-12 place-items-center rounded-md text-foreground transition-colors hover:border-accent/50 hover:text-accent"
+          className="panel fixed bottom-6 right-6 z-[90] grid h-12 w-12 place-items-center rounded-md text-foreground transition-colors hover:border-accent hover:text-accent"
         >
           <ArrowUp className="h-5 w-5" />
         </motion.button>

@@ -3,7 +3,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Tag } from '@/components/ui/Tag';
 import { useBlog, usePublishedPosts } from '@/hooks/useContent';
 import { isRealHref } from '@/utils/href';
@@ -37,7 +37,7 @@ export default function BlogSection() {
                   : {})}
                 data-cursor
               >
-                <GlassCard interactive className="flex h-full flex-col gap-3 p-6">
+                <Card interactive className="flex h-full flex-col gap-3 p-6">
                   <div className="flex items-center gap-2 text-xs text-subtle">
                     <time>{formatDate(post.date)}</time>
                     {post.readingTime && <span>· {post.readingTime}</span>}
@@ -58,7 +58,7 @@ export default function BlogSection() {
                       Read <ArrowUpRight className="h-4 w-4" />
                     </span>
                   )}
-                </GlassCard>
+                </Card>
               </Wrapper>
             );
           })}

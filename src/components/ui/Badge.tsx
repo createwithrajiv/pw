@@ -10,17 +10,17 @@ interface BadgeProps {
 }
 
 const tones: Record<Tone, string> = {
-  default: 'bg-surface text-muted border-border',
-  accent: 'bg-accent/10 text-accent border-accent/25',
-  success: 'bg-success/10 text-success border-success/25',
-  outline: 'bg-transparent text-foreground border-border-strong',
+  default: 'border-border bg-surface text-muted',
+  accent: 'border-accent/25 bg-accent/10 text-accent-strong',
+  success: 'border-success/25 bg-success/10 text-success',
+  outline: 'border-border-strong bg-transparent text-foreground',
 };
 
 export function Badge({ tone = 'default', className, children }: BadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-md border px-3 py-1 text-xs font-medium',
+        'inline-flex items-center gap-1.5 rounded-sm border px-2.5 py-1 text-xs font-medium',
         tones[tone],
         className,
       )}

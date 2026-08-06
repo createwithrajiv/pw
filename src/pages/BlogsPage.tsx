@@ -90,7 +90,7 @@ export default function BlogsPage() {
                           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',
                           active
                             ? 'border-accent/40 bg-accent/10 font-medium text-accent'
-                            : 'border-border text-muted hover:border-accent/40 hover:text-foreground',
+                            : 'border-border text-muted hover:border-accent hover:text-foreground',
                         )}
                       >
                         {cat}
@@ -113,7 +113,7 @@ export default function BlogsPage() {
                     className={cn(
                       'w-full rounded-md border border-border bg-surface/60 py-2 pl-10 pr-9 text-sm text-foreground',
                       'placeholder:text-subtle transition-colors duration-200',
-                      'focus:border-accent/50 focus:outline-none focus:ring-2 focus:ring-accent/20',
+                      'focus:border-accent/40 focus:outline-none focus:ring-2 focus:ring-accent/20',
                     )}
                   />
                   {query && (

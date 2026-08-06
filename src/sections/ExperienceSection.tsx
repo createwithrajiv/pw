@@ -4,7 +4,7 @@ import { Briefcase } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { useExperience, useCompanies, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
@@ -42,7 +42,7 @@ function CompanyLogoLink({
         aria-label={`${name} website`}
         data-cursor
         data-cursor-label="VISIT"
-        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-sm')}
+        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent hover:shadow-sm')}
       >
         {img}
       </a>
@@ -83,7 +83,7 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
         <Briefcase className="relative z-10 h-4 w-4" aria-hidden />
       </motion.span>
       <div>
-        <GlassCard interactive className="flex flex-col gap-4 p-6">
+        <Card interactive className="flex flex-col gap-4 p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="flex items-start gap-3">
               <CompanyLogoLink logo={logo} website={company?.website} name={item.company} />
@@ -115,7 +115,7 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
               ))}
             </ul>
           )}
-        </GlassCard>
+        </Card>
       </div>
     </div>
   );
