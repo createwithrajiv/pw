@@ -4,7 +4,6 @@ import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-route
 import { motion } from 'framer-motion';
 import { ThemeProvider } from '@/providers/ThemeProvider';
 import { ReducedMotionProvider } from '@/providers/ReducedMotionProvider';
-import { SmoothScrollProvider } from '@/providers/SmoothScrollProvider';
 import { FxProvider } from '@/providers/FxProvider';
 import { RootLayout } from '@/layouts/RootLayout';
 import { RouteSkeleton } from '@/blogs/BlogSkeleton';
@@ -35,23 +34,21 @@ export default function App() {
       <ThemeProvider>
         <ReducedMotionProvider>
           <BrowserRouter>
-            <SmoothScrollProvider>
-              <FxProvider>
-                <RootLayout>
-                  <Suspense fallback={<RouteSkeleton />}>
-                    <RouteFade>
-                      <Routes>
-                        <Route path="/" element={<HomePage />} />
-                        <Route path="/blogs" element={<BlogsPage />} />
-                        <Route path="/blogs/:slug" element={<BlogPostPage />} />
-                        <Route path="/404" element={<NotFoundPage />} />
-                        <Route path="*" element={<Navigate to="/404" replace />} />
-                      </Routes>
-                    </RouteFade>
-                  </Suspense>
-                </RootLayout>
-              </FxProvider>
-            </SmoothScrollProvider>
+            <FxProvider>
+              <RootLayout>
+                <Suspense fallback={<RouteSkeleton />}>
+                  <RouteFade>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/blogs" element={<BlogsPage />} />
+                      <Route path="/blogs/:slug" element={<BlogPostPage />} />
+                      <Route path="/404" element={<NotFoundPage />} />
+                      <Route path="*" element={<Navigate to="/404" replace />} />
+                    </Routes>
+                  </RouteFade>
+                </Suspense>
+              </RootLayout>
+            </FxProvider>
           </BrowserRouter>
         </ReducedMotionProvider>
       </ThemeProvider>

@@ -12,7 +12,7 @@ import { BlogCover } from './BlogCover';
 import { ShareBar } from './ShareBar';
 import { RelatedPosts } from './RelatedPosts';
 import { useProfile } from '@/hooks/useContent';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { useCopy } from '@/hooks/useCopy';
 import { formatDate } from '@/utils/format';
@@ -37,7 +37,6 @@ function ReadingProgress() {
 /** Hover-revealed permalink beside a heading — copies the deep link and smooth-scrolls to it. */
 function HeadingAnchor({ id }: { id: string }) {
   const { copied, copy } = useCopy();
-  const { scrollTo } = useSmoothScroll();
   return (
     <a
       href={`#${id}`}
@@ -68,7 +67,6 @@ function HeadingAnchor({ id }: { id: string }) {
 export default function BlogArticle({ blog }: { blog: Blog }) {
   const { meta, content, cta } = blog;
   const profile = useProfile();
-  const { scrollTo } = useSmoothScroll();
 
   // Stable, human-readable anchor ids shared by the TOC, scroll-spy, and permalinks.
   const sectionIds = uniqueSlugs(content.sections.map((s) => s.heading));

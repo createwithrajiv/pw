@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 
-/** Appears after scrolling down; smooth-scrolls back to the top. */
+/** Appears after scrolling down; scrolls back to the top. */
 export function BackToTop() {
-  const { scrollTo } = useSmoothScroll();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

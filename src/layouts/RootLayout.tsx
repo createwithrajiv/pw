@@ -9,17 +9,15 @@ import { SkipToContent } from '@/components/layout/SkipToContent';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { StoryBackdrop } from '@/components/layout/StoryBackdrop';
 import { CanvasRoot } from '@/three/CanvasRoot';
-import { RevealCurtain } from '@/components/motion/RevealCurtain';
 import { useHashScroll } from '@/hooks/useHashScroll';
 import { useFxSignals } from '@/hooks/useFxSignals';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 
 /** App shell: global chrome around the routed page content. */
 export function RootLayout({ children }: { children: ReactNode }) {
   useHashScroll();
   const fx = useFxSignals();
   const { pathname, hash } = useLocation();
-  const { scrollTo } = useSmoothScroll();
   const onBlog = pathname.startsWith('/blogs');
   const chromaOpacity = useTransform(fx.velocityAbs, [0, 1], [0, 0.06]);
 
@@ -27,11 +25,10 @@ export function RootLayout({ children }: { children: ReactNode }) {
   // handled by useHashScroll instead.
   useEffect(() => {
     if (!hash) scrollTo(0, { immediate: true });
-  }, [pathname, hash, scrollTo]);
+  }, [pathname, hash]);
 
   return (
     <>
-      <RevealCurtain />
       <StoryBackdrop />
       <CanvasRoot />
       {!fx.reduced && !onBlog && (

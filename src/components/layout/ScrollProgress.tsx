@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useNavSections } from '@/hooks/useSections';
 import { useActiveSection } from '@/hooks/useActiveSection';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { cn } from '@/utils/cn';
 
@@ -28,7 +28,6 @@ export function ScrollProgress() {
   const navSections = useNavSections();
   const ids = navSections.map((s) => s.anchor.replace('#', ''));
   const active = useActiveSection(ids);
-  const { scrollTo } = useSmoothScroll();
   const [marks, setMarks] = useState<Mark[]>([]);
 
   useEffect(() => {

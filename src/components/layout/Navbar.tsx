@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/utils/cn';
 import { useNavSections } from '@/hooks/useSections';
 import { useActiveSection } from '@/hooks/useActiveSection';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 import { useNavigation, useSocial } from '@/hooks/useContent';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +18,6 @@ export function Navbar() {
   const navSections = useNavSections();
   const navigation = useNavigation();
   const social = useSocial();
-  const { scrollTo } = useSmoothScroll();
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const onBlog = pathname.startsWith('/blogs');

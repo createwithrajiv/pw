@@ -9,7 +9,7 @@ import { IconRenderer } from '@/components/ui/IconRenderer';
 import { HeroBackdrop } from '@/components/three/HeroBackdrop';
 import { ProfileFrame } from '@/components/hero/ProfileFrame';
 import { useProfile, useSocial } from '@/hooks/useContent';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 import { useIntroSequence } from '@/hooks/useIntroSequence';
 import { usePointerGlow } from '@/hooks/usePointerGlow';
 import { parseStat } from '@/utils/format';
@@ -20,7 +20,6 @@ import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 export default function HeroSection() {
   const profile = useProfile();
   const social = useSocial();
-  const { scrollTo } = useSmoothScroll();
   const { step } = useIntroSequence();
   const reduced = useReducedMotion();
   const glow = usePointerGlow<HTMLElement>({ size: 520, alpha: 0.1 });

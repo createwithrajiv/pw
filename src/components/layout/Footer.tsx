@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useNavSections } from '@/hooks/useSections';
 import { useProfile, useSocial, useNavigation } from '@/hooks/useContent';
-import { useSmoothScroll } from '@/providers/SmoothScrollProvider';
+import { scrollTo } from '@/utils/scroll';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { GradientText } from '@/components/ui/GradientText';
 import { MotionToggle } from '@/components/layout/MotionToggle';
@@ -13,7 +13,6 @@ export function Footer() {
   const social = useSocial();
   const navigation = useNavigation();
   const navSections = useNavSections();
-  const { scrollTo } = useSmoothScroll();
   const navigate = useNavigate();
   const { pathname } = useLocation();
 

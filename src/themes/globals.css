@@ -16,7 +16,7 @@
     @apply bg-canvas;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-    scroll-behavior: auto; /* Lenis owns smooth scroll; native off to avoid conflict */
+    scroll-behavior: smooth; /* native; disabled under reduced-motion below */
     transition: background-color 0.4s ease;
   }
 
@@ -26,21 +26,6 @@
     font-size: theme('fontSize.body');
     transition: color 0.3s ease;
     overflow-x: hidden;
-  }
-
-  /* When Lenis is active it adds these classes to <html>. */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
   }
 
   h1,
