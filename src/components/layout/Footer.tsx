@@ -21,12 +21,16 @@ export function Footer() {
     else navigate(`/${anchor}`);
   };
 
+  // justify-self-start + text-left: a stretched <button> centres its label by
+  // default, which left the link columns ragged against the <a> beside them.
   const linkClass =
-    'self-start text-sm text-muted transition-colors duration-200 hover:text-accent';
+    'justify-self-start text-left text-sm text-muted transition-colors duration-200 hover:text-accent';
 
   return (
     <footer className="relative border-t border-border bg-base">
-      <div className="mx-auto grid w-full max-w-container gap-8 px-5 py-10 sm:px-6 lg:grid-cols-[1fr_auto] lg:gap-16 lg:px-8">
+      {/* Three even columns so the width is filled rather than leaving a void
+          between a hard-left brand and a hard-right link list. */}
+      <div className="mx-auto grid w-full max-w-container gap-10 px-5 py-12 sm:px-6 lg:grid-cols-3 lg:gap-8 lg:px-8">
         <div className="flex flex-col gap-3">
           <button
             onClick={() => go('#hero')}
@@ -36,7 +40,31 @@ export function Footer() {
             <BrandMark className="h-8 w-8" />
             {navigation.brand}
           </button>
-          <p className="max-w-sm text-sm text-muted">{profile.tagline}.</p>
+          <p className="max-w-xs text-sm text-muted">{profile.tagline}.</p>
+        </div>
+
+        <nav aria-label="Footer" className="flex flex-col gap-3">
+          <span className="eyebrow">Explore</span>
+          {/* Two link columns, so a dozen entries don't stretch the footer into
+              a page of its own. grid-flow-col fills the first column downward. */}
+          <div className="grid grid-flow-col grid-rows-6 gap-x-8 gap-y-2">
+            {navSections.map((s) => (
+              <button key={s.id} onClick={() => go(s.anchor)} className={linkClass}>
+                {s.label}
+              </button>
+            ))}
+            <Link to="/blogs" className={linkClass}>
+              My Blogs
+            </Link>
+          </div>
+        </nav>
+
+        <div className="flex flex-col gap-3">
+          <span className="eyebrow">Connect</span>
+          <a href={`mailto:${profile.email}`} className={linkClass}>
+            {profile.email}
+          </a>
+          <p className="text-sm text-muted">{profile.location}</p>
           <div className="mt-1 flex gap-2">
             {social.map((s) => (
               <a
@@ -52,22 +80,6 @@ export function Footer() {
             ))}
           </div>
         </div>
-
-        <nav aria-label="Footer" className="flex flex-col gap-3">
-          <span className="eyebrow">Explore</span>
-          {/* Two columns, so a dozen links don't stretch the footer into a page
-              of its own. grid-flow-col fills the first column downward first. */}
-          <div className="grid grid-flow-col grid-rows-6 gap-x-12 gap-y-2">
-            {navSections.map((s) => (
-              <button key={s.id} onClick={() => go(s.anchor)} className={linkClass}>
-                {s.label}
-              </button>
-            ))}
-            <Link to="/blogs" className={linkClass}>
-              My Blogs
-            </Link>
-          </div>
-        </nav>
       </div>
 
       <div className="border-t border-border">

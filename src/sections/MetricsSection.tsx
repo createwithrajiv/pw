@@ -50,9 +50,13 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
           id={ctxId}
           role="tooltip"
           initial={false}
-          animate={{ opacity: open ? 1 : 0, y: open ? 0 : -6 }}
+          // The horizontal centring has to go through framer, not a
+          // -translate-x-1/2 class: framer writes `transform` inline, which
+          // overwrites the utility and leaves the tooltip's left edge pinned to
+          // the item's centre — pushing the last one off the panel.
+          animate={{ opacity: open ? 1 : 0, x: '-50%', y: open ? 0 : -6 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 max-w-[15rem] -translate-x-1/2 rounded-md border border-border bg-surface px-3 py-2 text-xs leading-relaxed text-muted shadow-md"
+          className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 max-w-[15rem] rounded-md border border-border bg-surface px-3 py-2 text-xs leading-relaxed text-muted shadow-md"
         >
           {m.context}
         </motion.span>
@@ -63,7 +67,7 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
 
 export default function MetricsSection() {
   const metrics = useMetrics();
-  const profile = useProfile();
+  const profile = useProfile();
   const items: NormalizedMetric[] =
     metrics.items.length > 0
       ? metrics.items.map((m) => ({
@@ -84,7 +88,9 @@ export default function MetricsSection() {
   return (
     <Section id="metrics" band>
       <Container>
-        <div className="panel relative overflow-hidden rounded-lg px-6 py-10 sm:px-12 sm:py-14">
+        {/* No overflow-hidden — it clipped the metric tooltips. The blurred
+            blob it used to contain is gone. */}
+        <div className="panel relative rounded-lg px-6 py-10 sm:px-12 sm:py-14">
           {/* in-view glow pulse, contained inside the box */}
           {metrics.eyebrow && (
             <p className="eyebrow relative mb-9 flex items-center justify-center gap-2">
