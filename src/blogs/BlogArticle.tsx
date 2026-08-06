@@ -108,6 +108,8 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                     src={profile.image}
                     alt={profile.name}
                     loading="eager"
+                    width={44}
+                    height={44}
                     className="h-11 w-11 shrink-0 rounded-full object-cover ring-1 ring-border"
                   />
                   <div className="flex flex-col">
@@ -252,6 +254,8 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
                   <img
                     src={profile.image}
                     alt={profile.name}
+                    width={64}
+                    height={64}
                     className="h-16 w-16 shrink-0 rounded-full object-cover ring-1 ring-border"
                   />
                   <div className="flex min-w-0 flex-col gap-3">

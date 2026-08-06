@@ -101,6 +101,8 @@ export function BlogCard({ blog, featured = false, className }: BlogCardProps) {
               src={profile.image}
               alt=""
               loading="lazy"
+              width={28}
+              height={28}
               className="h-7 w-7 shrink-0 rounded-full object-cover ring-1 ring-border"
             />
             <span className="truncate text-xs text-subtle">{profile.name}</span>

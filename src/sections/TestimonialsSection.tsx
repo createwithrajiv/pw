@@ -27,6 +27,8 @@ function Avatar({ photo, name, size = 'md' }: { photo?: string; name: string; si
         alt={name}
         loading="lazy"
         decoding="async"
+        width={size === 'lg' ? 56 : 48}
+        height={size === 'lg' ? 56 : 48}
         className={cn('shrink-0 rounded-full object-cover ring-1 ring-border', dim)}
       />
     );

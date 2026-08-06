@@ -80,10 +80,7 @@ export function Modal({ open, onClose, children, labelledBy, describedBy, classN
   return createPortal(
     <AnimatePresence>
       {open && (
-        <div
-          className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center"
-          onKeyDown={onKeyDown}
-        >
+        <div className="fixed inset-0 z-[100] flex items-end justify-center sm:items-center">
           <motion.div
             className="absolute inset-0 bg-scrim/70 backdrop-blur-md"
             initial={{ opacity: 0 }}
@@ -100,6 +97,11 @@ export function Modal({ open, onClose, children, labelledBy, describedBy, classN
             aria-labelledby={labelledBy}
             aria-describedby={describedBy}
             tabIndex={-1}
+            // Escape + the Tab focus trap live on the dialog itself. The panel
+            // is focused on open, so keydowns from anything inside it bubble
+            // here — and unlike the old role-less wrapper, this element has a
+            // role and is focusable.
+            onKeyDown={onKeyDown}
             className={cn(
               'relative z-10 max-h-[92vh] w-full overflow-y-auto sm:max-w-2xl lg:max-w-3xl',
               'focus:outline-none',
