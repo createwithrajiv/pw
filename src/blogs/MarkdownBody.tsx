@@ -13,8 +13,8 @@ function CodeBlock({ language, children }: { language: string; children: ReactNo
   const ref = useRef<HTMLPreElement>(null);
   const { copied, copy } = useCopy();
   return (
-    <div className="not-prose my-6 overflow-hidden rounded-xl border border-border bg-[hsl(var(--bg-base)/0.5)] shadow-sm">
-      <div className="flex items-center justify-between gap-2 border-b border-border bg-surface/40 px-4 py-2">
+    <div className="not-prose my-6 overflow-hidden rounded-lg border border-border bg-[hsl(var(--bg-base)/0.5)] shadow-sm">
+      <div className="flex items-center justify-between gap-2 border-b border-border bg-surface px-4 py-2">
         <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-subtle">
           {language || 'code'}
         </span>
@@ -54,7 +54,7 @@ const components: Components = {
     const isBlock = !!match || (className?.includes('hljs') ?? false);
     if (!isBlock) {
       return (
-        <code className="rounded-md border border-border bg-surface/70 px-1.5 py-0.5 font-mono text-[0.85em] text-accent">
+        <code className="rounded-md border border-border bg-surface px-1.5 py-0.5 font-mono text-[0.85em] text-accent">
           {children}
         </code>
       );
@@ -80,7 +80,7 @@ const components: Components = {
           alt={alt ?? ''}
           loading="lazy"
           decoding="async"
-          className="w-full rounded-xl border border-border"
+          className="w-full rounded-lg border border-border"
         />
         {(title || alt) && (
           <figcaption className="text-center text-sm text-subtle">{title || alt}</figcaption>
@@ -91,7 +91,7 @@ const components: Components = {
   table({ children }) {
     return (
       <div className="not-prose my-6 overflow-x-auto rounded-lg border border-border">
-        <table className="w-full border-collapse text-left text-sm [&_td]:border-t [&_td]:border-border [&_td]:px-4 [&_td]:py-2.5 [&_th]:border-b [&_th]:border-border-strong [&_th]:bg-surface/40 [&_th]:px-4 [&_th]:py-2.5 [&_th]:font-medium [&_th]:text-foreground">
+        <table className="w-full border-collapse text-left text-sm [&_td]:border-t [&_td]:border-border [&_td]:px-4 [&_td]:py-2.5 [&_th]:border-b [&_th]:border-border-strong [&_th]:bg-surface [&_th]:px-4 [&_th]:py-2.5 [&_th]:font-medium [&_th]:text-foreground">
           {children}
         </table>
       </div>

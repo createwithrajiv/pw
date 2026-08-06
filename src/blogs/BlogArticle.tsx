@@ -81,7 +81,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
               cover={meta.cover}
               title={meta.title}
               category={meta.category}
-              className="mt-5 rounded-2xl border border-border"
+              className="mt-5 rounded-lg border border-border"
             />
           </div>
 
@@ -141,7 +141,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
 
               {/* Contents (mobile / tablet) — desktop uses the sticky rail instead */}
               {toc.length > 1 && (
-                <details className="group/toc mt-9 overflow-hidden rounded-xl border border-border bg-surface/30 xl:hidden">
+                <details className="group/toc mt-9 overflow-hidden rounded-lg border border-border bg-surface xl:hidden">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-2 px-4 py-3 text-sm font-medium text-foreground [&::-webkit-details-marker]:hidden">
                     <span className="inline-flex items-center gap-2">
                       <List className="h-4 w-4 text-accent" aria-hidden />
@@ -227,7 +227,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
               {/* Closing callout */}
               {content.closing && (
                 <Reveal as="div" className="mt-16">
-                  <div className="relative overflow-hidden rounded-2xl border border-border bg-surface/40 p-7 sm:p-9">
+                  <div className="relative overflow-hidden rounded-lg border border-border bg-surface p-7 sm:p-9">
                     <span
                       aria-hidden
                       className="pointer-events-none absolute -left-1 -top-8 select-none font-sans text-[8rem] leading-none text-accent/10"
@@ -248,7 +248,7 @@ export default function BlogArticle({ blog }: { blog: Blog }) {
 
               {/* Author + CTA */}
               <Reveal as="div" className="mt-12">
-                <div className="panel flex flex-col gap-5 rounded-2xl p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
+                <div className="panel flex flex-col gap-5 rounded-lg p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8">
                   <img
                     src={profile.image}
                     alt={profile.name}

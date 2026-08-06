@@ -22,7 +22,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-border bg-base/40">
+    <footer className="relative border-t border-border bg-base">
       <div className="mx-auto grid w-full max-w-container gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[1.5fr_1fr_auto] lg:px-8">
         <div className="flex flex-col gap-4">
           <button

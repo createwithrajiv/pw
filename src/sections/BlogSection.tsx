@@ -34,9 +34,7 @@ export default function BlogSection() {
                 variants={fadeInUp}
                 {...(isRealHref(post.url)
                   ? { href: post.url, target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
-                data-cursor
-              >
+                  : {})}              >
                 <Card interactive className="flex h-full flex-col gap-3 p-6">
                   <div className="flex items-center gap-2 text-xs text-subtle">
                     <time>{formatDate(post.date)}</time>

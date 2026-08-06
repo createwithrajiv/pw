@@ -41,12 +41,12 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         exit={{ opacity: 0, scale: 0.97, y: 16 }}
         transition={{ duration: 0.35, ease: EASE }}
-        className="panel relative rounded-xl p-7 sm:p-9"
+        className="panel relative rounded-lg p-7 sm:p-9"
       >
         <button
           onClick={onClose}
           aria-label="Close"
-          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface/70 text-muted transition-colors hover:border-accent hover:text-accent"
+          className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
         >
           <X className="h-4 w-4" />
         </button>

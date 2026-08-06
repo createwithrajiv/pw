@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play, X } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -52,7 +52,9 @@ function CompanyLogo({ logo, company }: { logo?: string; company: string }) {
         alt={company}
         loading="lazy"
         decoding="async"
-        className="max-h-8 w-auto max-w-[110px] shrink-0 rounded bg-white/95 object-contain p-1.5"
+        width={110}
+        height={32}
+        className="max-h-8 w-auto max-w-[110px] shrink-0 object-contain grayscale opacity-70 dark:brightness-0 dark:invert"
       />
     );
   }
@@ -68,11 +70,13 @@ export default function TestimonialsSection() {
   const [hoverPaused, setHoverPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const current = testimonials[index];
   const go = (dir: number) => setIndex((i) => (i + dir + count) % count);
 
-  const autoActive = !reduced && !hoverPaused && !tabHidden && !detailOpen && count > 1;
+  const autoActive =
+    !reduced && !paused && !hoverPaused && !tabHidden && !detailOpen && count > 1;
   useEffect(() => {
     if (!autoActive) return;
     const id = window.setInterval(() => setIndex((i) => (i + 1) % count), 5500);
@@ -126,9 +130,7 @@ export default function TestimonialsSection() {
                   else if (info.offset.x > 60) go(-1);
                 }}
                 aria-live="polite"
-                data-cursor
-                data-cursor-label="DRAG"
-                className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
+                               className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
               >
                 <blockquote className="text-h3 font-sans font-medium leading-snug text-foreground">
                   {`“${current.quote}”`}
@@ -176,16 +178,24 @@ export default function TestimonialsSection() {
               </div>
               <div className="flex gap-2">
                 <button
+                  onClick={() => setPaused((p) => !p)}
+                  aria-label={paused ? 'Resume testimonial rotation' : 'Pause testimonial rotation'}
+                  aria-pressed={paused}
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+                >
+                  {paused ? <Play className="h-4 w-4" aria-hidden /> : <Pause className="h-4 w-4" aria-hidden />}
+                </button>
+                <button
                   onClick={() => go(-1)}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-muted transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -205,12 +215,12 @@ export default function TestimonialsSection() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 12 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="panel relative rounded-xl p-7 sm:p-9"
+          className="panel relative rounded-lg p-7 sm:p-9"
         >
           <button
             onClick={() => setDetailOpen(false)}
             aria-label="Close"
-            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface/70 text-muted transition-colors hover:border-accent hover:text-accent"
+            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <X className="h-4 w-4" />
           </button>

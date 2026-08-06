@@ -36,9 +36,7 @@ export function ProjectCard({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.08 }}
-      data-cursor
-      data-cursor-label="VIEW"
-      onPointerEnter={onPointerEnter}
+           onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
       onFocus={onFocus}
       onBlur={onBlur}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import { useNavSections } from '@/hooks/useSections';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { scrollTo } from '@/utils/scroll';
@@ -14,16 +14,15 @@ interface Mark {
 }
 
 /**
- * Premium scroll progress: a vertical glowing beam (desktop) with a comet head
- * and section tick markers that light up as you pass them; a slim top line on
- * mobile. Ticks are quick-nav buttons. Static fill under reduced motion.
+ * Scroll progress: a slim top line on mobile, and on desktop a vertical rail
+ * with one tick per section that doubles as quick-nav. Unsprung under reduced
+ * motion.
  */
 export function ScrollProgress() {
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const spring = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.4 });
   const progress = reduced ? scrollYProgress : spring;
-  const cometTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   const navSections = useNavSections();
   const ids = navSections.map((s) => s.anchor.replace('#', ''));
@@ -67,13 +66,6 @@ export function ScrollProgress() {
           style={{ scaleY: progress }}
           className="absolute inset-x-0 top-0 h-full origin-top rounded-full bg-accent shadow-sm"
         />
-        {!reduced && (
-          <motion.span
-            aria-hidden
-            style={{ top: cometTop }}
-            className=" absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-sm"
-          />
-        )}
         {marks.map((m) => (
           <button
             key={m.id}
@@ -87,7 +79,7 @@ export function ScrollProgress() {
                 : 'border-border-strong bg-canvas hover:border-accent',
             )}
           >
-            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface/90 px-2 py-0.5 text-[11px] text-muted opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
+            <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-0.5 text-[11px] text-muted opacity-0 backdrop-blur transition-opacity group-hover:opacity-100">
               {m.label}
             </span>
           </button>

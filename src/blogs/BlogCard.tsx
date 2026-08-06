@@ -29,7 +29,7 @@ export function BlogCard({ blog, featured = false, className }: BlogCardProps) {
     <Link
       to={`/blogs/${meta.slug}`}
       className={cn(
-        'group panel relative flex overflow-hidden rounded-2xl',
+        'group panel relative flex overflow-hidden rounded-lg',
         'transition-[transform,box-shadow,border-color] duration-300 will-change-transform',
         'hover:-translate-y-1 hover:border-accent hover:shadow-sm',
         'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-base',

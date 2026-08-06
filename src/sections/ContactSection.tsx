@@ -44,7 +44,7 @@ export default function ContactSection() {
           <Card className="relative flex flex-col gap-6 overflow-hidden p-8">
             <div className="relative z-10 flex flex-col gap-2">
               <span className="eyebrow">Email</span>
-              <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface/50 p-4">
+              <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface p-4">
                 <span className="flex items-center gap-3 truncate font-mono text-sm">
                   <Mail className="h-4 w-4 shrink-0 text-accent" aria-hidden />
                   <span className="truncate">{profile.email}</span>

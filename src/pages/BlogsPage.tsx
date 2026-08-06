@@ -64,7 +64,7 @@ export default function BlogsPage() {
         </div>
 
         {blogs.length === 0 ? (
-          <div className="panel mt-12 rounded-2xl p-10 text-center text-muted">
+          <div className="panel mt-12 rounded-lg p-10 text-center text-muted">
             No posts yet - check back soon.
           </div>
         ) : (
@@ -111,7 +111,7 @@ export default function BlogsPage() {
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search posts..."
                     className={cn(
-                      'w-full rounded-md border border-border bg-surface/60 py-2 pl-10 pr-9 text-sm text-foreground',
+                      'w-full rounded-md border border-border bg-surface py-2 pl-10 pr-9 text-sm text-foreground',
                       'placeholder:text-subtle transition-colors duration-200',
                       'focus:border-accent/40 focus:outline-none focus:ring-2 focus:ring-accent/20',
                     )}
@@ -132,7 +132,7 @@ export default function BlogsPage() {
 
             {/* Results */}
             {filtered.length === 0 ? (
-              <div className="panel mt-12 flex flex-col items-center gap-4 rounded-2xl p-12 text-center">
+              <div className="panel mt-12 flex flex-col items-center gap-4 rounded-lg p-12 text-center">
                 <p className="text-muted">
                   No posts match{' '}
                   {query ? (

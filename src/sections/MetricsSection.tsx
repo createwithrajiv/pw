@@ -32,10 +32,10 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
       onBlur={() => setOpen(false)}
-      className="group relative -m-2 flex flex-col items-center gap-3 rounded-lg p-2 text-center outline-none transition-colors focus-visible:bg-surface/40"
+      className="group relative -m-2 flex flex-col items-center gap-3 rounded-lg p-2 text-center outline-none transition-colors focus-visible:bg-surface"
     >
       {m.icon && (
-        <span className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-accent transition-colors group-hover:border-accent">
+        <span className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-accent transition-colors group-hover:border-accent">
           <IconRenderer name={m.icon} className="h-5 w-5" />
         </span>
       )}
@@ -84,12 +84,8 @@ export default function MetricsSection() {
   return (
     <Section id="metrics" band>
       <Container>
-        <div className="panel relative overflow-hidden rounded-2xl px-6 py-10 sm:px-12 sm:py-14">
+        <div className="panel relative overflow-hidden rounded-lg px-6 py-10 sm:px-12 sm:py-14">
           {/* in-view glow pulse, contained inside the box */}
-          <div
-            aria-hidden
-            className=" pointer-events-none absolute left-1/2 top-1/2 z-0 h-[80%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-transparent opacity-50 blur-3xl"
-          />
           {metrics.eyebrow && (
             <p className="eyebrow relative mb-9 flex items-center justify-center gap-2">
               <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />

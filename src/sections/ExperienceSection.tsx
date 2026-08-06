@@ -23,14 +23,16 @@ function CompanyLogoLink({
 }) {
   if (!logo) return null;
   const base =
-    'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-white/95 p-1.5';
+    'group flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-1.5';
   const img = (
     <img
       src={logo}
       alt={name}
       loading="lazy"
       decoding="async"
-      className="max-h-full max-w-full object-contain"
+      width={44}
+      height={44}
+      className="max-h-full max-w-full object-contain grayscale opacity-70 transition duration-200 group-hover:grayscale-0 group-hover:opacity-100 dark:brightness-0 dark:invert"
     />
   );
   if (website) {
@@ -40,9 +42,7 @@ function CompanyLogoLink({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${name} website`}
-        data-cursor
-        data-cursor-label="VISIT"
-        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent hover:shadow-sm')}
+               className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent hover:shadow-sm')}
       >
         {img}
       </a>
@@ -99,7 +99,7 @@ function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
             </div>
             <Badge tone="accent">{item.employment_type}</Badge>
           </div>
-          <span className="w-fit rounded-md bg-surface/70 px-3 py-1 font-mono text-xs text-subtle">
+          <span className="w-fit rounded-md bg-surface px-3 py-1 font-mono text-xs text-subtle">
             {item.period}
           </span>
           <p className="text-sm leading-relaxed text-muted">{item.description}</p>

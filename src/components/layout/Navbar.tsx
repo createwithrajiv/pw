@@ -54,7 +54,7 @@ export function Navbar() {
         aria-label="Primary"
         className={cn(
           'flex w-full max-w-container items-center justify-between gap-4 rounded-md px-4 py-2.5 transition-all duration-300',
-          scrolled ? 'panel shadow-md' : 'border border-transparent',
+          scrolled ? 'chrome-blur border border-border shadow-sm' : 'border border-transparent',
         )}
       >
         <button
@@ -129,7 +129,7 @@ export function Navbar() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface/60 text-foreground lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-foreground lg:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>

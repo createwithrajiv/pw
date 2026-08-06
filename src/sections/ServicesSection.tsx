@@ -24,9 +24,7 @@ export default function ServicesSection() {
           {services.map((service) => (
             <motion.div
               key={service.title}
-              variants={fadeInUp}
-              data-cursor
-              className="h-full"
+              variants={fadeInUp}              className="h-full"
             >
               <Card className="flex h-full flex-col gap-4 p-6">
                 <span className="grid h-12 w-12 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20 transition-[transform,color] duration-300 group-hover:scale-105 group-hover:text-accent">

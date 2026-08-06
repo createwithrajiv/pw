@@ -13,14 +13,16 @@ const ALL = 'All';
 export default function ProjectsSection() {
   const projects = useProjects();
   const categories = useProjectCategories();
-  const copy = useSectionCopy('projects');  const [filter, setFilter] = useState<string>(ALL);
+  const copy = useSectionCopy('projects');
+  const [filter, setFilter] = useState<string>(ALL);
   const [selected, setSelected] = useState<Project | null>(null);
 
   const filters = useMemo(() => [ALL, ...categories], [categories]);
-  const visible = useMemo(
-    () => (filter === ALL ? projects : projects.filter((p) => p.category === filter)),
-    [filter, projects],
-  );
+  const visible = useMemo(() => {
+    const inFilter = filter === ALL ? projects : projects.filter((p) => p.category === filter);
+    // Stable sort: featured first, original order preserved within each group.
+    return [...inFilter].sort((a, b) => Number(b.featured) - Number(a.featured));
+  }, [filter, projects]);
 
   return (
     <Section id="projects">
@@ -37,8 +39,8 @@ export default function ProjectsSection() {
               className={cn(
                 'shrink-0 rounded-md border px-4 py-1.5 text-sm font-medium transition-colors',
                 filter === cat
-                  ? 'border-accent/40 bg-accent/10 text-accent'
-                  : 'border-border bg-surface/40 text-muted hover:text-foreground',
+                  ? 'border-accent bg-accent/10 text-accent-strong'
+                  : 'border-border bg-surface text-muted hover:border-accent hover:text-foreground',
               )}
             >
               {cat}

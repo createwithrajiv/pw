@@ -9,7 +9,7 @@ export function ArticleSkeleton() {
       <Container width="default">
         <div className="mx-auto max-w-[64rem]">
           <div className="skeleton h-4 w-40 rounded" />
-          <div className="skeleton mt-5 aspect-[2/1] w-full rounded-2xl sm:aspect-[21/9]" />
+          <div className="skeleton mt-5 aspect-[2/1] w-full rounded-lg sm:aspect-[21/9]" />
         </div>
         <div className="mx-auto mt-10 max-w-[44rem]">
           <div className="skeleton h-6 w-24 rounded-md" />
@@ -45,7 +45,7 @@ export function ListingSkeleton() {
         <div className="skeleton mt-4 h-4 w-96 max-w-full rounded" />
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="panel overflow-hidden rounded-2xl">
+            <div key={i} className="panel overflow-hidden rounded-lg">
               <div className="skeleton aspect-[16/9] w-full" />
               <div className="flex flex-col gap-3 p-6">
                 <div className="skeleton h-5 w-24 rounded-md" />
