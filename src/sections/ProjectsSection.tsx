@@ -3,7 +3,6 @@ import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { useProjects, useProjectCategories, useSectionCopy } from '@/hooks/useContent';
-import { useSpotlight } from '@/hooks/useSpotlight';
 import { ProjectCard } from '@/sections/projects/ProjectCard';
 import { ProjectModal } from '@/sections/projects/ProjectModal';
 import { cn } from '@/utils/cn';
@@ -14,9 +13,7 @@ const ALL = 'All';
 export default function ProjectsSection() {
   const projects = useProjects();
   const categories = useProjectCategories();
-  const copy = useSectionCopy('projects');
-  const spotlight = useSpotlight();
-  const [filter, setFilter] = useState<string>(ALL);
+  const copy = useSectionCopy('projects');  const [filter, setFilter] = useState<string>(ALL);
   const [selected, setSelected] = useState<Project | null>(null);
 
   const filters = useMemo(() => [ALL, ...categories], [categories]);
@@ -50,13 +47,11 @@ export default function ProjectsSection() {
         </div>
 
         <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project, i) => (
+          {visible.map((project) => (
             <ProjectCard
               key={project.title}
               project={project}
               onOpen={setSelected}
-              dimmed={spotlight.dimmed(i)}
-              {...spotlight.bind(i)}
             />
           ))}
         </div>

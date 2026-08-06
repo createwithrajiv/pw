@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import { Seo } from '@/components/seo/Seo';
 import { Container } from '@/components/ui/Container';
-import { GradientText } from '@/components/ui/GradientText';
 import { BlogCard } from '@/blogs/BlogCard';
 import { useBlogs } from '@/hooks/useContent';
 import { fadeInUp } from '@/animations/variants';
@@ -56,7 +55,7 @@ export default function BlogsPage() {
             Writing
           </p>
           <h1 className="text-display font-display font-semibold tracking-tight">
-            <GradientText>My Blogs</GradientText>
+            My Blogs
           </h1>
           <p className="text-lead text-muted">
             Field notes on building production AI systems - agentic patterns, ML infrastructure, and the

@@ -1,17 +1,15 @@
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/utils/cn';
-import { useMagnetic } from '@/hooks/useMagnetic';
 import { isExternal as isExternalHref } from '@/utils/href';
 import { interactive } from '@/animations/variants';
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'outline';
+type Variant = 'primary' | 'secondary' | 'ghost';
 type Size = 'sm' | 'md' | 'lg';
 
 interface CommonProps {
   variant?: Variant;
   size?: Size;
-  magnetic?: boolean;
   className?: string;
   children: ReactNode;
   'aria-label'?: string;
@@ -35,30 +33,30 @@ interface ButtonAsAnchor extends CommonProps {
 type ButtonProps = ButtonAsButton | ButtonAsAnchor;
 
 const base =
-  'relative inline-flex items-center justify-center gap-2 rounded-pill font-medium tracking-tight transition-[color,background-color,border-color,box-shadow] duration-200 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap select-none';
+  'relative inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors duration-200 focus-visible:outline-none disabled:opacity-50 disabled:pointer-events-none whitespace-nowrap select-none';
 
 const sizes: Record<Size, string> = {
   sm: 'h-9 px-4 text-sm',
-  md: 'h-11 px-6 text-sm',
-  lg: 'h-[3.25rem] px-8 text-[1rem]',
+  md: 'h-11 px-5 text-sm',
+  lg: 'h-12 px-6 text-base',
 };
 
+/**
+ * Three variants, one accent.
+ *
+ * `primary` uses `text-primary-foreground` rather than a literal white:
+ * white on the dark theme's accent is only 3.68:1 and fails AA, so the token
+ * flips to a near-black label in dark mode (5.12:1).
+ */
 const variants: Record<Variant, string> = {
-  primary: 'bg-grad-accent text-primary-foreground shadow-glow hover:shadow-glow-lg',
-  secondary:
-    'bg-surface text-foreground border border-border-strong hover:border-accent/50 hover:text-accent',
-  ghost: 'bg-transparent text-muted hover:text-foreground hover:bg-surface/60',
-  outline: 'bg-transparent text-foreground border border-accent/40 hover:bg-accent/10',
+  primary: 'bg-accent text-primary-foreground shadow-sm hover:bg-accent-hover',
+  secondary: 'border border-border-strong bg-surface text-foreground hover:border-accent hover:text-accent',
+  ghost: 'text-muted hover:bg-surface hover:text-foreground',
 };
 
 export function Button(props: ButtonProps) {
-  const { variant = 'primary', size = 'md', magnetic = false, className, children } = props;
-  const magnet = useMagnetic<HTMLElement>({ strength: 0.4 });
+  const { variant = 'primary', size = 'md', className, children } = props;
   const classes = cn(base, sizes[size], variants[variant], className);
-  const motionProps = magnetic
-    ? { ref: magnet.ref as React.Ref<any>, style: { x: magnet.x, y: magnet.y } }
-    : {};
-  const hover = interactive;
 
   if ('href' in props && props.href !== undefined) {
     const external = props.external ?? isExternalHref(props.href);
@@ -72,8 +70,7 @@ export function Button(props: ButtonProps) {
         aria-label={props['aria-label']}
         id={props.id}
         className={classes}
-        {...hover}
-        {...motionProps}
+        {...interactive}
       >
         {children}
       </motion.a>
@@ -88,8 +85,7 @@ export function Button(props: ButtonProps) {
       aria-label={props['aria-label']}
       id={props.id}
       className={classes}
-      {...hover}
-      {...motionProps}
+      {...interactive}
     >
       {children}
     </motion.button>

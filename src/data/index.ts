@@ -27,7 +27,6 @@ import certificationsJson from './certifications.json';
 import blogJson from './blog.json';
 import faqJson from './faq.json';
 import technologiesJson from './technologies.json';
-import animationsJson from './animations.json';
 import sectionCopyJson from './section-copy.json';
 
 import type {
@@ -49,9 +48,7 @@ import type {
   Certification,
   BlogData,
   FaqData,
-  TechnologiesData,
-  AnimationTokens,
-  SectionCopyData,
+  TechnologiesData,  SectionCopyData,
   Blog,
   BlogArticleData,
 } from '@/types';
@@ -100,7 +97,6 @@ export const certifications = certificationsJson as Certification[];
 export const blog = blogJson as BlogData;
 export const faq = faqJson as FaqData;
 export const technologies = technologiesJson as TechnologiesData;
-export const animations = animationsJson as AnimationTokens;
 
 /** Section heading copy (eyebrow/title/subtitle) keyed by section id. */
 export const sectionCopy = sectionCopyJson as SectionCopyData;

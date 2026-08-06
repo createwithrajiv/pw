@@ -3,8 +3,6 @@ import { useNavSections } from '@/hooks/useSections';
 import { useProfile, useSocial, useNavigation } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { GradientText } from '@/components/ui/GradientText';
-import { MotionToggle } from '@/components/layout/MotionToggle';
 import { currentYear } from '@/utils/format';
 import { settings } from '@/data';
 
@@ -35,7 +33,7 @@ export function Footer() {
             <span className="grid h-9 w-9 place-items-center rounded-md bg-grad-accent text-primary-foreground shadow-glow">
               {settings.brandShortName.slice(0, 1)}
             </span>
-            <GradientText>{navigation.brand}</GradientText>
+            {navigation.brand}
           </button>
           <p className="max-w-sm text-sm text-muted">{profile.tagline}.</p>
           <div className="mt-2 flex gap-3">
@@ -71,13 +69,7 @@ export function Footer() {
           >
             My Blogs
           </Link>
-        </nav>
-
-        <div className="flex flex-col gap-3">
-          <span className="eyebrow mb-2">Preferences</span>
-          <MotionToggle />
-        </div>
-      </div>
+        </nav>      </div>
 
       <div className="border-t border-border">
         <div className="mx-auto flex w-full max-w-container flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-subtle sm:flex-row sm:px-6 lg:px-8">

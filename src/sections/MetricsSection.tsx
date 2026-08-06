@@ -3,12 +3,10 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { Counter } from '@/components/ui/Counter';
-import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { useMetrics, useProfile } from '@/hooks/useContent';
-import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { parseStat } from '@/utils/format';
-import { burstVariant, signatureSpring, staggerContainer } from '@/animations/variants';
+import { fadeInUp, staggerContainer } from '@/animations/variants';
 
 interface NormalizedMetric {
   id: string;
@@ -21,13 +19,13 @@ interface NormalizedMetric {
   context?: string;
 }
 
-function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number; reduced: boolean }) {
+function MetricItem({ m }: { m: NormalizedMetric }) {
   const [open, setOpen] = useState(false);
   const ctxId = `metric-ctx-${m.id}`;
 
   return (
     <motion.li
-      variants={burstVariant(index, reduced)}
+      variants={fadeInUp}
       tabIndex={m.context ? 0 : -1}
       aria-describedby={m.context ? ctxId : undefined}
       onMouseEnter={() => setOpen(true)}
@@ -42,18 +40,9 @@ function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number;
         </span>
       )}
       <span className="font-display text-5xl font-semibold tracking-tight sm:text-6xl">
-        <GradientText>
-          <Counter value={m.value} decimals={m.decimals} prefix={m.prefix} suffix={m.suffix} />
-        </GradientText>
+        <Counter value={m.value} decimals={m.decimals} prefix={m.prefix} suffix={m.suffix} />
       </span>
-      <motion.span
-        aria-hidden
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ ...signatureSpring, delay: 0.25 }}
-        className="h-px w-12 origin-center bg-gradient-to-r from-accent to-accent-2"
-      />
+      <span aria-hidden className="h-px w-12 bg-border" />
       <span className="text-sm text-muted">{m.label}</span>
 
       {m.context && (
@@ -74,9 +63,7 @@ function MetricItem({ m, index, reduced }: { m: NormalizedMetric; index: number;
 
 export default function MetricsSection() {
   const metrics = useMetrics();
-  const profile = useProfile();
-  const reduced = useReducedMotion();
-
+  const profile = useProfile();
   const items: NormalizedMetric[] =
     metrics.items.length > 0
       ? metrics.items.map((m) => ({
@@ -116,8 +103,8 @@ export default function MetricsSection() {
             viewport={{ once: true, amount: 0.4 }}
             className="relative z-10 grid grid-cols-2 gap-x-6 gap-y-12 lg:grid-cols-4"
           >
-            {items.map((m, i) => (
-              <MetricItem key={m.id} m={m} index={i} reduced={reduced} />
+            {items.map((m) => (
+              <MetricItem key={m.id} m={m} />
             ))}
           </motion.ul>
         </div>

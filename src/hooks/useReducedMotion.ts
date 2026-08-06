@@ -1,2 +1,1 @@
-export { useReducedMotion, useMotionPreference } from '@/providers/ReducedMotionProvider';
-export type { MotionPreference } from '@/providers/ReducedMotionProvider';
+export { useReducedMotion } from '@/providers/ReducedMotionProvider';

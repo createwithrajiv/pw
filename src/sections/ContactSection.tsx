@@ -3,12 +3,9 @@ import { Check, Copy, Mail, MapPin } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { GradientText } from '@/components/ui/GradientText';
 import { Button } from '@/components/ui/Button';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { Reveal } from '@/components/motion/Reveal';
-import { SectionDivider } from '@/components/motion/SectionDivider';
-import { usePointerGlow } from '@/hooks/usePointerGlow';
 import { useCopy } from '@/hooks/useCopy';
 import { useProfile, useSocial } from '@/hooks/useContent';
 import { EASE } from '@/animations/variants';
@@ -16,9 +13,7 @@ import { EASE } from '@/animations/variants';
 export default function ContactSection() {
   const profile = useProfile();
   const social = useSocial();
-  const { copied, copy } = useCopy();
-  const glow = usePointerGlow<HTMLDivElement>({ size: 460, alpha: 0.08 });
-
+  const { copied, copy } = useCopy();
   const copyEmail = async () => {
     const ok = await copy(profile.email);
     if (!ok) window.location.href = `mailto:${profile.email}`;
@@ -26,9 +21,7 @@ export default function ContactSection() {
 
   return (
     <Section id="contact">
-      <Container>
-        <SectionDivider className="mb-12" />
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <Container>        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="flex flex-col gap-5">
             <p className="eyebrow flex items-center gap-2">
               <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
@@ -36,7 +29,7 @@ export default function ContactSection() {
             </p>
             <Reveal variant="fadeInUp">
               <h2 className="text-h1 font-display font-semibold tracking-tight">
-                Let's build something <GradientText>that scales</GradientText>.
+                Let's build something that scales.
               </h2>
             </Reveal>
             <Reveal variant="fadeInUp" delay={0.05}>
@@ -48,12 +41,7 @@ export default function ContactSection() {
             </div>
           </div>
 
-          <GlassCard ref={glow.ref} className="relative flex flex-col gap-6 overflow-hidden p-8">
-            <motion.div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 z-0 mix-blend-screen"
-              style={{ background: glow.background }}
-            />
+          <GlassCard className="relative flex flex-col gap-6 overflow-hidden p-8">
             <div className="relative z-10 flex flex-col gap-2">
               <span className="eyebrow">Email</span>
               <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-surface/50 p-4">
@@ -91,7 +79,7 @@ export default function ContactSection() {
             </div>
 
             <div className="relative z-10 flex flex-wrap gap-3">
-              <Button href={`mailto:${profile.email}`} magnetic>
+              <Button href={`mailto:${profile.email}`}>
                 <Mail className="h-4 w-4" />
                 Send a message
               </Button>

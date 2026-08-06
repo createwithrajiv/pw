@@ -10,7 +10,6 @@ import { useNavigation, useSocial } from '@/hooks/useContent';
 import { useLockBodyScroll } from '@/hooks/useLockBodyScroll';
 import { Button } from '@/components/ui/Button';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
-import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { settings } from '@/data';
 
@@ -66,7 +65,7 @@ export function Navbar() {
           <span className="grid h-8 w-8 place-items-center rounded-md bg-grad-accent text-primary-foreground shadow-glow">
             {settings.brandShortName.slice(0, 1)}
           </span>
-          <GradientText className="hidden sm:inline">{settings.brandShortName}</GradientText>
+          <span className="hidden sm:inline">{settings.brandShortName}</span>
         </button>
 
         {/* Desktop links */}
@@ -121,7 +120,7 @@ export function Navbar() {
           <ThemeToggle />
           {navigation.cta && (
             <div className="hidden sm:block">
-              <Button href={navigation.cta.href} size="sm" magnetic>
+              <Button href={navigation.cta.href} size="sm">
                 {navigation.cta.label}
               </Button>
             </div>

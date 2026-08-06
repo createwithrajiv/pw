@@ -6,7 +6,6 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Badge } from '@/components/ui/Badge';
-import { FlyIn } from '@/components/motion/FlyIn';
 import { useExperience, useCompanies, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { cn } from '@/utils/cn';
@@ -61,10 +60,9 @@ interface TimelineItemProps {
   company?: Company;
   progress: MotionValue<number>;
   t: number; // fractional position of this node down the spine
-  index: number;
 }
 
-function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) {
+function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
   // "Ignite" as the spine fill reaches this node.
   const lit = useTransform(progress, [t - 0.08, t], [0, 1], { clamp: true });
   const nodeScale = useTransform(lit, [0, 1], [1, 1.14]);
@@ -84,7 +82,7 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
         />
         <Briefcase className="relative z-10 h-4 w-4" aria-hidden />
       </motion.span>
-      <FlyIn direction={index % 2 === 0 ? 'left' : 'right'} blur={8}>
+      <div>
         <GlassCard interactive className="flex flex-col gap-4 p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="flex items-start gap-3">
@@ -118,7 +116,7 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
             </ul>
           )}
         </GlassCard>
-      </FlyIn>
+      </div>
     </div>
   );
 }
@@ -158,7 +156,6 @@ export default function ExperienceSection() {
                 company={companies[item.company]}
                 progress={progress}
                 t={total > 1 ? i / (total - 1) : 0}
-                index={i}
               />
             ))}
           </div>

@@ -2,12 +2,7 @@ import { MapPin, CheckCircle2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { GlassCard } from '@/components/ui/GlassCard';
-import { GradientText } from '@/components/ui/GradientText';
 import { Reveal } from '@/components/motion/Reveal';
-import { SectionReveal } from '@/components/motion/SectionReveal';
-import { AnimatedText } from '@/components/motion/AnimatedText';
-import { Parallax } from '@/components/motion/Parallax';
-import { SectionDivider } from '@/components/motion/SectionDivider';
 import { Marquee } from '@/components/ui/Marquee';
 import { Tag } from '@/components/ui/Tag';
 import { useProfile, useTechnologies } from '@/hooks/useContent';
@@ -27,7 +22,6 @@ export default function AboutSection() {
   return (
     <Section id="about">
       <Container>
-        <SectionDivider className="mb-12" />
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="flex min-w-0 flex-col gap-6">
             <div className="flex flex-col gap-4">
@@ -35,20 +29,26 @@ export default function AboutSection() {
                 <span className="inline-block h-px w-6 bg-accent" aria-hidden />
                 About
               </span>
+              {/* Emphasis is carried by colour now that the gradient text is gone. */}
               <h2 className="text-h1 font-display tracking-tight">
-                <AnimatedText segments={HEADLINE} stagger={0.07} />
+                {HEADLINE.map((w, i) => (
+                  <span key={w.text} className={w.emphasis ? 'text-accent' : undefined}>
+                    {w.text}
+                    {i < HEADLINE.length - 1 ? ' ' : ''}
+                  </span>
+                ))}
               </h2>
             </div>
-            <SectionReveal variant="riseIn">
+            <Reveal variant="fadeInUp">
               <p className="text-lead text-foreground">{profile.description}</p>
-            </SectionReveal>
+            </Reveal>
             <Reveal variant="fadeInUp" delay={0.08}>
               <p className="text-body text-muted">{profile.longDescription}</p>
             </Reveal>
           </div>
 
-          <Parallax speed={0.08} className="min-w-0 lg:self-center">
-            <Reveal variant="blurScaleIn">
+          <div className="min-w-0 lg:self-center">
+            <Reveal variant="fadeInUp">
               <GlassCard className="flex flex-col gap-6 p-8">
                 <div className="flex flex-col gap-1">
                   <span className="eyebrow">Currently</span>
@@ -70,7 +70,7 @@ export default function AboutSection() {
                   {profile.stats.map((s) => (
                     <div key={s.label} className="flex flex-col gap-1">
                       <dt className="font-display text-h3 font-semibold">
-                        <GradientText>{s.value}</GradientText>
+                        {s.value}
                       </dt>
                       <dd className="text-xs leading-snug text-muted">{s.label}</dd>
                     </div>
@@ -87,7 +87,7 @@ export default function AboutSection() {
                 </div>
               </GlassCard>
             </Reveal>
-          </Parallax>
+          </div>
         </div>
       </Container>
     </Section>

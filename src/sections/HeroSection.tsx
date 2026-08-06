@@ -1,66 +1,32 @@
-import { motion, useMotionTemplate, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, FileText } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
-import { AnimatedText } from '@/components/motion/AnimatedText';
-import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { ProfileFrame } from '@/components/hero/ProfileFrame';
 import { useProfile, useSocial } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
-import { useIntroSequence } from '@/hooks/useIntroSequence';
-import { usePointerGlow } from '@/hooks/usePointerGlow';
 import { parseStat } from '@/utils/format';
 import { Counter } from '@/components/ui/Counter';
-import { fadeInUp, staggerContainer } from '@/animations/variants';
-import { useReducedMotion } from '@/providers/ReducedMotionProvider';
+import { fadeInUp, slideUp, staggerContainer } from '@/animations/variants';
 
 export default function HeroSection() {
   const profile = useProfile();
   const social = useSocial();
-  const { step } = useIntroSequence();
-  const reduced = useReducedMotion();
-  const glow = usePointerGlow<HTMLElement>({ size: 520, alpha: 0.1 });
   const teaser = profile.stats.slice(0, 3);
-  const show = (n: number) => (step >= n ? 'show' : 'hidden');
-
-  // Cinematic scroll-out: the content recedes (lift + fade + blur + slight scale)
-  // as the hero leaves the viewport.
-  const { scrollYProgress } = useScroll({ target: glow.ref, offset: ['start start', 'end start'] });
-  const outOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
-  const outY = useTransform(scrollYProgress, [0, 1], [0, -80]);
-  const outScale = useTransform(scrollYProgress, [0, 1], [1, 0.985]);
-  const outBlurPx = useTransform(scrollYProgress, [0, 1], [0, 6]);
-  const outBlur = useMotionTemplate`blur(${outBlurPx}px)`;
-  // Tilt the whole hero back into depth as it recedes — reads as real 3D.
-  const outRotateX = useTransform(scrollYProgress, [0, 1], [0, 14]);
-  const outStyle = reduced
-    ? undefined
-    : {
-        opacity: outOpacity,
-        y: outY,
-        scale: outScale,
-        filter: outBlur,
-        rotateX: outRotateX,
-        transformPerspective: 1200,
-        transformOrigin: 'center 20%',
-      };
 
   return (
-    <Section ref={glow.ref} id="hero" className="!py-0">
-      {/* cursor-tracking glow */}
-      <motion.div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 z-0 mix-blend-screen"
-        style={{ background: glow.background }}
-      />
-
-      <motion.div style={outStyle} className="relative z-10">
-        <Container className="grid min-h-[100svh] grid-cols-1 items-center gap-8 pb-12 pt-24 lg:grid-cols-[1.25fr_minmax(0,19rem)] lg:gap-12">
-        <div className="flex max-w-2xl flex-col gap-4 sm:gap-5">
-          <motion.div variants={fadeInUp} initial="hidden" animate={show(2)}>
-            <span className="inline-flex items-center gap-2 rounded-pill border border-border bg-surface/50 px-3 py-1.5 text-sm text-muted backdrop-blur">
+    <Section id="hero" className="!pb-16 !pt-28 sm:!pt-32">
+      <Container className="grid grid-cols-1 items-center gap-12 lg:min-h-[38rem] lg:grid-cols-[1.25fr_minmax(0,18rem)] lg:gap-16">
+        <motion.div
+          variants={staggerContainer(0.06)}
+          initial="hidden"
+          animate="show"
+          className="flex max-w-2xl flex-col gap-5"
+        >
+          <motion.div variants={fadeInUp}>
+            <span className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-success opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
@@ -69,109 +35,81 @@ export default function HeroSection() {
             </span>
           </motion.div>
 
-          <motion.p variants={fadeInUp} initial="hidden" animate={show(2)} className="eyebrow">
-            {profile.name} - {profile.title}
+          <motion.p variants={fadeInUp} className="eyebrow">
+            {profile.name} · {profile.title}
           </motion.p>
 
-          <h1 className="text-[clamp(2.25rem,1.3rem+3.4vw,3.85rem)] font-display font-semibold leading-[1.05] tracking-tight">
-            <AnimatedText text={profile.tagline} split="word" play={step >= 3} />
-          </h1>
-
-          <motion.p
-            variants={fadeInUp}
-            initial="hidden"
-            animate={show(3)}
-            className="max-w-2xl text-lead text-muted"
+          {/* Opacity stays at 1 — this is the LCP element, so it must paint on
+              the first frame rather than at the end of the animation. */}
+          <motion.h1
+            variants={slideUp}
+            className="text-display font-display tracking-tight"
           >
+            {profile.tagline}
+          </motion.h1>
+
+          <motion.p variants={fadeInUp} className="max-w-2xl text-lead text-muted">
             {profile.description}
           </motion.p>
 
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate={show(5)}
-            className="flex flex-wrap items-center gap-3"
-          >
-            <Button href={profile.resumeUrl} external magnetic size="lg">
-              <FileText className="h-4 w-4" />
+          <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-3">
+            <Button href={profile.resumeUrl} external size="lg">
+              <FileText className="h-4 w-4" aria-hidden />
               Download Résumé
             </Button>
-            <Button variant="secondary" size="lg" magnetic onClick={() => scrollTo('#projects')}>
+            <Button variant="secondary" size="lg" onClick={() => scrollTo('#projects')}>
               View Work
-              <ArrowUpRight className="h-4 w-4" />
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
             </Button>
           </motion.div>
 
           <motion.div
-            variants={staggerContainer(0.08)}
-            initial="hidden"
-            animate={show(4)}
-            className="mt-1 flex flex-wrap items-center gap-x-8 gap-y-3"
+            variants={fadeInUp}
+            className="mt-2 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-border pt-6"
           >
             {teaser.map((stat) => {
               const parsed = parseStat(stat.value);
               return (
-                <motion.div key={stat.label} variants={fadeInUp} className="flex flex-col">
-                  <span className="font-display text-2xl font-semibold sm:text-3xl">
-                    <GradientText>
-                      <Counter
-                        value={parsed.value}
-                        decimals={parsed.decimals}
-                        prefix={parsed.prefix}
-                        suffix={parsed.suffix}
-                        start={step >= 4}
-                      />
-                    </GradientText>
+                <div key={stat.label} className="flex flex-col">
+                  <span className="font-display text-2xl font-bold text-foreground sm:text-3xl">
+                    <Counter
+                      value={parsed.value}
+                      decimals={parsed.decimals}
+                      prefix={parsed.prefix}
+                      suffix={parsed.suffix}
+                    />
                   </span>
-                  <span className="mt-1 max-w-[12ch] text-xs text-subtle">{stat.label}</span>
-                </motion.div>
+                  <span className="mt-1 max-w-[14ch] text-xs text-muted">{stat.label}</span>
+                </div>
               );
             })}
           </motion.div>
 
-          <motion.div
-            variants={fadeInUp}
-            initial="hidden"
-            animate={show(5)}
-            className="mt-1 flex items-center gap-4"
-          >
-            <span className="text-xs uppercase tracking-widest text-subtle">Find me</span>
+          <motion.div variants={fadeInUp} className="mt-1 flex items-center gap-4">
+            <span className="eyebrow">Find me</span>
             <div className="flex gap-2">
               {social.map((s) => (
-                <motion.a
+                <a
                   key={s.platform}
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.platform}
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="grid h-10 w-10 place-items-center rounded-pill border border-border bg-surface/40 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
                 >
                   <IconRenderer name={s.icon} className="h-[18px] w-[18px]" />
-                </motion.a>
+                </a>
               ))}
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         <ProfileFrame
           image={profile.image}
           name={profile.name}
-          play={step >= 2}
-          className="lg:justify-self-end"
+          className="order-first lg:order-none lg:justify-self-end"
         />
-        </Container>
-      </motion.div>
-
-      <button
-        onClick={() => scrollTo('#metrics')}
-        aria-label="Scroll to next section"
-        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-subtle transition-colors hover:text-accent sm:flex"
-      >
-        <span className="text-[11px] uppercase tracking-[0.3em]">Scroll</span>
-        <ArrowDown className="h-4 w-4 animate-scroll-cue" />
-      </button>
+      </Container>
     </Section>
   );
 }

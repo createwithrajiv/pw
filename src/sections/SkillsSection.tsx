@@ -2,12 +2,10 @@ import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { TiltCard } from '@/components/ui/TiltCard';
+import { GlassCard } from '@/components/ui/GlassCard';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { SectionDivider } from '@/components/motion/SectionDivider';
 import { useSkills, useSectionCopy } from '@/hooks/useContent';
-import { useReducedMotion } from '@/providers/ReducedMotionProvider';
-import { burstVariant, staggerContainer } from '@/animations/variants';
+import { fadeInUp, staggerContainer } from '@/animations/variants';
 
 // Keys MUST match the category names in skills.json exactly (an unknown name
 // falls back to a "?" HelpCircle icon).
@@ -83,15 +81,11 @@ function Constellation() {
 
 export default function SkillsSection() {
   const skills = useSkills();
-  const copy = useSectionCopy('skills');
-  const reduced = useReducedMotion();
-
+  const copy = useSectionCopy('skills');
   return (
     <Section id="skills">
       <Constellation />
-      <Container className="relative z-10">
-        <SectionDivider className="mb-12" />
-        <SectionHeading {...copy} />
+      <Container className="relative z-10">        <SectionHeading {...copy} />
 
         <motion.div
           variants={staggerContainer(0.08)}
@@ -100,9 +94,9 @@ export default function SkillsSection() {
           viewport={{ once: true, amount: 0.15 }}
           className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {skills.categories.map((cat, i) => (
-            <motion.div key={cat.name} variants={burstVariant(i, reduced)} className="h-full">
-              <TiltCard className="flex h-full flex-col gap-5 p-6">
+          {skills.categories.map((cat) => (
+            <motion.div key={cat.name} variants={fadeInUp} className="h-full">
+              <GlassCard className="flex h-full flex-col gap-5 p-6">
                 <div className="flex items-center gap-3.5 border-b border-border/60 pb-4">
                   <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-grad-accent/10 text-accent ring-1 ring-accent/20">
                     <IconRenderer name={CATEGORY_ICONS[cat.name]} className="h-[22px] w-[22px]" />
@@ -122,7 +116,7 @@ export default function SkillsSection() {
                     </li>
                   ))}
                 </ul>
-              </TiltCard>
+              </GlassCard>
             </motion.div>
           ))}
         </motion.div>

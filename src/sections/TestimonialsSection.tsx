@@ -6,7 +6,6 @@ import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { GlassCard } from '@/components/ui/GlassCard';
 import { Modal } from '@/components/ui/Modal';
-import { AnimatedText } from '@/components/motion/AnimatedText';
 import { useTestimonials, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { EASE } from '@/animations/variants';
@@ -132,11 +131,7 @@ export default function TestimonialsSection() {
                 className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
               >
                 <blockquote className="text-h3 font-display font-medium leading-snug text-foreground">
-                  {reduced ? (
-                    `“${current.quote}”`
-                  ) : (
-                    <AnimatedText text={`“${current.quote}”`} stagger={0.012} />
-                  )}
+                  {`“${current.quote}”`}
                 </blockquote>
 
                 {current.detailed_quote && (
