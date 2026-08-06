@@ -23,7 +23,7 @@ function CompanyLogoLink({
 }) {
   if (!logo) return null;
   const base =
-    'group flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-border bg-surface p-1.5';
+    'group flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white p-1.5 ring-1 ring-black/5 dark:ring-white/10';
   const img = (
     <img
       src={logo}
@@ -32,7 +32,7 @@ function CompanyLogoLink({
       decoding="async"
       width={44}
       height={44}
-      className="max-h-full max-w-full object-contain grayscale opacity-70 transition duration-200 group-hover:grayscale-0 group-hover:opacity-100 dark:brightness-0 dark:invert"
+      className="max-h-full max-w-full object-contain"
     />
   );
   if (website) {
@@ -42,7 +42,7 @@ function CompanyLogoLink({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${name} website`}
-               className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent hover:shadow-sm')}
+               className={cn(base, 'transition duration-200 hover:-translate-y-0.5 hover:ring-accent')}
       >
         {img}
       </a>

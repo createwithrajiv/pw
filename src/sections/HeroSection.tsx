@@ -17,13 +17,13 @@ export default function HeroSection() {
   const teaser = profile.stats.slice(0, 3);
 
   return (
-    <Section id="hero" className="!pb-16 !pt-28 sm:!pt-32">
-      <Container className="grid grid-cols-1 items-center gap-12 lg:min-h-[38rem] lg:grid-cols-[1.25fr_minmax(0,18rem)] lg:gap-16">
+    <Section id="hero" className="!pb-12 !pt-24 sm:!pt-28">
+      <Container className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.25fr_minmax(0,16rem)] lg:gap-14">
         <motion.div
           variants={staggerContainer(0.06)}
           initial="hidden"
           animate="show"
-          className="flex max-w-2xl flex-col gap-5"
+          className="flex max-w-2xl flex-col gap-4"
         >
           <motion.div variants={fadeInUp}>
             <span className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-sm text-muted">
@@ -65,13 +65,13 @@ export default function HeroSection() {
 
           <motion.div
             variants={fadeInUp}
-            className="mt-2 flex flex-wrap items-center gap-x-10 gap-y-4 border-t border-border pt-6"
+            className="mt-1 flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-border pt-5"
           >
             {teaser.map((stat) => {
               const parsed = parseStat(stat.value);
               return (
                 <div key={stat.label} className="flex flex-col">
-                  <span className="font-sans text-2xl font-bold text-foreground sm:text-3xl">
+                  <span className="font-sans text-2xl font-bold text-foreground">
                     <Counter
                       value={parsed.value}
                       decimals={parsed.decimals}
@@ -85,7 +85,7 @@ export default function HeroSection() {
             })}
           </motion.div>
 
-          <motion.div variants={fadeInUp} className="mt-1 flex items-center gap-4">
+          <motion.div variants={fadeInUp} className="flex items-center gap-4">
             <span className="eyebrow">Find me</span>
             <div className="flex gap-2">
               {social.map((s) => (

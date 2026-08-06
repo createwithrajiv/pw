@@ -22,13 +22,13 @@ export function ProfileFrame({ image, name, className }: ProfileFrameProps) {
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.4 }}
-      className={cn('relative mx-auto w-full max-w-[18rem] lg:max-w-[20rem]', className)}
+      className={cn('relative mx-auto w-full max-w-[14rem] lg:max-w-[16rem]', className)}
     >
       <img
         src={image}
         alt={`Portrait of ${name}`}
-        width={320}
-        height={320}
+        width={256}
+        height={256}
         loading="eager"
         // @ts-expect-error — valid HTML attribute, not yet in React's typings
         fetchpriority="high"

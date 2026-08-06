@@ -39,9 +39,16 @@ export default {
       lg: 'var(--shadow-lg)',
     },
     extend: {
-      colors: {
+      // `base` and `canvas` are page backgrounds and NOTHING else. They live
+      // here rather than in `colors` because `colors` feeds every utility
+      // family — which made `text-base` emit a white *colour* rule that
+      // overrode Tailwind's stock `text-base` font-size, silently turning any
+      // element using it white-on-white.
+      backgroundColor: {
         base: 'hsl(var(--bg-base) / <alpha-value>)',
         canvas: 'hsl(var(--bg-canvas) / <alpha-value>)',
+      },
+      colors: {
         surface: {
           DEFAULT: 'hsl(var(--surface) / <alpha-value>)',
           hi: 'hsl(var(--surface-hi) / <alpha-value>)',
@@ -84,9 +91,11 @@ export default {
       // 600, body 400) so components stop hand-setting them. These land in the
       // utilities layer, so they win over the base layer's heading weight.
       fontSize: {
+        // Capped at 3rem so the hero still fits above the fold on a scaled
+        // laptop display, where the CSS viewport is only ~660px tall.
         display: [
-          'clamp(2.25rem, 1.3rem + 3.4vw, 3.5rem)',
-          { lineHeight: '1.08', letterSpacing: '-0.025em', fontWeight: '700' },
+          'clamp(2rem, 1.2rem + 2.2vw, 3rem)',
+          { lineHeight: '1.1', letterSpacing: '-0.025em', fontWeight: '700' },
         ],
         h1: [
           'clamp(1.875rem, 1.4rem + 1.8vw, 2.5rem)',

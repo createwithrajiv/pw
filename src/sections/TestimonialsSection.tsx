@@ -56,7 +56,7 @@ function CompanyLogo({ logo, company }: { logo?: string; company: string }) {
         decoding="async"
         width={110}
         height={32}
-        className="max-h-8 w-auto max-w-[110px] shrink-0 object-contain grayscale opacity-70 dark:brightness-0 dark:invert"
+        className="max-h-8 w-auto max-w-[110px] shrink-0 rounded bg-white object-contain p-1.5 ring-1 ring-black/5 dark:ring-white/10"
       />
     );
   }

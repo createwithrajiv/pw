@@ -10,6 +10,10 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    // Screenshot scratch output; watching it is pointless and can lock files.
+    watch: { ignored: ['**/.shots/**', '**/lighthouse/**'] },
+  },
   build: {
     target: 'es2020',
     cssCodeSplit: true,

@@ -50,9 +50,9 @@ function MetricItem({ m }: { m: NormalizedMetric }) {
           id={ctxId}
           role="tooltip"
           initial={false}
-          animate={{ opacity: open ? 1 : 0, y: open ? 0 : 8 }}
-          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="pointer-events-none absolute left-2 right-2 top-full z-10 mt-1 rounded-md border border-border bg-surface/95 px-3 py-2 text-xs leading-relaxed text-subtle backdrop-blur"
+          animate={{ opacity: open ? 1 : 0, y: open ? 0 : -6 }}
+          transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          className="pointer-events-none absolute bottom-full left-1/2 z-20 mb-2 w-56 max-w-[15rem] -translate-x-1/2 rounded-md border border-border bg-surface px-3 py-2 text-xs leading-relaxed text-muted shadow-md"
         >
           {m.context}
         </motion.span>

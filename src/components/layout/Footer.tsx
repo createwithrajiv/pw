@@ -21,20 +21,23 @@ export function Footer() {
     else navigate(`/${anchor}`);
   };
 
+  const linkClass =
+    'self-start text-sm text-muted transition-colors duration-200 hover:text-accent';
+
   return (
     <footer className="relative border-t border-border bg-base">
-      <div className="mx-auto grid w-full max-w-container gap-10 px-5 py-16 sm:px-6 lg:grid-cols-[1.5fr_1fr_auto] lg:px-8">
-        <div className="flex flex-col gap-4">
+      <div className="mx-auto grid w-full max-w-container gap-8 px-5 py-10 sm:px-6 lg:grid-cols-[1fr_auto] lg:gap-16 lg:px-8">
+        <div className="flex flex-col gap-3">
           <button
             onClick={() => go('#hero')}
-            className="flex items-center gap-2 self-start text-lg font-sans font-bold"
+            className="flex items-center gap-2 self-start font-sans text-base font-bold"
             aria-label={`${navigation.brand} - back to top`}
           >
-            <BrandMark className="h-9 w-9 shadow-sm" />
+            <BrandMark className="h-8 w-8" />
             {navigation.brand}
           </button>
           <p className="max-w-sm text-sm text-muted">{profile.tagline}.</p>
-          <div className="mt-2 flex gap-3">
+          <div className="mt-1 flex gap-2">
             {social.map((s) => (
               <a
                 key={s.platform}
@@ -42,40 +45,35 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.platform}
-                className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
               >
-                <IconRenderer name={s.icon} className="h-5 w-5" />
+                <IconRenderer name={s.icon} className="h-[18px] w-[18px]" />
               </a>
             ))}
           </div>
         </div>
 
-        <nav aria-label="Footer" className="flex flex-col gap-2">
-          <span className="eyebrow mb-2">Explore</span>
-          {navSections.map((s) => (
-            <button
-              key={s.id}
-              onClick={() => go(s.anchor)}
-              className="self-start text-sm text-muted transition-colors hover:text-accent"
-            >
-              {s.label}
-            </button>
-          ))}
-          <Link
-            to="/blogs"
-            className="self-start text-sm text-muted transition-colors hover:text-accent"
-          >
-            My Blogs
-          </Link>
-        </nav>      </div>
+        <nav aria-label="Footer" className="flex flex-col gap-3">
+          <span className="eyebrow">Explore</span>
+          {/* Two columns, so a dozen links don't stretch the footer into a page
+              of its own. grid-flow-col fills the first column downward first. */}
+          <div className="grid grid-flow-col grid-rows-6 gap-x-12 gap-y-2">
+            {navSections.map((s) => (
+              <button key={s.id} onClick={() => go(s.anchor)} className={linkClass}>
+                {s.label}
+              </button>
+            ))}
+            <Link to="/blogs" className={linkClass}>
+              My Blogs
+            </Link>
+          </div>
+        </nav>
+      </div>
 
       <div className="border-t border-border">
-        <div className="mx-auto flex w-full max-w-container flex-col items-center justify-between gap-2 px-5 py-6 text-xs text-subtle sm:flex-row sm:px-6 lg:px-8">
-          <p>
-            © {currentYear()} {profile.name}. All rights reserved.
-          </p>
-          <p className="font-mono">Built with React · TypeScript · Tailwind CSS</p>
-        </div>
+        <p className="mx-auto w-full max-w-container px-5 py-5 text-center text-xs text-muted sm:px-6 lg:px-8">
+          © {currentYear()} {profile.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );

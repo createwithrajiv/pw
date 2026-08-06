@@ -16,6 +16,6 @@
     { "id": "faq", "label": "FAQ", "anchor": "#faq", "enabled": true, "order": 100, "hideWhenEmpty": true },
     { "id": "blog", "label": "Writing", "anchor": "#blog", "enabled": false, "order": 110, "hideWhenEmpty": true },
     { "id": "contact", "label": "Contact", "anchor": "#contact", "enabled": true, "order": 120, "hideWhenEmpty": false },
-    { "id": "cta", "label": "", "anchor": "#cta", "enabled": true, "order": 130, "hideWhenEmpty": false }
+    { "id": "cta", "label": "", "anchor": "#cta", "enabled": false, "order": 130, "hideWhenEmpty": false }
   ]
 }
