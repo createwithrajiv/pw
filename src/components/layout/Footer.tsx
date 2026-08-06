@@ -84,7 +84,7 @@ export function Footer() {
           <p>
             © {currentYear()} {profile.name}. All rights reserved.
           </p>
-          <p className="font-mono">Built with React · Three.js · Framer Motion</p>
+          <p className="font-mono">Built with React · TypeScript · Tailwind CSS</p>
         </div>
       </div>
     </footer>

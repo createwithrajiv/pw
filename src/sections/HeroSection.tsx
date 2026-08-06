@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/Button';
 import { AnimatedText } from '@/components/motion/AnimatedText';
 import { GradientText } from '@/components/ui/GradientText';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { HeroBackdrop } from '@/components/three/HeroBackdrop';
 import { ProfileFrame } from '@/components/hero/ProfileFrame';
 import { useProfile, useSocial } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
@@ -50,7 +49,6 @@ export default function HeroSection() {
 
   return (
     <Section ref={glow.ref} id="hero" className="!py-0" depth={false}>
-      <HeroBackdrop />
       {/* cursor-tracking glow */}
       <motion.div
         aria-hidden

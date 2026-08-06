@@ -8,7 +8,6 @@ import { CustomCursor } from '@/components/layout/CustomCursor';
 import { SkipToContent } from '@/components/layout/SkipToContent';
 import { BackToTop } from '@/components/layout/BackToTop';
 import { StoryBackdrop } from '@/components/layout/StoryBackdrop';
-import { CanvasRoot } from '@/three/CanvasRoot';
 import { useHashScroll } from '@/hooks/useHashScroll';
 import { useFxSignals } from '@/hooks/useFxSignals';
 import { scrollTo } from '@/utils/scroll';
@@ -30,7 +29,6 @@ export function RootLayout({ children }: { children: ReactNode }) {
   return (
     <>
       <StoryBackdrop />
-      <CanvasRoot />
       {!fx.reduced && !onBlog && (
         <motion.div
           aria-hidden
