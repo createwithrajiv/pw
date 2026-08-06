@@ -53,7 +53,7 @@ export default function StorySection() {
   const hasValues = values.items.length > 0;
 
   return (
-    <Section id="story" grid ambient={{ density: 'sparse' }}>
+    <Section id="story">
       <Container>
         <SectionDivider className="mb-12" />
         <div className="flex flex-col gap-14">

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { MapPin, CheckCircle2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
@@ -9,11 +8,9 @@ import { SectionReveal } from '@/components/motion/SectionReveal';
 import { AnimatedText } from '@/components/motion/AnimatedText';
 import { Parallax } from '@/components/motion/Parallax';
 import { SectionDivider } from '@/components/motion/SectionDivider';
-import { EnterBurst } from '@/components/motion/EnterBurst';
 import { Marquee } from '@/components/ui/Marquee';
 import { Tag } from '@/components/ui/Tag';
 import { useProfile, useTechnologies } from '@/hooks/useContent';
-import { EASE } from '@/animations/variants';
 
 const HEADLINE = [
   { text: 'Bridging' },
@@ -28,31 +25,20 @@ export default function AboutSection() {
   const technologies = useTechnologies();
 
   return (
-    <Section id="about" ambient={{ density: 'sparse' }}>
+    <Section id="about">
       <Container>
         <SectionDivider className="mb-12" />
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="flex min-w-0 flex-col gap-6">
-            <EnterBurst variant={['ring', 'sweep']} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               <span className="eyebrow flex items-center gap-2">
-                <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
+                <span className="inline-block h-px w-6 bg-accent" aria-hidden />
                 About
               </span>
-              <div className="relative overflow-hidden">
-                <h2 className="text-h1 font-display font-semibold tracking-tight">
-                  <AnimatedText segments={HEADLINE} stagger={0.07} />
-                </h2>
-                {/* one-shot light sweep across the headline on enter */}
-                <motion.span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-foreground/10 to-transparent mix-blend-overlay"
-                  initial={{ x: '-130%' }}
-                  whileInView={{ x: '130%' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.1, ease: EASE, delay: 0.55 }}
-                />
-              </div>
-            </EnterBurst>
+              <h2 className="text-h1 font-display tracking-tight">
+                <AnimatedText segments={HEADLINE} stagger={0.07} />
+              </h2>
+            </div>
             <SectionReveal variant="riseIn">
               <p className="text-lead text-foreground">{profile.description}</p>
             </SectionReveal>

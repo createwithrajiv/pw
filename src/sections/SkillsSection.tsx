@@ -87,7 +87,7 @@ export default function SkillsSection() {
   const reduced = useReducedMotion();
 
   return (
-    <Section id="skills" ambient={{ density: 'sparse', motes: false }}>
+    <Section id="skills">
       <Constellation />
       <Container className="relative z-10">
         <SectionDivider className="mb-12" />

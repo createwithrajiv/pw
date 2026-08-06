@@ -48,7 +48,7 @@ export default function HeroSection() {
       };
 
   return (
-    <Section ref={glow.ref} id="hero" className="!py-0" depth={false}>
+    <Section ref={glow.ref} id="hero" className="!py-0">
       {/* cursor-tracking glow */}
       <motion.div
         aria-hidden

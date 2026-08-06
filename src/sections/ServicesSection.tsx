@@ -17,7 +17,7 @@ export default function ServicesSection() {
   const reduced = useReducedMotion();
 
   return (
-    <Section id="services" ambient={{ density: 'sparse' }}>
+    <Section id="services" band>
       <Container>
         <SectionHeading {...copy} />
         <motion.div

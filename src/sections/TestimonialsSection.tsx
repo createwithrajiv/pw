@@ -93,7 +93,7 @@ export default function TestimonialsSection() {
     .filter(Boolean);
 
   return (
-    <Section id="testimonials" ambient>
+    <Section id="testimonials" band>
       <Container>
         <SectionHeading {...copy} align="center" />
 

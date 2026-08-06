@@ -25,7 +25,7 @@ export default function ContactSection() {
   };
 
   return (
-    <Section id="contact" ambient>
+    <Section id="contact">
       <Container>
         <SectionDivider className="mb-12" />
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">

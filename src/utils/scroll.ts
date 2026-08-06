@@ -4,13 +4,24 @@
  * plus the sticky-navbar offset that anchored jumps need.
  */
 
-/** Height of the sticky navbar. Anchored scrolls clear it by this much. */
-export const NAV_OFFSET = 88;
+/** Fallback if `--nav-h` can't be read (SSR, or the token is missing). */
+const NAV_H_FALLBACK = 88;
+
+/**
+ * Height of the sticky navbar, read from the `--nav-h` token so CSS and JS
+ * share one source of truth. Only evaluated on an actual scroll call.
+ */
+function navHeight(): number {
+  if (typeof window === 'undefined') return NAV_H_FALLBACK;
+  const raw = getComputedStyle(document.documentElement).getPropertyValue('--nav-h');
+  const parsed = Number.parseFloat(raw);
+  return Number.isFinite(parsed) ? parsed : NAV_H_FALLBACK;
+}
 
 export type ScrollTarget = string | number | HTMLElement;
 
 export interface ScrollOptions {
-  /** Offset in px applied to the resolved position. Defaults to `-NAV_OFFSET`. */
+  /** Offset in px applied to the resolved position. Defaults to `---nav-h`. */
   offset?: number;
   /** Jump instantly instead of animating. */
   immediate?: boolean;
@@ -39,7 +50,7 @@ function resolveTop(target: ScrollTarget): number | null {
 export function scrollTo(target: ScrollTarget, opts: ScrollOptions = {}): void {
   const base = resolveTop(target);
   if (base === null) return;
-  const top = Math.max(0, base + (opts.offset ?? -NAV_OFFSET));
+  const top = Math.max(0, base + (opts.offset ?? -navHeight()));
   window.scrollTo({
     top,
     behavior: opts.immediate || prefersReducedMotion() ? 'auto' : 'smooth',

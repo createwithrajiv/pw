@@ -7,6 +7,10 @@
  */
 
 :root {
+  /* Sticky navbar height. Single source of truth: CSS scroll-margin reads it
+     directly, and src/utils/scroll.ts parses it for anchored jumps. */
+  --nav-h: 88px;
+
   /* ---- LIGHT (intentional, warm-paper "daylight lab") ---- */
   --bg-base: 220 30% 96%;
   --bg-canvas: 210 36% 98%;

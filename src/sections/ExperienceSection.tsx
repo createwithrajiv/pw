@@ -139,7 +139,7 @@ export default function ExperienceSection() {
   const total = experience.length;
 
   return (
-    <Section id="experience" ambient={{ density: 'sparse', motes: false }}>
+    <Section id="experience" band>
       <Container>
         <SectionHeading {...copy} />
 

@@ -95,7 +95,7 @@ export default function MetricsSection() {
         });
 
   return (
-    <Section id="metrics" grid ambient={{ density: 'sparse' }}>
+    <Section id="metrics" band>
       <Container>
         <div className="glass relative overflow-hidden rounded-2xl px-6 py-10 sm:px-12 sm:py-14">
           {/* in-view glow pulse, contained inside the box */}
