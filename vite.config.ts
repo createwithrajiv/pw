@@ -22,7 +22,6 @@ export default defineConfig({
         manualChunks: {
           'motion-vendor': ['framer-motion'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'markdown-vendor': ['react-markdown', 'remark-gfm', 'rehype-highlight'],
         },
       },
     },

@@ -2,7 +2,22 @@
   command = "npm run build"
   publish = "dist"
 
-# SPA fallback so /blogs/:slug deep links resolve instead of 404-ing.
+# Retired blog. Articles live on the newsletter now; 301 so the old URLs keep
+# their search equity and any existing links still land somewhere real.
+# These must come before the SPA fallback — Netlify matches in order.
+[[redirects]]
+  from = "/blogs"
+  to = "https://createwithrajiv.substack.com/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blogs/*"
+  to = "https://createwithrajiv.substack.com/"
+  status = 301
+  force = true
+
+# SPA fallback for every remaining route.
 [[redirects]]
   from = "/*"
   to = "/index.html"

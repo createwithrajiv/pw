@@ -1,5 +1,4 @@
 import type { Config } from 'tailwindcss';
-import typography from '@tailwindcss/typography';
 
 /**
  * Light-first, token-driven config. Every colour resolves to an HSL channel CSS
@@ -70,15 +69,6 @@ export default {
         ring: 'hsl(var(--accent) / <alpha-value>)',
         success: 'hsl(var(--success) / <alpha-value>)',
         scrim: 'hsl(var(--scrim) / <alpha-value>)',
-        code: {
-          keyword: 'hsl(var(--code-keyword) / <alpha-value>)',
-          string: 'hsl(var(--code-string) / <alpha-value>)',
-          number: 'hsl(var(--code-number) / <alpha-value>)',
-          comment: 'hsl(var(--code-comment) / <alpha-value>)',
-          function: 'hsl(var(--code-function) / <alpha-value>)',
-          type: 'hsl(var(--code-type) / <alpha-value>)',
-          tag: 'hsl(var(--code-tag) / <alpha-value>)',
-        },
       },
       fontFamily: {
         sans: ['"Geist Variable"', 'system-ui', 'sans-serif'],
@@ -113,37 +103,6 @@ export default {
         body: ['1rem', { lineHeight: '1.65' }],
         eyebrow: ['0.8125rem', { lineHeight: '1.2', letterSpacing: '0.12em', fontWeight: '500' }],
       },
-      // Long-form article typography, mapped to the same tokens so one
-      // definition covers both themes.
-      typography: {
-        blog: {
-          css: {
-            maxWidth: 'none',
-            fontSize: '1.0625rem',
-            lineHeight: '1.75',
-            '--tw-prose-body': 'hsl(var(--fg-muted))',
-            '--tw-prose-headings': 'hsl(var(--fg))',
-            '--tw-prose-lead': 'hsl(var(--fg-muted))',
-            '--tw-prose-links': 'hsl(var(--accent))',
-            '--tw-prose-bold': 'hsl(var(--fg))',
-            '--tw-prose-counters': 'hsl(var(--fg-muted))',
-            '--tw-prose-bullets': 'hsl(var(--border-strong))',
-            '--tw-prose-hr': 'hsl(var(--border))',
-            '--tw-prose-quotes': 'hsl(var(--fg))',
-            '--tw-prose-quote-borders': 'hsl(var(--accent))',
-            '--tw-prose-captions': 'hsl(var(--fg-muted))',
-            '--tw-prose-code': 'hsl(var(--fg))',
-            '--tw-prose-pre-code': 'hsl(var(--fg))',
-            '--tw-prose-pre-bg': 'transparent',
-            '--tw-prose-th-borders': 'hsl(var(--border-strong))',
-            '--tw-prose-td-borders': 'hsl(var(--border))',
-            'h1, h2, h3, h4': { fontWeight: '600', letterSpacing: '-0.015em' },
-            'code::before': { content: '""' },
-            'code::after': { content: '""' },
-            a: { fontWeight: '500', textUnderlineOffset: '3px' },
-          },
-        },
-      },
       maxWidth: {
         // 1200px everywhere per the design doc. `container-wide` is an alias so
         // the chrome that used 1320px lands on the same measure.
@@ -175,5 +134,5 @@ export default {
       },
     },
   },
-  plugins: [typography],
+  plugins: [],
 } satisfies Config;

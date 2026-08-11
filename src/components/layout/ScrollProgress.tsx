@@ -33,7 +33,7 @@ export function ScrollProgress() {
     const compute = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       // Sections that aren't on this route resolve to null. Dropping them keeps
-      // the rail off the blog pages instead of stacking every tick at 0%.
+      // the rail off non-home routes instead of stacking every tick at 0%.
       setMarks(
         navSections.flatMap((s) => {
           const el = document.getElementById(s.anchor.replace('#', ''));

@@ -1,10 +1,13 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { writing } from '@/data';
 import { useNavSections } from '@/hooks/useSections';
 import { useProfile, useSocial, useNavigation } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { BrandMark } from '@/components/ui/BrandMark';
 import { currentYear } from '@/utils/format';
+
+const NEWSLETTER_URL = writing.newsletter.url;
 
 export function Footer() {
   const profile = useProfile();
@@ -53,9 +56,9 @@ export function Footer() {
                 {s.label}
               </button>
             ))}
-            <Link to="/blogs" className={linkClass}>
-              My Blogs
-            </Link>
+            <a href={NEWSLETTER_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+              Newsletter
+            </a>
           </div>
         </nav>
 

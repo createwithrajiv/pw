@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { cn } from '@/utils/cn';
 import { useNavSections } from '@/hooks/useSections';
 import { useActiveSection } from '@/hooks/useActiveSection';
@@ -20,7 +20,6 @@ export function Navbar() {
   const social = useSocial();
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const onBlog = pathname.startsWith('/blogs');
   const ids = navSections.map((s) => s.anchor.replace('#', ''));
   const active = useActiveSection(ids);
 
@@ -71,7 +70,7 @@ export function Navbar() {
         <ul className="hidden items-center gap-1 lg:flex">
           {navSections.map((s) => {
             const id = s.anchor.replace('#', '');
-            const isActive = !onBlog && active === id;
+            const isActive = active === id;
             return (
               <li key={s.id}>
                 <button
@@ -94,25 +93,6 @@ export function Navbar() {
               </li>
             );
           })}
-          <li>
-            <Link
-              to="/blogs"
-              aria-current={onBlog ? 'page' : undefined}
-              className={cn(
-                'relative rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors',
-                onBlog ? 'text-foreground' : 'text-muted hover:text-foreground',
-              )}
-            >
-              {onBlog && (
-                <motion.span
-                  layoutId="nav-active"
-                  className="absolute inset-0 -z-10 rounded-md bg-surface"
-                  transition={{ type: 'spring', stiffness: 200, damping: 26, mass: 0.6 }}
-                />
-              )}
-              My Blogs
-            </Link>
-          </li>
         </ul>
 
         <div className="flex items-center gap-2">
@@ -166,23 +146,13 @@ export function Navbar() {
                     onClick={() => go(s.anchor)}
                     className={cn(
                       'rounded-md px-3 py-3 text-left text-h3 font-sans transition-colors',
-                      !onBlog && active === id ? 'text-accent' : 'text-foreground hover:text-accent',
+                      active === id ? 'text-accent' : 'text-foreground hover:text-accent',
                     )}
                   >
                     {s.label}
                   </button>
                 );
               })}
-              <Link
-                to="/blogs"
-                onClick={() => setMenuOpen(false)}
-                className={cn(
-                  'rounded-md px-3 py-3 text-left text-h3 font-sans transition-colors',
-                  onBlog ? 'text-accent' : 'text-foreground hover:text-accent',
-                )}
-              >
-                My Blogs
-              </Link>
               {navigation.cta && (
                 <div className="mt-4">
                   <Button href={navigation.cta.href} className="w-full">

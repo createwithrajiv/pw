@@ -56,15 +56,6 @@
   --shadow-lg:
     0 8px 24px -6px hsl(221 39% 11% / 0.1), 0 2px 6px -2px hsl(221 39% 11% / 0.05);
 
-  /* Syntax highlighting. Deliberately outside the single-accent rule: code
-     colour is semantic information, not decoration. All ≥4.5:1 on --surface. */
-  --code-keyword: 262 83% 58%; /* 5.45:1 */
-  --code-string: 142 72% 29%; /* 4.80:1 */
-  --code-number: 26 90% 37%; /* 4.81:1 */
-  --code-comment: 215 16% 47%; /* 4.55:1 */
-  --code-function: 221 83% 53%; /* 4.95:1 */
-  --code-type: 175 77% 26%; /* 5.24:1 */
-  --code-tag: 345 83% 41%; /* 6.01:1 */
 }
 
 .dark {
@@ -100,11 +91,4 @@
   --shadow-lg:
     0 8px 24px -6px hsl(223 60% 2% / 0.6), inset 0 1px 0 0 hsl(210 40% 98% / 0.05);
 
-  --code-keyword: 253 95% 85%;
-  --code-string: 142 77% 73%;
-  --code-number: 46 97% 65%;
-  --code-comment: 215 20% 65%; /* 6.92:1 */
-  --code-function: 212 96% 78%; /* 9.84:1 */
-  --code-type: 171 77% 64%;
-  --code-tag: 353 96% 82%;
 }
