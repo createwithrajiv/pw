@@ -18,6 +18,8 @@ import { fadeInUp, staggerContainer } from '@/animations/variants';
 export default function WritingSection() {
   const { newsletter, posts } = useWriting();
   if (posts.length === 0) return null;
+  // Newest first, so adding a post is just an append to writing.json.
+  const ordered = [...posts].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <Section id="writing">
@@ -35,7 +37,7 @@ export default function WritingSection() {
           viewport={{ once: true, amount: 0.15 }}
           className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3"
         >
-          {posts.map((post) => (
+          {ordered.map((post) => (
             <motion.a
               key={post.url}
               variants={fadeInUp}
