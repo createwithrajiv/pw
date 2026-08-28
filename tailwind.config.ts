@@ -61,6 +61,7 @@ export default {
           DEFAULT: 'hsl(var(--accent) / <alpha-value>)',
           hover: 'hsl(var(--accent-hover) / <alpha-value>)',
           strong: 'hsl(var(--accent-strong) / <alpha-value>)',
+          soft: 'hsl(var(--accent-soft) / <alpha-value>)',
         },
         primary: {
           DEFAULT: 'hsl(var(--accent) / <alpha-value>)',

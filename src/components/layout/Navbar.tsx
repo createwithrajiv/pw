@@ -78,13 +78,13 @@ export function Navbar() {
                   aria-current={isActive ? 'true' : undefined}
                   className={cn(
                     'relative rounded-md px-3.5 py-1.5 text-sm font-medium transition-colors',
-                    isActive ? 'text-foreground' : 'text-muted hover:text-foreground',
+                    isActive ? 'text-accent-strong' : 'text-muted hover:text-foreground',
                   )}
                 >
                   {isActive && (
                     <motion.span
                       layoutId="nav-active"
-                      className="absolute inset-0 -z-10 rounded-md bg-surface"
+                      className="absolute inset-0 -z-10 rounded-md border border-accent bg-accent-soft"
                       transition={{ type: 'spring', stiffness: 200, damping: 26, mass: 0.6 }}
                     />
                   )}
@@ -146,7 +146,9 @@ export function Navbar() {
                     onClick={() => go(s.anchor)}
                     className={cn(
                       'rounded-md px-3 py-3 text-left text-h3 font-sans transition-colors',
-                      active === id ? 'text-accent' : 'text-foreground hover:text-accent',
+                      active === id
+                        ? 'bg-accent-soft text-accent-strong'
+                        : 'text-foreground hover:text-accent',
                     )}
                   >
                     {s.label}

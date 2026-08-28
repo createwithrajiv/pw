@@ -38,6 +38,7 @@
   --accent: 221 83% 53%; /* #2563EB — 5.17:1 on white */
   --accent-hover: 224 76% 48%; /* #1D4ED8 */
   --accent-strong: 224 76% 48%; /* accent text sitting on an accent tint */
+  --accent-soft: 222 83% 88%; /* active-nav fill; accent-strong on it = 4.69:1 */
   --accent-fg: 0 0% 100%; /* label on a filled accent button — 5.17:1 */
 
   /* Status. The doc's six-colour palette has no green, but the availability
@@ -76,6 +77,7 @@
   --accent: 217 91% 60%; /* #3B82F6 — 5.12:1 on bg, 4.82:1 on surface */
   --accent-hover: 213 94% 68%; /* #60A5FA */
   --accent-strong: 212 96% 78%; /* #93C5FD — 10.4:1 */
+  --accent-soft: 218 59% 32%; /* active-nav fill; accent-strong on it = 5.29:1 */
   /* NOT white: #FFFFFF on #3B82F6 is 3.68:1 and FAILS AA. Near-black is 5.12:1. */
   --accent-fg: 223 49% 8%;
 
