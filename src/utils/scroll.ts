@@ -5,13 +5,13 @@
  */
 
 /** Fallback if `--nav-h` can't be read (SSR, or the token is missing). */
-const NAV_H_FALLBACK = 88;
+export const NAV_H_FALLBACK = 88;
 
 /**
  * Height of the sticky navbar, read from the `--nav-h` token so CSS and JS
  * share one source of truth. Only evaluated on an actual scroll call.
  */
-function navHeight(): number {
+export function navHeight(): number {
   if (typeof window === 'undefined') return NAV_H_FALLBACK;
   const raw = getComputedStyle(document.documentElement).getPropertyValue('--nav-h');
   const parsed = Number.parseFloat(raw);
