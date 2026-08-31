@@ -56,10 +56,7 @@ export default function DemosSection() {
           {items.map((demo) => (
             <motion.li key={demo.url} variants={fadeInUp}>
               <Card className="flex h-full flex-col gap-3 p-6">
-                <div className="flex items-center gap-2 text-xs text-subtle">
-                  <span>{demo.company}</span>
-                  {demo.duration && <span>· {demo.duration}</span>}
-                </div>
+                {demo.duration && <span className="text-xs text-subtle">{demo.duration}</span>}
                 <h3 className="text-h3 font-sans font-medium leading-snug">{demo.title}</h3>
                 <p className="flex-1 text-sm leading-relaxed text-muted">{demo.summary}</p>
                 {demo.tags && demo.tags.length > 0 && (

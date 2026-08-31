@@ -1,8 +1,6 @@
 export interface Demo {
   /** Short title of what the recording shows. */
   title: string;
-  /** Which company / client the work was for. */
-  company: string;
   /** One or two lines on what the walkthrough demonstrates. */
   summary: string;
   /** Full YouTube URL. MUST point at a video set to Private, not Unlisted. */
