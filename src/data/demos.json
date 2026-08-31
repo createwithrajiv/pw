@@ -1,26 +1,38 @@
 {
-  "notice": "These are screen recordings of production systems built for client teams, so the recordings are access-controlled rather than public. Email me and I'll walk through them live on a call.",
+  "notice": "Walkthroughs of production systems I've shipped. Client work under NDA, so access is by request - send a quick note and I'll take it from there.",
   "items": [
     {
       "title": "Tabular View",
       "summary": "Build a matrix of companies against whichever metrics you want - revenue, profit, CEO commentary - pulled from their latest IR filings, every value carrying a citation. Exports to Excel, and generates an analysis of how each company is performing relative to the others.",
       "url": "https://youtu.be/1r_I2I-Qve4",
       "duration": "4:43",
-      "tags": ["Financial Data", "Citations", "Excel Export"]
+      "tags": [
+        "Financial Data",
+        "Citations",
+        "Excel Export"
+      ]
     },
     {
       "title": "News Feed",
       "summary": "Pick a topic and get the news on it as a daily or weekly digest, every item attributed to its source. Delivered both to email and inside the platform.",
       "url": "https://youtu.be/I-4ku-vLPWo",
       "duration": "3:03",
-      "tags": ["Digests", "Email Delivery", "Sourcing"]
+      "tags": [
+        "Digests",
+        "Email Delivery",
+        "Sourcing"
+      ]
     },
     {
       "title": "Client QA and Financial Extractor",
       "summary": "Pulls the Q&A section and the full financial statements - balance sheet, cash flow, income statement - out of every quarterly and annual filing. Statements download as Excel.",
       "url": "https://youtu.be/jJLenZdKg58",
       "duration": "2:11",
-      "tags": ["Document Extraction", "Filings", "Excel Export"]
+      "tags": [
+        "Document Extraction",
+        "Filings",
+        "Excel Export"
+      ]
     }
   ]
 }

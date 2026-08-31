@@ -27,7 +27,18 @@ export default function DemosSection() {
   const mailto = `mailto:${profile.email}?subject=${encodeURIComponent(
     'Request: product walkthrough access',
   )}&body=${encodeURIComponent(
-    "Hi Rajiv,\n\nI'd like to see a walkthrough of your production work.\n\n",
+    // The blank message box is the real friction here, not the call. Seeding
+    // two short prompts makes the mail easier to send AND returns the context
+    // needed to decide what to share - without a second round-trip.
+    [
+      'Hi Rajiv,',
+      '',
+      "I'd like to see a walkthrough of your production work.",
+      '',
+      'Who I am:',
+      'What I am working on:',
+      '',
+    ].join('\n'),
   )}`;
 
   return (
