@@ -10,6 +10,7 @@
     { "id": "skills", "label": "Skills", "anchor": "#skills", "enabled": true, "order": 40, "hideWhenEmpty": true },
     { "id": "experience", "label": "Experience", "anchor": "#experience", "enabled": true, "order": 50, "hideWhenEmpty": true },
     { "id": "projects", "label": "Work", "anchor": "#projects", "enabled": true, "order": 60, "hideWhenEmpty": true },
+    { "id": "demos", "label": "Demos", "anchor": "#demos", "enabled": true, "order": 65, "hideWhenEmpty": true },
     { "id": "testimonials", "label": "Praise", "anchor": "#testimonials", "enabled": true, "order": 70, "hideWhenEmpty": true },
     { "id": "story", "label": "Story", "anchor": "#story", "enabled": true, "order": 80, "hideWhenEmpty": false },
     { "id": "certifications", "label": "Certs", "anchor": "#certifications", "enabled": true, "order": 90, "hideWhenEmpty": true },

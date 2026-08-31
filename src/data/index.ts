@@ -25,6 +25,7 @@ import valuesJson from './values.json';
 import ctaJson from './cta.json';
 import certificationsJson from './certifications.json';
 import writingJson from './writing.json';
+import demosJson from './demos.json';
 import faqJson from './faq.json';
 import technologiesJson from './technologies.json';
 import sectionCopyJson from './section-copy.json';
@@ -47,6 +48,7 @@ import type {
   Cta,
   Certification,
   WritingData,
+  DemosData,
   FaqData,
   TechnologiesData,  SectionCopyData,
 } from '@/types';
@@ -93,6 +95,7 @@ export const values = valuesJson as ValuesData;
 export const cta = ctaJson as Cta;
 export const certifications = certificationsJson as Certification[];
 export const writing = writingJson as WritingData;
+export const demos = demosJson as DemosData;
 export const faq = faqJson as FaqData;
 export const technologies = technologiesJson as TechnologiesData;
 

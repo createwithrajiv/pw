@@ -14,6 +14,7 @@ export type { StoryParagraph, PersonalStory, ValueItem, ValuesData } from './sto
 export type { CtaButton, Cta } from './cta';
 export type { Certification } from './certification';
 export type { WritingPost, NewsletterMeta, WritingData } from './writing';
+export type { Demo, DemosData } from './demos';
 export type { FaqItem, FaqData } from './faq';
 export type { Technology, TechnologiesData } from './technology';
 export type { SectionCopy, SectionCopyData } from './section';

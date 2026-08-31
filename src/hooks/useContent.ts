@@ -26,6 +26,7 @@ export const useValues = () => content.values;
 export const useCta = () => content.cta;
 export const useCertifications = () => content.certifications;
 export const useWriting = () => content.writing;
+export const useDemos = () => content.demos;
 export const useFaq = () => content.faq;
 export const useTechnologies = () => content.technologies;
 

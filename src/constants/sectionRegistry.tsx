@@ -11,6 +11,7 @@ import {
   values,
   faq,
   writing,
+  demos,
   companyLogos,
 } from '@/data';
 
@@ -51,6 +52,10 @@ export const sectionRegistry: Record<string, SectionRegistryEntry> = {
   projects: {
     Component: lazy(() => import('@/sections/ProjectsSection')),
     isEmpty: () => projects.length === 0,
+  },
+  demos: {
+    Component: lazy(() => import('@/sections/DemosSection')),
+    isEmpty: () => demos.items.length === 0,
   },
   testimonials: {
     Component: lazy(() => import('@/sections/TestimonialsSection')),
