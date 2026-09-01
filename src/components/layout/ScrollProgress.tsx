@@ -90,7 +90,7 @@ export function ScrollProgress() {
                     : 'border-border-strong bg-canvas group-hover:border-accent',
                 )}
               />
-              <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-0.5 text-[11px] text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+              <span className="pointer-events-none absolute right-6 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-md border border-border bg-surface px-2 py-0.5 text-xs text-muted opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                 {m.label}
               </span>
             </button>

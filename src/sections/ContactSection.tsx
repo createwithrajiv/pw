@@ -53,7 +53,7 @@ export default function ContactSection() {
                   <button
                     onClick={copyEmail}
                     aria-label={copied ? 'Email copied' : 'Copy email address'}
-                    className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                    className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors hover:border-accent hover:text-accent"
                   >
                     {copied ? (
                       <Check className="h-4 w-4 text-success" />

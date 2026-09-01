@@ -27,7 +27,7 @@ export function Footer() {
   // justify-self-start + text-left: a stretched <button> centres its label by
   // default, which left the link columns ragged against the <a> beside them.
   const linkClass =
-    'justify-self-start text-left text-sm text-muted transition-colors duration-200 hover:text-accent';
+    'justify-self-start py-1 text-left text-sm text-muted transition-colors duration-200 hover:text-accent';
 
   return (
     <footer className="relative border-t border-border bg-base">
@@ -37,7 +37,7 @@ export function Footer() {
         <div className="flex flex-col gap-3">
           <button
             onClick={() => go('#hero')}
-            className="flex items-center gap-2 self-start font-sans text-base font-bold"
+            className="flex items-center gap-2 self-start py-1.5 font-sans text-base font-bold"
             aria-label={`${navigation.brand} - back to top`}
           >
             <BrandMark className="h-8 w-8" />
@@ -83,7 +83,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.platform}
-                className="grid h-9 w-9 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
+                className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
               >
                 <IconRenderer name={s.icon} className="h-[18px] w-[18px]" />
               </a>

@@ -141,7 +141,7 @@ export default function TestimonialsSection() {
                 {current.detailed_quote && (
                   <button
                     onClick={() => setDetailOpen(true)}
-                    className="link-underline inline-flex w-fit items-center gap-1.5 text-sm font-medium text-accent"
+                    className="link-underline -my-1 inline-flex w-fit items-center gap-1.5 py-2 text-sm font-medium text-accent"
                   >
                     Read full recommendation
                     <ArrowUpRight className="h-4 w-4" />
@@ -171,7 +171,7 @@ export default function TestimonialsSection() {
                     onClick={() => setIndex(i)}
                     aria-label={`Show testimonial ${i + 1} of ${count}`}
                     aria-current={i === index}
-                    className="group/dot grid h-9 w-9 place-items-center rounded-md"
+                    className="group/dot grid h-11 w-11 place-items-center rounded-md"
                   >
                     <span
                       aria-hidden
@@ -190,21 +190,21 @@ export default function TestimonialsSection() {
                   onClick={() => setPaused((p) => !p)}
                   aria-label={paused ? 'Resume testimonial rotation' : 'Pause testimonial rotation'}
                   aria-pressed={paused}
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   {paused ? <Play className="h-4 w-4" aria-hidden /> : <Pause className="h-4 w-4" aria-hidden />}
                 </button>
                 <button
                   onClick={() => go(-1)}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+                  className="grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -229,7 +229,7 @@ export default function TestimonialsSection() {
           <button
             onClick={() => setDetailOpen(false)}
             aria-label="Close"
-            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+            className="absolute right-4 top-4 grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <X className="h-4 w-4" />
           </button>

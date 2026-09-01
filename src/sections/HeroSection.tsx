@@ -110,7 +110,7 @@ export default function HeroSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.platform}
-                  className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
+                  className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted transition-colors duration-200 hover:border-accent hover:text-accent"
                 >
                   <IconRenderer name={s.icon} className="h-[18px] w-[18px]" />
                 </a>
