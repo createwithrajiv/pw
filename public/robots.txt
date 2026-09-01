@@ -1,4 +1,128 @@
+# rajivyadav.com — open to everything, including AI.
+#
+# NOTE: Cloudflare's "Managed robots.txt" (Security -> Settings -> Bot traffic ->
+# "Instruct AI bot traffic with robots.txt") PREPENDS its own block to this file
+# at the edge, and that block Disallows GPTBot, ClaudeBot, Google-Extended,
+# CCBot, Bytespider, Amazonbot, Applebot-Extended and meta-externalagent.
+# A specific user-agent rule beats the wildcard, so while that setting is on,
+# everything below is overridden for those crawlers. It must be turned off in
+# the Cloudflare dashboard for this file to take effect.
+
+# Cloudflare Content Signals — this site grants all three uses.
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=yes, use=full
 Allow: /
 
-Sitemap: https://rajivyadav.com/sitemap.xml
+# --- Search engines ---
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# --- AI answer engines and assistants (these cite and link back) ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: DuckAssistBot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# --- AI training crawlers ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: omgili
+Allow: /
+
+User-agent: Timpibot
+Allow: /
+
+# --- Social preview fetchers ---
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot-LinkExpanding
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+Sitemap: https://www.rajivyadav.com/sitemap.xml

@@ -6,12 +6,14 @@
   "description": "Premium personal portfolio for Rajiv Yadav — AI Engineer. Data-driven from src/data.",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && npm run seo:files && npm run prerender",
     "preview": "vite preview",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc -b",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,json}\"",
-    "audit:lh": "lighthouse http://localhost:4173 --preset=desktop --output=json --output=html --output-path=./lighthouse/report --chrome-flags=\"--headless=new\" --quiet"
+    "audit:lh": "lighthouse http://localhost:4173 --preset=desktop --output=json --output=html --output-path=./lighthouse/report --chrome-flags=\"--headless=new\" --quiet",
+    "seo:files": "node scripts/generate-llms.mjs",
+    "prerender": "node scripts/prerender.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
@@ -41,6 +43,7 @@
     "lighthouse": "^13.4.1",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
+    "puppeteer": "^25.9.0",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.6.3",
     "vite": "^5.4.11"
