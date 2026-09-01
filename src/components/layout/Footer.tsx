@@ -47,23 +47,30 @@ export function Footer() {
         </div>
 
         <nav aria-label="Footer" className="flex flex-col gap-3">
-          <span className="eyebrow">Explore</span>
-          {/* Two link columns, so a dozen entries don't stretch the footer into
-              a page of its own. grid-flow-col fills the first column downward. */}
-          <div className="grid grid-flow-col grid-rows-6 gap-x-8 gap-y-2">
+          <span className="eyebrow text-center">Explore</span>
+          {/* CSS multi-column rather than grid-flow-col: it balances the items
+              across the three columns on its own, so adding a link never leaves
+              a stranded single entry in the last column the way a fixed
+              grid-rows count does. */}
+          <div className="columns-3 gap-x-6 [&>*]:mb-2 [&>*]:block [&>*]:break-inside-avoid">
             {navSections.map((s) => (
               <button key={s.id} onClick={() => go(s.anchor)} className={linkClass}>
                 {s.label}
               </button>
             ))}
-            <a href={NEWSLETTER_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              Newsletter
-            </a>
           </div>
         </nav>
 
         <div className="flex flex-col gap-3">
           <span className="eyebrow">Connect</span>
+          <a
+            href={NEWSLETTER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            The Hot Path - newsletter
+          </a>
           <a href={`mailto:${profile.email}`} className={linkClass}>
             {profile.email}
           </a>
