@@ -25,6 +25,8 @@ export interface Metric {
   decimals?: number;
   label: string;
   icon?: string;
+  /** Show this number in the hero teaser row as well as the metrics grid. */
+  hero?: boolean;
   context?: string;
   /** Optional breakdown, shown in a modal when the tile is activated. */
   details?: MetricDetails;

@@ -5,7 +5,7 @@ import { Container } from '@/components/ui/Container';
 import { Button } from '@/components/ui/Button';
 import { IconRenderer } from '@/components/ui/IconRenderer';
 import { ProfileFrame } from '@/components/hero/ProfileFrame';
-import { useProfile, useSocial } from '@/hooks/useContent';
+import { useMetrics, useProfile, useSocial } from '@/hooks/useContent';
 import { scrollTo } from '@/utils/scroll';
 import { parseStat } from '@/utils/format';
 import { Counter } from '@/components/ui/Counter';
@@ -14,7 +14,25 @@ import { fadeInUp, slideUp, staggerContainer } from '@/animations/variants';
 export default function HeroSection() {
   const profile = useProfile();
   const social = useSocial();
-  const teaser = profile.stats.slice(0, 3);
+  const metrics = useMetrics();
+  // One source of truth: the hero row is whichever metrics are flagged
+  // `hero` in metrics.json. profile.stats remains the fallback.
+  const flagged = metrics.items.filter((m) => m.hero);
+  const teaser =
+    flagged.length > 0
+      ? flagged.map((m) => ({
+          key: m.id,
+          label: m.label,
+          value: m.value,
+          decimals: m.decimals ?? 0,
+          prefix: m.prefix ?? '',
+          suffix: m.suffix ?? '',
+        }))
+      : profile.stats.slice(0, 3).map((stat, i) => ({
+          key: `stat-${i}`,
+          label: stat.label,
+          ...parseStat(stat.value),
+        }));
 
   return (
     <Section id="hero" className="!pb-12 !pt-24 sm:!pt-28">
@@ -65,24 +83,21 @@ export default function HeroSection() {
 
           <motion.div
             variants={fadeInUp}
-            className="mt-1 flex flex-wrap items-center gap-x-10 gap-y-3 border-t border-border pt-5"
+            className="mt-1 flex flex-wrap items-start gap-x-10 gap-y-4 border-t border-border pt-5"
           >
-            {teaser.map((stat) => {
-              const parsed = parseStat(stat.value);
-              return (
-                <div key={stat.label} className="flex flex-col">
-                  <span className="font-sans text-2xl font-bold text-foreground">
-                    <Counter
-                      value={parsed.value}
-                      decimals={parsed.decimals}
-                      prefix={parsed.prefix}
-                      suffix={parsed.suffix}
-                    />
-                  </span>
-                  <span className="mt-1 max-w-[14ch] text-xs text-muted">{stat.label}</span>
-                </div>
-              );
-            })}
+            {teaser.map((stat) => (
+              <div key={stat.key} className="flex flex-col">
+                <span className="font-sans text-2xl font-bold text-foreground">
+                  <Counter
+                    value={stat.value}
+                    decimals={stat.decimals}
+                    prefix={stat.prefix}
+                    suffix={stat.suffix}
+                  />
+                </span>
+                <span className="mt-1 max-w-[14ch] text-xs text-muted">{stat.label}</span>
+              </div>
+            ))}
           </motion.div>
 
           <motion.div variants={fadeInUp} className="flex items-center gap-4">

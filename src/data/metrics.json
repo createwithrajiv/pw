@@ -52,7 +52,8 @@
             ]
           }
         ]
-      }
+      },
+      "hero": true
     },
     {
       "id": "agents",
@@ -116,7 +117,8 @@
             ]
           }
         ]
-      }
+      },
+      "hero": true
     },
     {
       "id": "rag",
@@ -145,7 +147,8 @@
             ]
           }
         ]
-      }
+      },
+      "hero": true
     },
     {
       "id": "uptime",
@@ -162,7 +165,8 @@
       "suffix": "K+",
       "label": "Daily API Requests Handled",
       "icon": "gauge",
-      "context": "Requests served daily across production systems at sub-100ms latency."
+      "context": "Requests served daily across production systems at sub-100ms latency.",
+      "hero": true
     },
     {
       "id": "years",
