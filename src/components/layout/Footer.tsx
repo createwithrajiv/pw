@@ -47,7 +47,7 @@ export function Footer() {
         </div>
 
         <nav aria-label="Footer" className="flex flex-col gap-3">
-          <span className="eyebrow text-center">Explore</span>
+          <span className="eyebrow mb-3 text-center">Explore</span>
           {/* CSS multi-column rather than grid-flow-col: it balances the items
               across the three columns on its own, so adding a link never leaves
               a stranded single entry in the last column the way a fixed
@@ -62,7 +62,7 @@ export function Footer() {
         </nav>
 
         <div className="flex flex-col gap-3">
-          <span className="eyebrow">Connect</span>
+          <span className="eyebrow mb-3">Connect</span>
           <a
             href={NEWSLETTER_URL}
             target="_blank"
