@@ -53,7 +53,8 @@
           }
         ]
       },
-      "hero": true
+      "hero": true,
+      "shortLabel": "Production models"
     },
     {
       "id": "agents",
@@ -118,7 +119,8 @@
           }
         ]
       },
-      "hero": true
+      "hero": true,
+      "shortLabel": "Agents in production"
     },
     {
       "id": "rag",
@@ -148,7 +150,8 @@
           }
         ]
       },
-      "hero": true
+      "hero": true,
+      "shortLabel": "RAG pipelines"
     },
     {
       "id": "uptime",
@@ -157,7 +160,8 @@
       "decimals": 1,
       "label": "System Uptime",
       "icon": "activity",
-      "context": "Sustained availability under load, backed by observability and automated failover."
+      "context": "Sustained availability under load, backed by observability and automated failover.",
+      "shortLabel": "Uptime"
     },
     {
       "id": "requests",
@@ -166,7 +170,8 @@
       "label": "Daily API Requests Handled",
       "icon": "gauge",
       "context": "Requests served daily across production systems at sub-100ms latency.",
-      "hero": true
+      "hero": true,
+      "shortLabel": "Daily requests"
     },
     {
       "id": "years",
@@ -174,7 +179,9 @@
       "suffix": "+",
       "label": "Years of Experience",
       "icon": "calendar-clock",
-      "context": "Building ML infrastructure, distributed systems, and production AI pipelines."
+      "context": "Building ML infrastructure, distributed systems, and production AI pipelines.",
+      "hero": true,
+      "shortLabel": "Years experience"
     }
   ]
 }

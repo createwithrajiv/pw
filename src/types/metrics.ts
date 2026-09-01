@@ -24,6 +24,8 @@ export interface Metric {
   prefix?: string; // "$", "~"
   decimals?: number;
   label: string;
+  /** Tighter label for the hero row, where five tiles share one line. */
+  shortLabel?: string;
   icon?: string;
   /** Show this number in the hero teaser row as well as the metrics grid. */
   hero?: boolean;

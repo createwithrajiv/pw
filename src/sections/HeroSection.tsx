@@ -22,7 +22,7 @@ export default function HeroSection() {
     flagged.length > 0
       ? flagged.map((m) => ({
           key: m.id,
-          label: m.label,
+          label: m.shortLabel ?? m.label,
           value: m.value,
           decimals: m.decimals ?? 0,
           prefix: m.prefix ?? '',
@@ -83,7 +83,7 @@ export default function HeroSection() {
 
           <motion.div
             variants={fadeInUp}
-            className="mt-1 flex flex-wrap items-start gap-x-10 gap-y-4 border-t border-border pt-5"
+            className="mt-1 flex flex-wrap items-start gap-x-8 gap-y-4 border-t border-border pt-5"
           >
             {teaser.map((stat) => (
               <div key={stat.key} className="flex flex-col">
@@ -95,7 +95,7 @@ export default function HeroSection() {
                     suffix={stat.suffix}
                   />
                 </span>
-                <span className="mt-1 max-w-[14ch] text-xs text-muted">{stat.label}</span>
+                <span className="mt-1 text-xs text-muted">{stat.label}</span>
               </div>
             ))}
           </motion.div>
