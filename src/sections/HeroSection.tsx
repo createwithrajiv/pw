@@ -86,7 +86,7 @@ export default function HeroSection() {
             className="mt-1 flex flex-wrap items-start gap-x-8 gap-y-4 border-t border-border pt-5"
           >
             {teaser.map((stat) => (
-              <div key={stat.key} className="flex flex-col">
+              <div key={stat.key} className="flex flex-col items-center text-center">
                 <span className="font-sans text-2xl font-bold text-foreground">
                   <Counter
                     value={stat.value}
@@ -95,7 +95,7 @@ export default function HeroSection() {
                     suffix={stat.suffix}
                   />
                 </span>
-                <span className="mt-1 text-xs text-muted">{stat.label}</span>
+                <span className="mt-1 max-w-[11ch] text-xs text-muted">{stat.label}</span>
               </div>
             ))}
           </motion.div>
