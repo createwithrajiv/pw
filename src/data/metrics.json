@@ -2,9 +2,175 @@
   "eyebrow": "Impact in numbers",
   "heading": "Built to scale, measured in production",
   "items": [
-    { "id": "models", "value": 7, "suffix": "+", "label": "Production Models Deployed", "icon": "boxes", "context": "Shipped and maintained across real production environments, not notebooks." },
-    { "id": "uptime", "value": 99.9, "suffix": "%", "decimals": 1, "label": "System Uptime", "icon": "activity", "context": "Sustained availability under load, backed by observability and automated failover." },
-    { "id": "requests", "value": 100, "suffix": "K+", "label": "Daily API Requests Handled", "icon": "gauge", "context": "Requests served daily across production systems at sub-100ms latency." },
-    { "id": "years", "value": 2, "suffix": "+", "label": "Years of Experience", "icon": "calendar-clock", "context": "Building ML infrastructure, distributed systems, and production AI pipelines." }
+    {
+      "id": "models",
+      "value": 7,
+      "suffix": "+",
+      "label": "Production Models Deployed",
+      "icon": "boxes",
+      "context": "Shipped and maintained across real production environments, not notebooks.",
+      "details": {
+        "heading": "Models running in production",
+        "intro": "Trained, deployed and maintained in live systems - not notebook experiments.",
+        "groups": [
+          {
+            "title": "Vision",
+            "items": [
+              {
+                "name": "Vehicle Detection",
+                "note": "YOLOv8"
+              },
+              {
+                "name": "License Plate Detection",
+                "note": "YOLOv8"
+              },
+              {
+                "name": "Vehicle Classification",
+                "note": "YOLOv8"
+              },
+              {
+                "name": "License Plate Recognition",
+                "note": "Tesseract + PaddleOCR + EasyOCR"
+              }
+            ]
+          },
+          {
+            "title": "Document & language",
+            "items": [
+              {
+                "name": "Document Intelligence / Parsing",
+                "note": "Docling"
+              },
+              {
+                "name": "Large language model",
+                "note": "Gemma 3"
+              },
+              {
+                "name": "Large language model",
+                "note": "Qwen 3"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "agents",
+      "value": 19,
+      "label": "Agents in Production",
+      "icon": "workflow",
+      "context": "Nineteen agents across three multi-agent systems, each with its own review and revision loop.",
+      "details": {
+        "heading": "Agent systems in production",
+        "intro": "Three multi-agent systems, nineteen agents. Every pipeline separates generation from review, so nothing ships on a single model call.",
+        "groups": [
+          {
+            "title": "Agentic QA pipeline - 6 agents",
+            "items": [
+              {
+                "name": "Stage 1 - documents to test cases",
+                "note": "Generation, reviewer, revisor"
+              },
+              {
+                "name": "Stage 2 - test cases to SQL",
+                "note": "Generation, reviewer, revisor"
+              }
+            ]
+          },
+          {
+            "title": "PRD to requirements - 5 agents",
+            "items": [
+              {
+                "name": "Generator, extractor",
+                "note": "Turns a PRD into discrete, typed requirements"
+              },
+              {
+                "name": "Reviewer, revisor",
+                "note": "Checks each requirement and rewrites the ones that fail"
+              },
+              {
+                "name": "Dedup",
+                "note": "Collapses requirements restated across the document"
+              }
+            ]
+          },
+          {
+            "title": "Firmware unit testing - 8 agents",
+            "items": [
+              {
+                "name": "Requirement analysis, project analyzer, requirement mapping",
+                "note": "Reads the firmware and ties each requirement to the code it governs"
+              },
+              {
+                "name": "Generation, validation",
+                "note": "Writes the unit tests and checks them against the requirement"
+              },
+              {
+                "name": "Execution, failure analysis",
+                "note": "Runs the suite and diagnoses what actually broke"
+              },
+              {
+                "name": "Report generation",
+                "note": "Produces the coverage and outcome report"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "rag",
+      "value": 3,
+      "label": "RAG Pipelines Built",
+      "icon": "layers",
+      "context": "Three retrieval pipelines in production across legal, financial and engineering documents.",
+      "details": {
+        "heading": "Retrieval pipelines",
+        "intro": "Three production RAG systems, each matched to the document type and retrieval pattern it serves.",
+        "groups": [
+          {
+            "items": [
+              {
+                "name": "Legal document retrieval",
+                "note": "Zilliz (Milvus) + OpenAI embeddings"
+              },
+              {
+                "name": "Financial document retrieval",
+                "note": "Qdrant + OpenAI embeddings"
+              },
+              {
+                "name": "Document to test-case retrieval",
+                "note": "Pinecone + text-embedding-3-small via Azure OpenAI. Hybrid sparse-dense search weighted 0.7 to dense, with GPT-4o-mini reranking."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "uptime",
+      "value": 99.9,
+      "suffix": "%",
+      "decimals": 1,
+      "label": "System Uptime",
+      "icon": "activity",
+      "context": "Sustained availability under load, backed by observability and automated failover."
+    },
+    {
+      "id": "requests",
+      "value": 100,
+      "suffix": "K+",
+      "label": "Daily API Requests Handled",
+      "icon": "gauge",
+      "context": "Requests served daily across production systems at sub-100ms latency."
+    },
+    {
+      "id": "years",
+      "value": 2,
+      "suffix": "+",
+      "label": "Years of Experience",
+      "icon": "calendar-clock",
+      "context": "Building ML infrastructure, distributed systems, and production AI pipelines."
+    }
   ]
 }
