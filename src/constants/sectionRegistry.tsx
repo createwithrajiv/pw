@@ -10,7 +10,8 @@ import {
   personalStory,
   values,
   faq,
-  publishedPosts,
+  writing,
+  demos,
   companyLogos,
 } from '@/data';
 
@@ -52,6 +53,10 @@ export const sectionRegistry: Record<string, SectionRegistryEntry> = {
     Component: lazy(() => import('@/sections/ProjectsSection')),
     isEmpty: () => projects.length === 0,
   },
+  demos: {
+    Component: lazy(() => import('@/sections/DemosSection')),
+    isEmpty: () => demos.items.length === 0,
+  },
   testimonials: {
     Component: lazy(() => import('@/sections/TestimonialsSection')),
     isEmpty: () => testimonials.length === 0,
@@ -68,9 +73,9 @@ export const sectionRegistry: Record<string, SectionRegistryEntry> = {
     Component: lazy(() => import('@/sections/FaqSection')),
     isEmpty: () => faq.items.length === 0,
   },
-  blog: {
-    Component: lazy(() => import('@/sections/BlogSection')),
-    isEmpty: () => publishedPosts.length === 0,
+  writing: {
+    Component: lazy(() => import('@/sections/WritingSection')),
+    isEmpty: () => writing.posts.length === 0,
   },
   contact: { Component: lazy(() => import('@/sections/ContactSection')), isEmpty: () => false },
   cta: { Component: lazy(() => import('@/sections/CtaSection')), isEmpty: () => false },

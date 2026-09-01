@@ -1,24 +1,56 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#060810" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f7f9fc" media="(prefers-color-scheme: light)" />
-    <meta name="color-scheme" content="dark light" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B1120" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
     <title>Rajiv Yadav — AI Engineer</title>
     <meta
+      data-rh="true"
       name="description"
       content="AI Engineer building production AI systems that scale — ML infrastructure, MLOps, and LLM orchestration."
     />
+    <link data-rh="true" rel="canonical" href="https://rajivyadav.com/" />
+
+    <!--
+      Static social fallbacks. Helmet injects the real per-route tags after
+      hydration, but scrapers that do not execute JS (LinkedIn, Slack, Twitter)
+      only ever see what is in this document.
+    -->
+    <meta data-rh="true" property="og:type" content="website" />
+    <meta data-rh="true" property="og:site_name" content="Rajiv Yadav" />
+    <meta data-rh="true" property="og:title" content="Rajiv Yadav — AI Engineer" />
+    <meta
+      data-rh="true"
+      property="og:description"
+      content="AI Engineer building production AI systems that scale — ML infrastructure, MLOps, and LLM orchestration."
+    />
+    <meta data-rh="true" property="og:url" content="https://rajivyadav.com/" />
+    <meta data-rh="true" property="og:image" content="https://rajivyadav.com/profile.jpg" />
+    <meta data-rh="true" name="twitter:card" content="summary_large_image" />
+    <meta data-rh="true" name="twitter:site" content="@createwithrajiv" />
+    <meta data-rh="true" name="twitter:title" content="Rajiv Yadav — AI Engineer" />
+    <meta
+      data-rh="true"
+      name="twitter:description"
+      content="AI Engineer building production AI systems that scale — ML infrastructure, MLOps, and LLM orchestration."
+    />
+    <meta data-rh="true" name="twitter:image" content="https://rajivyadav.com/profile.jpg" />
+
     <!-- FOUC guard: resolve theme before first paint so there is no flash. -->
     <script>
       (function () {
         try {
           var stored = localStorage.getItem('theme');
-          var mode = stored || 'dark';
+          var mode = stored || 'light'; /* must match settings.themeDefault */
           var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           var resolved = mode === 'system' ? (systemDark ? 'dark' : 'light') : mode;
           var el = document.documentElement;
@@ -31,6 +63,15 @@
   <body>
     <div id="root"></div>
     <div id="modal-root"></div>
+    <noscript>
+      <div style="max-width: 40rem; margin: 4rem auto; padding: 0 1.25rem; font-family: system-ui">
+        <h1>Rajiv Yadav — R&amp;D AI Engineer</h1>
+        <p>
+          This portfolio needs JavaScript to render. You can still reach me at
+          <a href="mailto:rajiv@rajivyadav.com">rajiv@rajivyadav.com</a>.
+        </p>
+      </div>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

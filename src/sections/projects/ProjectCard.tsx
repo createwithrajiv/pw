@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight, Github, Star } from 'lucide-react';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
 import { Tag } from '@/components/ui/Tag';
 import { isRealHref } from '@/utils/href';
@@ -36,15 +36,13 @@ export function ProjectCard({
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, amount: 0.08 }}
-      data-cursor
-      data-cursor-label="VIEW"
-      onPointerEnter={onPointerEnter}
+           onPointerEnter={onPointerEnter}
       onPointerLeave={onPointerLeave}
       onFocus={onFocus}
       onBlur={onBlur}
       className={cn('transition-[opacity,filter] duration-300', dimmed && 'opacity-50 saturate-50')}
     >
-      <GlassCard
+      <Card
         interactive
         onClick={() => onOpen(project)}
         role="button"
@@ -60,19 +58,19 @@ export function ProjectCard({
       >
         {/* Hover sheen */}
         <span
-          className="pointer-events-none absolute inset-0 bg-grad-radial opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          className="pointer-events-none absolute inset-0 bg-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           aria-hidden
         />
         <div className="flex items-center justify-between gap-3">
           <Badge tone="accent">{project.category}</Badge>
           {project.featured && (
-            <span className="flex items-center gap-1 text-xs text-accent-2">
+            <span className="flex items-center gap-1 text-xs text-accent">
               <Star className="h-3.5 w-3.5 fill-current" aria-hidden /> Featured
             </span>
           )}
         </div>
 
-        <h3 className="text-h3 font-display font-medium leading-snug transition-colors group-hover:text-accent">
+        <h3 className="text-h3 font-sans font-medium leading-snug transition-colors group-hover:text-accent">
           {project.title}
         </h3>
         <p className="line-clamp-3 text-sm leading-relaxed text-muted">{project.description}</p>
@@ -93,7 +91,7 @@ export function ProjectCard({
             <Github className="h-4 w-4 text-subtle" aria-hidden />
           )}
         </div>
-      </GlassCard>
+      </Card>
     </motion.div>
   );
 }

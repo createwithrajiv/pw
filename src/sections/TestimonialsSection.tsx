@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowUpRight, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Pause, Play, X } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Modal } from '@/components/ui/Modal';
-import { AnimatedText } from '@/components/motion/AnimatedText';
 import { useTestimonials, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { EASE } from '@/animations/variants';
@@ -28,6 +27,8 @@ function Avatar({ photo, name, size = 'md' }: { photo?: string; name: string; si
         alt={name}
         loading="lazy"
         decoding="async"
+        width={size === 'lg' ? 56 : 48}
+        height={size === 'lg' ? 56 : 48}
         className={cn('shrink-0 rounded-full object-cover ring-1 ring-border', dim)}
       />
     );
@@ -36,7 +37,7 @@ function Avatar({ photo, name, size = 'md' }: { photo?: string; name: string; si
     <div
       aria-hidden
       className={cn(
-        'grid shrink-0 place-items-center rounded-full bg-grad-accent font-display font-semibold text-primary-foreground',
+        'grid shrink-0 place-items-center rounded-full bg-accent font-sans font-semibold text-primary-foreground',
         dim,
       )}
     >
@@ -53,7 +54,9 @@ function CompanyLogo({ logo, company }: { logo?: string; company: string }) {
         alt={company}
         loading="lazy"
         decoding="async"
-        className="max-h-8 w-auto max-w-[110px] shrink-0 rounded bg-white/95 object-contain p-1.5"
+        width={110}
+        height={32}
+        className="max-h-8 w-auto max-w-[110px] shrink-0 rounded bg-white object-contain p-1.5 ring-1 ring-black/5 dark:ring-white/10"
       />
     );
   }
@@ -69,11 +72,13 @@ export default function TestimonialsSection() {
   const [hoverPaused, setHoverPaused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
   const [detailOpen, setDetailOpen] = useState(false);
+  const [paused, setPaused] = useState(false);
 
   const current = testimonials[index];
   const go = (dir: number) => setIndex((i) => (i + dir + count) % count);
 
-  const autoActive = !reduced && !hoverPaused && !tabHidden && !detailOpen && count > 1;
+  const autoActive =
+    !reduced && !paused && !hoverPaused && !tabHidden && !detailOpen && count > 1;
   useEffect(() => {
     if (!autoActive) return;
     const id = window.setInterval(() => setIndex((i) => (i + 1) % count), 5500);
@@ -93,7 +98,7 @@ export default function TestimonialsSection() {
     .filter(Boolean);
 
   return (
-    <Section id="testimonials" ambient>
+    <Section id="testimonials" band>
       <Container>
         <SectionHeading {...copy} align="center" />
 
@@ -106,12 +111,12 @@ export default function TestimonialsSection() {
         >
           <span
             aria-hidden
-            className="text-gradient animate-gradient-shift pointer-events-none absolute -left-2 -top-16 select-none font-display text-[10rem] leading-none opacity-20"
+            className="text-foreground pointer-events-none absolute -left-2 -top-16 select-none font-sans text-[10rem] leading-none opacity-20"
           >
             &ldquo;
           </span>
 
-          <GlassCard className="relative min-h-[340px] overflow-hidden p-8 sm:p-10">
+          <Card className="relative min-h-[340px] overflow-hidden p-8 sm:p-10">
             <AnimatePresence mode="wait">
               <motion.figure
                 key={index}
@@ -127,16 +132,10 @@ export default function TestimonialsSection() {
                   else if (info.offset.x > 60) go(-1);
                 }}
                 aria-live="polite"
-                data-cursor
-                data-cursor-label="DRAG"
-                className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
+                               className="flex cursor-grab flex-col gap-6 active:cursor-grabbing"
               >
-                <blockquote className="text-h3 font-display font-medium leading-snug text-foreground">
-                  {reduced ? (
-                    `“${current.quote}”`
-                  ) : (
-                    <AnimatedText text={`“${current.quote}”`} stagger={0.012} />
-                  )}
+                <blockquote className="text-h3 font-sans font-medium leading-snug text-foreground">
+                  {`“${current.quote}”`}
                 </blockquote>
 
                 {current.detailed_quote && (
@@ -152,7 +151,7 @@ export default function TestimonialsSection() {
                 <figcaption className="mt-auto flex items-center gap-4 border-t border-border pt-5">
                   <Avatar photo={current.profile_picture} name={current.author} />
                   <div className="flex min-w-0 flex-col">
-                    <span className="font-display font-medium leading-tight">{current.author}</span>
+                    <span className="font-sans font-medium leading-tight">{current.author}</span>
                     <span className="truncate text-sm text-muted">{current.role}</span>
                   </div>
                   <div className="ml-auto">
@@ -161,36 +160,51 @@ export default function TestimonialsSection() {
                 </figcaption>
               </motion.figure>
             </AnimatePresence>
-          </GlassCard>
+          </Card>
 
           {count > 1 && (
             <div className="mt-6 flex items-center justify-between">
-              <div className="flex gap-2">
+              <div className="-m-2 flex">
                 {testimonials.map((t, i) => (
                   <button
                     key={t.author}
                     onClick={() => setIndex(i)}
-                    aria-label={`Show testimonial ${i + 1}`}
+                    aria-label={`Show testimonial ${i + 1} of ${count}`}
                     aria-current={i === index}
-                    className={cn(
-                      'h-2 rounded-full transition-all duration-300',
-                      i === index ? 'w-6 bg-accent' : 'w-2 bg-border-strong hover:bg-accent/50',
-                    )}
-                  />
+                    className="group/dot grid h-9 w-9 place-items-center rounded-md"
+                  >
+                    <span
+                      aria-hidden
+                      className={cn(
+                        'block h-2 rounded-full transition-all duration-200',
+                        i === index
+                          ? 'w-6 bg-accent'
+                          : 'w-2 bg-border-strong group-hover/dot:bg-accent',
+                      )}
+                    />
+                  </button>
                 ))}
               </div>
               <div className="flex gap-2">
                 <button
+                  onClick={() => setPaused((p) => !p)}
+                  aria-label={paused ? 'Resume testimonial rotation' : 'Pause testimonial rotation'}
+                  aria-pressed={paused}
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
+                >
+                  {paused ? <Play className="h-4 w-4" aria-hidden /> : <Pause className="h-4 w-4" aria-hidden />}
+                </button>
+                <button
                   onClick={() => go(-1)}
                   aria-label="Previous testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-pill border border-border bg-surface/60 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
                 <button
                   onClick={() => go(1)}
                   aria-label="Next testimonial"
-                  className="grid h-10 w-10 place-items-center rounded-pill border border-border bg-surface/60 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+                  className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -210,12 +224,12 @@ export default function TestimonialsSection() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.97, y: 12 }}
           transition={{ duration: 0.35, ease: EASE }}
-          className="glass relative rounded-xl p-7 sm:p-9"
+          className="panel relative rounded-lg p-7 sm:p-9"
         >
           <button
             onClick={() => setDetailOpen(false)}
             aria-label="Close"
-            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-pill border border-border bg-surface/70 text-muted transition-colors hover:border-accent/50 hover:text-accent"
+            className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border bg-surface text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <X className="h-4 w-4" />
           </button>
@@ -223,7 +237,7 @@ export default function TestimonialsSection() {
           <div className="flex items-center gap-4 pr-10">
             <Avatar photo={current.profile_picture} name={current.author} size="lg" />
             <div className="flex min-w-0 flex-col">
-              <span id="testimonial-detail-title" className="text-h3 font-display font-medium">
+              <span id="testimonial-detail-title" className="text-h3 font-sans font-medium">
                 {current.author}
               </span>
               <span className="text-sm text-muted">{current.role}</span>

@@ -25,14 +25,15 @@ export function Counter({
   const { ref, inView } = useScrollReveal({ amount: 0.6 });
   const current = useCountUp(value, { start: inView && start });
   const display = `${prefix}${formatNumber(current, decimals)}${suffix}`;
+  const final = `${prefix}${formatNumber(value, decimals)}${suffix}`;
 
+  // Screen readers get the final figure once, not the count-up churn. Expressed
+  // as an sr-only sibling rather than aria-label, which is prohibited on a
+  // <span> with no role.
   return (
-    <span
-      ref={ref}
-      className={cn('tabular-nums', className)}
-      aria-label={`${prefix}${formatNumber(value, decimals)}${suffix}`}
-    >
+    <span ref={ref} className={cn('tabular-nums', className)}>
       <span aria-hidden>{display}</span>
+      <span className="sr-only">{final}</span>
     </span>
   );
 }

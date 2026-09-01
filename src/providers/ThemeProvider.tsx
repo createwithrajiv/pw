@@ -51,9 +51,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     localStorage.setItem(STORAGE_KEY, m);
   }, []);
 
+  // light -> dark -> system -> light. The previous version flipped between the
+  // two resolved values only, so once a visitor touched it 'system' became
+  // unreachable and the OS preference was ignored forever.
   const cycle = useCallback(() => {
-    setMode(resolved === 'dark' ? 'light' : 'dark');
-  }, [resolved, setMode]);
+    setMode(mode === 'light' ? 'dark' : mode === 'dark' ? 'system' : 'light');
+  }, [mode, setMode]);
 
   const value = useMemo<ThemeContextValue>(
     () => ({ mode, resolved, setMode, cycle }),

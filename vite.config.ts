@@ -10,16 +10,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    // Screenshot scratch output; watching it is pointless and can lock files.
+    watch: { ignored: ['**/.shots/**', '**/lighthouse/**'] },
+  },
   build: {
     target: 'es2020',
     cssCodeSplit: true,
     rollupOptions: {
       output: {
         manualChunks: {
-          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
-          'motion-vendor': ['framer-motion', 'gsap', '@gsap/react'],
+          'motion-vendor': ['framer-motion'],
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'markdown-vendor': ['react-markdown', 'remark-gfm', 'rehype-highlight'],
         },
       },
     },

@@ -1,16 +1,10 @@
 import { motion } from 'framer-motion';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
-import { GradientText } from '@/components/ui/GradientText';
-import { TiltCard } from '@/components/ui/TiltCard';
+import { Card } from '@/components/ui/Card';
 import { IconRenderer } from '@/components/ui/IconRenderer';
-import { ScrubReveal } from '@/components/motion/ScrubReveal';
-import { SectionDivider } from '@/components/motion/SectionDivider';
-import { useSpotlight } from '@/hooks/useSpotlight';
-import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { usePersonalStory, useValues } from '@/hooks/useContent';
-import { burstVariant, staggerContainer } from '@/animations/variants';
-import { cn } from '@/utils/cn';
+import { fadeInUp, staggerContainer } from '@/animations/variants';
 
 /** Story heading — reveals with a gentle fade as it enters (no scroll pin). */
 function StoryNarrative({
@@ -36,8 +30,8 @@ function StoryNarrative({
           {eyebrow}
         </p>
       )}
-      <h2 className="max-w-3xl text-h1 font-display font-semibold tracking-tight">
-        <GradientText>{heading}</GradientText>
+      <h2 className="max-w-3xl text-h1 font-sans font-semibold tracking-tight">
+        {heading}
       </h2>
       {subheading && <p className="text-lead text-muted">{subheading}</p>}
     </motion.div>
@@ -46,17 +40,12 @@ function StoryNarrative({
 
 export default function StorySection() {
   const story = usePersonalStory();
-  const values = useValues();
-  const spotlight = useSpotlight();
-  const reduced = useReducedMotion();
-  const hasStory = story.paragraphs.length > 0;
+  const values = useValues();  const hasStory = story.paragraphs.length > 0;
   const hasValues = values.items.length > 0;
 
   return (
-    <Section id="story" grid ambient={{ density: 'sparse' }}>
-      <Container>
-        <SectionDivider className="mb-12" />
-        <div className="flex flex-col gap-14">
+    <Section id="story">
+      <Container>        <div className="flex flex-col gap-14">
           {hasStory && (
             <div className="flex flex-col gap-6">
               <StoryNarrative
@@ -66,7 +55,7 @@ export default function StorySection() {
               />
               <div className="flex flex-col gap-6 lg:grid lg:grid-cols-2 lg:gap-x-12 lg:gap-y-7">
                 {story.paragraphs.map((p, i) => (
-                  <ScrubReveal key={i} from={{ y: 36, opacity: 0 }}>
+                  <div key={i}>
                     <div>
                       {p.heading && (
                         <h3 className="mb-1 font-mono text-sm uppercase tracking-wider text-accent">
@@ -75,7 +64,7 @@ export default function StorySection() {
                       )}
                       <p className="text-body leading-relaxed text-muted">{p.body}</p>
                     </div>
-                  </ScrubReveal>
+                  </div>
                 ))}
               </div>
             </div>
@@ -91,23 +80,19 @@ export default function StorySection() {
                 viewport={{ once: true, amount: 0.2 }}
                 className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
               >
-                {values.items.map((v, i) => (
+                {values.items.map((v) => (
                   <motion.div
                     key={v.title}
-                    variants={burstVariant(i, reduced)}
-                    className={cn(
-                      'h-full transition-[opacity,filter] duration-300',
-                      spotlight.dimmed(i) && 'opacity-50 saturate-50',
-                    )}
-                    {...spotlight.bind(i)}
+                    variants={fadeInUp}
+                    className="h-full"
                   >
-                    <TiltCard className="flex h-full flex-col gap-3 p-6">
-                      <span className="grid h-10 w-10 place-items-center rounded-md bg-grad-accent/10 text-accent ring-1 ring-accent/20">
+                    <Card className="flex h-full flex-col gap-3 p-6">
+                      <span className="grid h-10 w-10 place-items-center rounded-md bg-accent/10 text-accent ring-1 ring-accent/20">
                         <IconRenderer name={v.icon} className="h-5 w-5" />
                       </span>
-                      <h3 className="font-display font-medium">{v.title}</h3>
+                      <h3 className="font-sans font-medium">{v.title}</h3>
                       <p className="text-sm leading-relaxed text-muted">{v.description}</p>
-                    </TiltCard>
+                    </Card>
                   </motion.div>
                 ))}
               </motion.div>

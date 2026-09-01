@@ -7,12 +7,14 @@ import type { Company } from '@/types';
 
 function LogoChip({ company }: { company: Company }) {
   const chip = (
-    <div className="flex h-16 items-center justify-center rounded-xl border border-border bg-white/95 px-5 shadow-sm transition duration-300 group-hover:-translate-y-1 group-hover:border-accent/40 group-hover:shadow-glow">
+    <div className="flex h-16 items-center justify-center rounded-md bg-white p-2 ring-1 ring-black/5 dark:ring-white/10 transition duration-200 group-hover:-translate-y-0.5 group-hover:ring-accent">
       <img
         src={company.logo}
         alt={company.name}
         loading="lazy"
         decoding="async"
+        width={130}
+        height={36}
         className="max-h-9 w-auto max-w-[130px] object-contain"
       />
     </div>
@@ -25,9 +27,7 @@ function LogoChip({ company }: { company: Company }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${company.name} website`}
-        data-cursor
-        data-cursor-label="VISIT"
-        className="group block"
+               className="group block"
       >
         {chip}
       </a>

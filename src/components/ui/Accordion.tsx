@@ -36,7 +36,7 @@ export function Accordion({ items, className, accent = false }: AccordionProps) 
                 onClick={() => setOpen(isOpen ? null : i)}
                 className="flex w-full items-center justify-between gap-4 py-5 text-left transition-colors hover:text-accent"
               >
-                <span className="text-h3 font-display font-medium">{item.title}</span>
+                <span className="text-h3 font-sans font-medium">{item.title}</span>
                 <ChevronDown
                   aria-hidden
                   className={cn(
@@ -66,7 +66,7 @@ export function Accordion({ items, className, accent = false }: AccordionProps) 
                         initial={{ scaleY: 0 }}
                         animate={{ scaleY: 1 }}
                         transition={{ duration: 0.5, ease: EASE, delay: 0.08 }}
-                        className="absolute bottom-5 left-0 top-0 w-0.5 origin-top rounded-full bg-grad-accent"
+                        className="absolute bottom-5 left-0 top-0 w-0.5 origin-top rounded-full bg-accent"
                       />
                     )}
                     <p className={cn('pb-5 pr-10 text-body text-muted', accent && 'pl-5')}>

@@ -6,26 +6,15 @@ export type { Project } from './project';
 export type { Testimonial } from './testimonial';
 export type { Company } from './company';
 export type { Social } from './social';
-export type { ThemeMode, SectionConfig, FeatureFlags, WebsiteSettings } from './settings';
+export type { ThemeMode, SectionConfig, WebsiteSettings } from './settings';
 export type { Seo, PersonSchema } from './seo';
 export type { NavLink, NavigationData } from './navigation';
-export type { Metric, MetricsData } from './metrics';
+export type { Metric, MetricsData, MetricDetails, MetricDetailGroup, MetricDetailItem } from './metrics';
 export type { StoryParagraph, PersonalStory, ValueItem, ValuesData } from './story';
 export type { CtaButton, Cta } from './cta';
 export type { Certification } from './certification';
-export type { BlogPost, BlogData } from './blog';
+export type { WritingPost, NewsletterMeta, WritingData } from './writing';
+export type { Demo, DemosData } from './demos';
 export type { FaqItem, FaqData } from './faq';
 export type { Technology, TechnologiesData } from './technology';
-export type { AnimationTokens } from './animations';
 export type { SectionCopy, SectionCopyData } from './section';
-export type {
-  Blog,
-  BlogArticleData,
-  BlogMeta,
-  BlogContent,
-  BlogArticleSection,
-  BlogArticleSubsection,
-  BlogCta,
-  BlogSeo,
-  BlogSocialSnippets,
-} from './blog-article';

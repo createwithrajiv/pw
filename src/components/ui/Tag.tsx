@@ -6,14 +6,14 @@ interface TagProps {
   children: ReactNode;
 }
 
-/** Small mono tech chip with a subtle hover glow. */
+/** Small mono tech chip. */
 export function Tag({ className, children }: TagProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-md border border-border bg-surface/60 px-2.5 py-1',
+        'inline-flex items-center rounded-sm border border-border bg-surface px-2.5 py-1',
         'font-mono text-xs text-muted transition-colors duration-200',
-        'hover:border-accent/40 hover:text-foreground',
+        'hover:border-accent hover:text-foreground',
         className,
       )}
     >

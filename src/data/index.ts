@@ -24,10 +24,10 @@ import personalStoryJson from './personal-story.json';
 import valuesJson from './values.json';
 import ctaJson from './cta.json';
 import certificationsJson from './certifications.json';
-import blogJson from './blog.json';
+import writingJson from './writing.json';
+import demosJson from './demos.json';
 import faqJson from './faq.json';
 import technologiesJson from './technologies.json';
-import animationsJson from './animations.json';
 import sectionCopyJson from './section-copy.json';
 
 import type {
@@ -47,13 +47,10 @@ import type {
   ValuesData,
   Cta,
   Certification,
-  BlogData,
+  WritingData,
+  DemosData,
   FaqData,
-  TechnologiesData,
-  AnimationTokens,
-  SectionCopyData,
-  Blog,
-  BlogArticleData,
+  TechnologiesData,  SectionCopyData,
 } from '@/types';
 import { resolveAsset } from '@/utils/asset';
 
@@ -97,37 +94,18 @@ export const personalStory = personalStoryJson as PersonalStory;
 export const values = valuesJson as ValuesData;
 export const cta = ctaJson as Cta;
 export const certifications = certificationsJson as Certification[];
-export const blog = blogJson as BlogData;
+export const writing = writingJson as WritingData;
+export const demos = demosJson as DemosData;
 export const faq = faqJson as FaqData;
 export const technologies = technologiesJson as TechnologiesData;
-export const animations = animationsJson as AnimationTokens;
 
 /** Section heading copy (eyebrow/title/subtitle) keyed by section id. */
 export const sectionCopy = sectionCopyJson as SectionCopyData;
 
-/**
- * Long-form blog articles. Each blog is one JSON under `src/data/blogs/<id>/`,
- * glob-loaded here (literal /src path — the @ alias doesn't work in glob). The
- * folder id (e.g. "BLOG-0001") is derived from the path and also keys the
- * per-blog UI folder in src/blogs/<id>/. Adding a blog = drop a JSON file.
- */
-const blogModules = import.meta.glob('/src/data/blogs/*/*.json', {
-  eager: true,
-  import: 'default',
-}) as Record<string, BlogArticleData>;
-
-export const blogs: Blog[] = Object.entries(blogModules)
-  .map(([path, data]) => ({ id: path.split('/').slice(-2, -1)[0], ...data }))
-  .sort((a, b) => +new Date(b.meta.date) - +new Date(a.meta.date)); // newest first
-
-export const blogBySlug: Record<string, Blog> = Object.fromEntries(
-  blogs.map((b) => [b.meta.slug, b]),
-);
 
 /* Derived selectors (still no hardcoded copy). */
 export const featuredProjects = projects.filter((p) => p.featured);
 export const otherProjects = projects.filter((p) => !p.featured);
-export const publishedPosts = blog.posts.filter((p) => p.published);
 export const projectCategories = Array.from(new Set(projects.map((p) => p.category)));
 
 /** Companies that have a logo — the trust wall (each may carry a website link). */

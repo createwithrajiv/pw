@@ -1,0 +1,8 @@
+# Retired blog. Articles live on the newsletter now; 301 so the old URLs keep
+# their search equity and any existing links still land somewhere real.
+/blogs/80-20-agentic-ai-learning-framework  https://createwithrajiv.substack.com/  301!
+/blogs/*                                    https://createwithrajiv.substack.com/  301!
+/blogs                                      https://createwithrajiv.substack.com/  301!
+
+# SPA fallback for every remaining route.
+/*    /index.html   200

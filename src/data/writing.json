@@ -1,0 +1,32 @@
+{
+  "newsletter": {
+    "name": "The Hot Path",
+    "tagline": "AI and backend systems, under real load.",
+    "url": "https://createwithrajiv.substack.com",
+    "subscribeUrl": "https://createwithrajiv.substack.com/subscribe"
+  },
+  "posts": [
+    {
+      "title": "Letting an LLM Run SQL Against a Production Warehouse",
+      "excerpt": "Grounding, four layers of execution safety, and the failure routing I'd defend hardest - assuming the test case might be wrong, not just the query.",
+      "url": "https://createwithrajiv.substack.com/p/letting-an-llm-run-sql-against-a",
+      "date": "2026-08-23",
+      "tags": [
+        "Agentic AI",
+        "SQL",
+        "Guardrails"
+      ]
+    },
+    {
+      "title": "The Agent Wrote the Test Before It Wrote the SQL",
+      "excerpt": "We built the obvious thing first - point an LLM at a requirements doc, get SQL out. It worked, and we deleted it.",
+      "url": "https://createwithrajiv.substack.com/p/the-agent-wrote-the-test-before-it",
+      "date": "2026-08-11",
+      "tags": [
+        "Agentic AI",
+        "Testing",
+        "Data"
+      ]
+    }
+  ]
+}

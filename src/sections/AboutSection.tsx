@@ -1,19 +1,11 @@
-import { motion } from 'framer-motion';
 import { MapPin, CheckCircle2 } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
-import { GlassCard } from '@/components/ui/GlassCard';
-import { GradientText } from '@/components/ui/GradientText';
+import { Card } from '@/components/ui/Card';
 import { Reveal } from '@/components/motion/Reveal';
-import { SectionReveal } from '@/components/motion/SectionReveal';
-import { AnimatedText } from '@/components/motion/AnimatedText';
-import { Parallax } from '@/components/motion/Parallax';
-import { SectionDivider } from '@/components/motion/SectionDivider';
-import { EnterBurst } from '@/components/motion/EnterBurst';
 import { Marquee } from '@/components/ui/Marquee';
 import { Tag } from '@/components/ui/Tag';
 import { useProfile, useTechnologies } from '@/hooks/useContent';
-import { EASE } from '@/animations/variants';
 
 const HEADLINE = [
   { text: 'Bridging' },
@@ -28,45 +20,39 @@ export default function AboutSection() {
   const technologies = useTechnologies();
 
   return (
-    <Section id="about" ambient={{ density: 'sparse' }}>
+    <Section id="about">
       <Container>
-        <SectionDivider className="mb-12" />
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16">
           <div className="flex min-w-0 flex-col gap-6">
-            <EnterBurst variant={['ring', 'sweep']} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4">
               <span className="eyebrow flex items-center gap-2">
-                <span className="inline-block h-px w-6 bg-accent/60" aria-hidden />
+                <span className="inline-block h-px w-6 bg-accent" aria-hidden />
                 About
               </span>
-              <div className="relative overflow-hidden">
-                <h2 className="text-h1 font-display font-semibold tracking-tight">
-                  <AnimatedText segments={HEADLINE} stagger={0.07} />
-                </h2>
-                {/* one-shot light sweep across the headline on enter */}
-                <motion.span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-foreground/10 to-transparent mix-blend-overlay"
-                  initial={{ x: '-130%' }}
-                  whileInView={{ x: '130%' }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.1, ease: EASE, delay: 0.55 }}
-                />
-              </div>
-            </EnterBurst>
-            <SectionReveal variant="riseIn">
+              {/* Emphasis is carried by colour now that the gradient text is gone. */}
+              <h2 className="text-h1 font-sans tracking-tight">
+                {HEADLINE.map((w, i) => (
+                  <span key={w.text} className={w.emphasis ? 'text-accent' : undefined}>
+                    {w.text}
+                    {i < HEADLINE.length - 1 ? ' ' : ''}
+                  </span>
+                ))}
+              </h2>
+            </div>
+            <Reveal variant="fadeInUp">
               <p className="text-lead text-foreground">{profile.description}</p>
-            </SectionReveal>
+            </Reveal>
             <Reveal variant="fadeInUp" delay={0.08}>
               <p className="text-body text-muted">{profile.longDescription}</p>
             </Reveal>
           </div>
 
-          <Parallax speed={0.08} className="min-w-0 lg:self-center">
-            <Reveal variant="blurScaleIn">
-              <GlassCard className="flex flex-col gap-6 p-8">
+          <div className="min-w-0 lg:self-center">
+            <Reveal variant="fadeInUp">
+              <Card className="flex flex-col gap-6 p-8">
                 <div className="flex flex-col gap-1">
                   <span className="eyebrow">Currently</span>
-                  <span className="text-h3 font-display font-medium">{profile.title}</span>
+                  <span className="text-h3 font-sans font-medium">{profile.title}</span>
                 </div>
                 <div className="flex flex-col gap-3 text-sm">
                   <span className="flex items-center gap-3 text-muted">
@@ -83,8 +69,8 @@ export default function AboutSection() {
                 <dl className="grid grid-cols-2 gap-x-6 gap-y-5">
                   {profile.stats.map((s) => (
                     <div key={s.label} className="flex flex-col gap-1">
-                      <dt className="font-display text-h3 font-semibold">
-                        <GradientText>{s.value}</GradientText>
+                      <dt className="font-sans text-h3 font-semibold">
+                        {s.value}
                       </dt>
                       <dd className="text-xs leading-snug text-muted">{s.label}</dd>
                     </div>
@@ -99,9 +85,9 @@ export default function AboutSection() {
                     ))}
                   </Marquee>
                 </div>
-              </GlassCard>
+              </Card>
             </Reveal>
-          </Parallax>
+          </div>
         </div>
       </Container>
     </Section>

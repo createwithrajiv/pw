@@ -25,19 +25,14 @@ export const usePersonalStory = () => content.personalStory;
 export const useValues = () => content.values;
 export const useCta = () => content.cta;
 export const useCertifications = () => content.certifications;
-export const useBlog = () => content.blog;
-export const usePublishedPosts = () => content.publishedPosts;
+export const useWriting = () => content.writing;
+export const useDemos = () => content.demos;
 export const useFaq = () => content.faq;
 export const useTechnologies = () => content.technologies;
-export const useAnimations = () => content.animations;
 
 /** Heading copy (eyebrow/title/subtitle) for a section id — source of truth for section headings. */
 export const useSectionCopy = (id: string) => content.sectionCopy[id];
 
-/** All blog articles, newest first. */
-export const useBlogs = () => content.blogs;
-/** A single blog by its slug (undefined if not found). */
-export const useBlogBySlug = (slug?: string) => (slug ? content.blogBySlug[slug] : undefined);
 
 /** Aggregate accessor if a component wants several datasets at once. */
 export const useContent = () => content;

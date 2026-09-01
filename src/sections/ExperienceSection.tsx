@@ -4,9 +4,8 @@ import { Briefcase } from 'lucide-react';
 import { Section } from '@/components/ui/Section';
 import { Container } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { GlassCard } from '@/components/ui/GlassCard';
+import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { FlyIn } from '@/components/motion/FlyIn';
 import { useExperience, useCompanies, useSectionCopy } from '@/hooks/useContent';
 import { useReducedMotion } from '@/providers/ReducedMotionProvider';
 import { cn } from '@/utils/cn';
@@ -24,13 +23,15 @@ function CompanyLogoLink({
 }) {
   if (!logo) return null;
   const base =
-    'flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-white/95 p-1.5';
+    'group flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white p-1.5 ring-1 ring-black/5 dark:ring-white/10';
   const img = (
     <img
       src={logo}
       alt={name}
       loading="lazy"
       decoding="async"
+      width={44}
+      height={44}
       className="max-h-full max-w-full object-contain"
     />
   );
@@ -41,9 +42,7 @@ function CompanyLogoLink({
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${name} website`}
-        data-cursor
-        data-cursor-label="VISIT"
-        className={cn(base, 'transition hover:-translate-y-0.5 hover:border-accent/40 hover:shadow-glow')}
+               className={cn(base, 'transition duration-200 hover:-translate-y-0.5 hover:ring-accent')}
       >
         {img}
       </a>
@@ -61,10 +60,9 @@ interface TimelineItemProps {
   company?: Company;
   progress: MotionValue<number>;
   t: number; // fractional position of this node down the spine
-  index: number;
 }
 
-function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) {
+function TimelineItem({ item, company, progress, t }: TimelineItemProps) {
   // "Ignite" as the spine fill reaches this node.
   const lit = useTransform(progress, [t - 0.08, t], [0, 1], { clamp: true });
   const nodeScale = useTransform(lit, [0, 1], [1, 1.14]);
@@ -75,22 +73,22 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
       {/* Node */}
       <motion.span
         style={{ scale: nodeScale }}
-        className="absolute left-2 top-1.5 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border border-border bg-elevated text-accent sm:left-3"
+        className="absolute left-2 top-1.5 grid h-8 w-8 -translate-x-1/2 place-items-center rounded-full border border-border bg-surface text-accent sm:left-3"
       >
         <motion.span
           aria-hidden
           style={{ opacity: lit }}
-          className="absolute inset-0 rounded-full bg-grad-accent shadow-glow"
+          className="absolute inset-0 rounded-full bg-accent shadow-sm"
         />
         <Briefcase className="relative z-10 h-4 w-4" aria-hidden />
       </motion.span>
-      <FlyIn direction={index % 2 === 0 ? 'left' : 'right'} blur={8}>
-        <GlassCard interactive className="flex flex-col gap-4 p-6">
+      <div>
+        <Card interactive className="flex flex-col gap-4 p-6">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div className="flex items-start gap-3">
               <CompanyLogoLink logo={logo} website={company?.website} name={item.company} />
               <div>
-                <h3 className="text-h3 font-display font-medium">{item.role}</h3>
+                <h3 className="text-h3 font-sans font-medium">{item.role}</h3>
                 <p className="mt-1 text-sm text-muted">
                   {item.company} · {item.location}
                 </p>
@@ -101,7 +99,7 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
             </div>
             <Badge tone="accent">{item.employment_type}</Badge>
           </div>
-          <span className="w-fit rounded-pill bg-surface/70 px-3 py-1 font-mono text-xs text-subtle">
+          <span className="w-fit rounded-md bg-surface px-3 py-1 font-mono text-xs text-subtle">
             {item.period}
           </span>
           <p className="text-sm leading-relaxed text-muted">{item.description}</p>
@@ -117,8 +115,8 @@ function TimelineItem({ item, company, progress, t, index }: TimelineItemProps) 
               ))}
             </ul>
           )}
-        </GlassCard>
-      </FlyIn>
+        </Card>
+      </div>
     </div>
   );
 }
@@ -139,7 +137,7 @@ export default function ExperienceSection() {
   const total = experience.length;
 
   return (
-    <Section id="experience" ambient={{ density: 'sparse', motes: false }}>
+    <Section id="experience" band>
       <Container>
         <SectionHeading {...copy} />
 
@@ -147,7 +145,7 @@ export default function ExperienceSection() {
           <div className="absolute bottom-0 left-2 top-0 w-px bg-border sm:left-3" aria-hidden />
           <motion.div
             style={{ scaleY }}
-            className="absolute bottom-0 left-2 top-0 w-px origin-top bg-gradient-to-b from-accent via-accent-2 to-accent-3 sm:left-3"
+            className="absolute bottom-0 left-2 top-0 w-px origin-top bg-gradient-to-b from-accent via-accent to-accent sm:left-3"
             aria-hidden
           />
           <div className="flex flex-col gap-10">
@@ -158,7 +156,6 @@ export default function ExperienceSection() {
                 company={companies[item.company]}
                 progress={progress}
                 t={total > 1 ? i / (total - 1) : 0}
-                index={i}
               />
             ))}
           </div>
