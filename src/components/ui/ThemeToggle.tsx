@@ -36,7 +36,7 @@ export function ThemeToggle({ className }: ThemeToggleProps) {
       onClick={cycle}
       aria-label={`Theme: ${LABEL[mode]}. Switch to ${LABEL[NEXT[mode]]}.`}
       className={cn(
-        'relative grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-foreground transition-colors duration-200 hover:border-accent hover:text-accent',
+        'relative grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-foreground transition-colors duration-200 hover:border-accent hover:text-accent',
         className,
       )}
     >

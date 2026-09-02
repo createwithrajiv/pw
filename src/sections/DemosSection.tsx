@@ -87,7 +87,7 @@ export default function DemosSection() {
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                     aria-label={`Open the ${demo.title} recording on YouTube (requires approved access)`}
-                    className="inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
+                    className="-my-1 inline-flex items-center gap-1 py-2 text-sm font-medium text-accent transition-colors hover:text-accent-hover"
                   >
                     Open
                     <ArrowUpRight className="h-4 w-4" aria-hidden />

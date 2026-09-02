@@ -59,7 +59,7 @@ export function Navbar() {
       >
         <button
           onClick={() => go('#hero')}
-          className="flex items-center gap-2 rounded-md px-1 text-sm font-sans font-bold"
+          className="flex items-center gap-2 rounded-md px-1 py-1.5 text-sm font-sans font-bold"
           aria-label={`${settings.brandShortName} - back to top`}
         >
           <BrandMark className="h-8 w-8 shadow-sm" />
@@ -67,7 +67,7 @@ export function Navbar() {
         </button>
 
         {/* Desktop links */}
-        <ul className="hidden items-center gap-1 lg:flex">
+        <ul className="hidden items-center gap-1 xl:flex">
           {navSections.map((s) => {
             const id = s.anchor.replace('#', '');
             const isActive = active === id;
@@ -108,7 +108,7 @@ export function Navbar() {
             onClick={() => setMenuOpen((o) => !o)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
-            className="grid h-10 w-10 place-items-center rounded-md border border-border bg-surface text-foreground lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-md border border-border bg-surface text-foreground xl:hidden"
           >
             {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -122,7 +122,7 @@ export function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[-1] lg:hidden"
+            className="fixed inset-0 z-[-1] xl:hidden"
           >
             <div
               className="absolute inset-0 bg-scrim/70 backdrop-blur-md"
@@ -170,7 +170,7 @@ export function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.platform}
-                    className="grid h-10 w-10 place-items-center rounded-md border border-border text-muted hover:border-accent hover:text-accent"
+                    className="grid h-11 w-11 place-items-center rounded-md border border-border text-muted hover:border-accent hover:text-accent"
                   >
                     <IconRenderer name={s.icon} className="h-5 w-5" />
                   </a>
