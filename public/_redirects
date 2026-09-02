@@ -4,5 +4,11 @@
 /blogs/*                                    https://createwithrajiv.substack.com/  301!
 /blogs                                      https://createwithrajiv.substack.com/  301!
 
+# Serve the generated text files as themselves, ahead of the SPA fallback.
+/llms.txt       /llms.txt       200
+/llms-full.txt  /llms-full.txt  200
+/robots.txt     /robots.txt     200
+/sitemap.xml    /sitemap.xml    200
+
 # SPA fallback for every remaining route.
 /*    /index.html   200
