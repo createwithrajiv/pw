@@ -320,7 +320,7 @@ const jsonLd = {
       url: SITE,
       name: seo.title,
       mainEntity: { '@id': `${SITE}#person` },
-      dateModified: new Date().toISOString().slice(0, 10),
+      dateModified: new Date().toISOString(),
       isPartOf: { '@id': `${SITE}#website` },
     },
   ],
